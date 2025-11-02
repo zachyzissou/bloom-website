@@ -1,0 +1,75 @@
+---
+/**
+ * Analytics Component - Plausible Integration
+ *
+ * Privacy-friendly analytics with no cookies or personal data collection.
+ * Compliant with GDPR, CCPA, and PECR.
+ */
+
+const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN || 'bloom-game.com';
+const plausibleHost = import.meta.env.PUBLIC_PLAUSIBLE_API_HOST || 'https://plausible.io';
+
+// Only load in production
+const isDev = import.meta.env.DEV;
+
+// Optional: Enable specific Plausible extensions
+// Options: outbound-links, file-downloads, hash, pageview-props, compat
+const extensions = ['outbound-links']; // Track external link clicks
+
+const scriptPath = extensions.length > 0
+  ? `/js/script.${extensions.join('.')}.js`
+  : '/js/script.js';
+---
+
+{!isDev && (
+  <>
+    <!-- Plausible Analytics -->
+    <script
+      defer
+      data-domain={plausibleDomain}
+      src={`${plausibleHost}${scriptPath}`}
+    ></script>
+
+    <!-- Plausible Manual Event Tracking Helper -->
+    <script is:inline>
+      window.plausible = window.plausible || function() {
+        (window.plausible.q = window.plausible.q || []).push(arguments);
+      };
+    </script>
+  </>
+)}
+
+{isDev && (
+  <!-- Analytics disabled in development -->
+  <script is:inline>
+    console.log('[Analytics] Plausible disabled in development mode');
+    // Provide mock function for development
+    window.plausible = function() {
+      console.log('[Analytics]', ...arguments);
+    };
+  </script>
+)}
+
+<!--
+  Usage Examples:
+
+  Track custom events:
+  <script>
+    // Button click
+    plausible('Download', { props: { version: '1.0', platform: 'Windows' } });
+
+    // Form submission
+    plausible('Newsletter Signup', { props: { source: 'homepage' } });
+
+    // Page view with custom properties
+    plausible('pageview', { props: { section: 'factions' } });
+  </script>
+
+  Track 404 pages (add to 404.astro):
+  <script>
+    plausible('404', { props: { path: document.location.pathname } });
+  </script>
+
+  Track outbound links (automatic with outbound-links extension):
+  No additional code needed - all external links are tracked automatically.
+-->

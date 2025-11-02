@@ -1,0 +1,259 @@
+{
+  "gameFeatures": {
+    "core": {
+      "title": "Core Gameplay",
+      "features": [
+        {
+          "name": "8-10 Player PvE Co-op",
+          "description": "Team up with friends in cooperative extraction missions across a massive world",
+          "icon": "users",
+          "status": "in-development"
+        },
+        {
+          "name": "32km x 32km Procedural World",
+          "description": "Explore a massive 1024-tile world with seamless terrain generation and diverse biomes",
+          "icon": "map",
+          "status": "complete"
+        },
+        {
+          "name": "Extraction Shooter Mechanics",
+          "description": "High-stakes gameplay where you must extract with your loot or lose everything",
+          "icon": "crosshair",
+          "status": "planned"
+        },
+        {
+          "name": "10 Unique Factions",
+          "description": "Choose from diverse factions with unique co-op abilities and playstyles",
+          "icon": "shield",
+          "status": "in-development"
+        },
+        {
+          "name": "12 Distinct Biomes",
+          "description": "From frozen peaks to toxic wetlands, each biome offers unique challenges",
+          "icon": "mountain",
+          "status": "partial"
+        },
+        {
+          "name": "Co-op Synergy System",
+          "description": "Faction abilities combine for powerful team effects - inspired by Deep Rock Galactic",
+          "icon": "zap",
+          "status": "planned"
+        }
+      ]
+    },
+    "world": {
+      "title": "Dynamic World Systems",
+      "features": [
+        {
+          "name": "14 Weather Types",
+          "description": "Dynamic weather system with biome-specific patterns and thermal effects",
+          "icon": "cloud-rain",
+          "status": "complete"
+        },
+        {
+          "name": "38 Macro Features",
+          "description": "Geographical features including piedmont, cirques, karst formations, and rivers",
+          "icon": "compass",
+          "status": "complete"
+        },
+        {
+          "name": "Seamless Multi-Tile Generation",
+          "description": "Edge contracts ensure perfect terrain continuity across 1024 tiles",
+          "icon": "grid",
+          "status": "complete"
+        },
+        {
+          "name": "Thermal Erosion System",
+          "description": "Realistic terrain weathering creates natural-looking landscapes",
+          "icon": "droplet",
+          "status": "complete"
+        },
+        {
+          "name": "Runtime Tile Streaming",
+          "description": "9-tile load radius with LRU cache for optimal performance",
+          "icon": "cpu",
+          "status": "planned"
+        },
+        {
+          "name": "Three Difficulty Rings",
+          "description": "H1 (safe), H2 (medium), H3 (hardcore) zones with escalating challenges",
+          "icon": "alert-circle",
+          "status": "planned"
+        }
+      ]
+    },
+    "technical": {
+      "title": "Technical Excellence",
+      "features": [
+        {
+          "name": "Unity 6 + HDRP",
+          "description": "Built on Unity 6000.2.2f1 with High Definition Render Pipeline for stunning visuals",
+          "icon": "code",
+          "status": "complete"
+        },
+        {
+          "name": "Unity Netcode + Steamworks",
+          "description": "Robust multiplayer foundation with peer-to-peer networking via Steam",
+          "icon": "wifi",
+          "status": "in-development"
+        },
+        {
+          "name": "ServiceLocator Architecture",
+          "description": "O(1) service access pattern optimized for 8-10 player performance",
+          "icon": "database",
+          "status": "complete"
+        },
+        {
+          "name": "60+ FPS Target",
+          "description": "Optimized to run at 60+ FPS on RTX 2060 6GB (minimum spec)",
+          "icon": "activity",
+          "status": "in-development"
+        },
+        {
+          "name": "Adaptive Spatial Manager",
+          "description": "Visibility culling with batched updates (100 updates/frame)",
+          "icon": "eye",
+          "status": "complete"
+        },
+        {
+          "name": "Performance Monitor",
+          "description": "Real-time FPS and memory tracking for optimization",
+          "icon": "bar-chart",
+          "status": "complete"
+        }
+      ]
+    },
+    "combat": {
+      "title": "Combat & Survival",
+      "features": [
+        {
+          "name": "Faction-Based Abilities",
+          "description": "Each faction offers unique combat abilities and support powers",
+          "icon": "target",
+          "status": "planned"
+        },
+        {
+          "name": "Loot & Extraction",
+          "description": "Risk-reward extraction mechanics with tiered loot rarity",
+          "icon": "package",
+          "status": "planned"
+        },
+        {
+          "name": "Environmental Hazards",
+          "description": "Biome-specific dangers from radiation to extreme weather",
+          "icon": "alert-triangle",
+          "status": "planned"
+        },
+        {
+          "name": "Harvester Tech Enemies",
+          "description": "Battle against alien technology including Skimmers, Harrowers, and Monoliths",
+          "icon": "shield-alert",
+          "status": "planned"
+        },
+        {
+          "name": "Weapon Systems",
+          "description": "Diverse arsenal from human-tier to hybrid Harvester technology",
+          "icon": "crosshair",
+          "status": "planned"
+        },
+        {
+          "name": "Survival Mechanics",
+          "description": "Manage resources, health, and environmental exposure",
+          "icon": "heart",
+          "status": "planned"
+        }
+      ]
+    },
+    "progression": {
+      "title": "Progression & Customization",
+      "features": [
+        {
+          "name": "Faction Progression",
+          "description": "Unlock faction-specific gear, abilities, and cosmetics",
+          "icon": "star",
+          "status": "planned"
+        },
+        {
+          "name": "Skill Trees",
+          "description": "Develop your operator across combat, survival, and support branches",
+          "icon": "trending-up",
+          "status": "planned"
+        },
+        {
+          "name": "Gear Customization",
+          "description": "Modify and upgrade equipment to match your playstyle",
+          "icon": "tool",
+          "status": "planned"
+        },
+        {
+          "name": "Convoy Economy",
+          "description": "Participate in supply chain management and trading",
+          "icon": "truck",
+          "status": "planned"
+        },
+        {
+          "name": "Base Building",
+          "description": "Construct forward operating bases in controlled territories",
+          "icon": "home",
+          "status": "planned"
+        },
+        {
+          "name": "Achievement System",
+          "description": "Track progress and earn rewards for accomplishments",
+          "icon": "award",
+          "status": "planned"
+        }
+      ]
+    }
+  },
+  "technicalSpecs": {
+    "engine": {
+      "name": "Unity",
+      "version": "6000.2.2f1",
+      "renderPipeline": "HDRP 17.2.0"
+    },
+    "networking": {
+      "framework": "Unity Netcode",
+      "transport": "Steamworks P2P",
+      "playerCapacity": "8-10 concurrent"
+    },
+    "performance": {
+      "targetFPS": "60+",
+      "minSpec": "RTX 2060 6GB",
+      "worldSize": "32km x 32km",
+      "tileCount": 1024
+    },
+    "systems": {
+      "architecture": "ServiceLocator pattern",
+      "assemblies": "com.bloom.runtime",
+      "weatherTypes": 14,
+      "macroFeatures": 38
+    }
+  },
+  "gameplaySystems": {
+    "multiplayer": {
+      "maxPlayers": 10,
+      "minPlayers": 1,
+      "coopMode": "PvE",
+      "matchmaking": "Steam-based"
+    },
+    "world": {
+      "size": "32km x 32km",
+      "tiles": 1024,
+      "biomes": 12,
+      "weatherTypes": 14
+    },
+    "factions": {
+      "total": 10,
+      "eaLaunch": 4,
+      "expansion": 6,
+      "roles": ["tank", "scavenger", "medic", "scout", "tech", "defender", "all-rounder", "food-provider", "elite-hunter", "stealth"]
+    },
+    "content": {
+      "weaponTypes": "Multiple tiers (human, hybrid, Harvester)",
+      "enemyTypes": "Harvester tech (Skimmers, Harrowers, Monoliths, Forged)",
+      "lootSystem": "Tiered rarity with extraction mechanics",
+      "progression": "Skill trees, faction ranks, gear unlocks"
+    }
+  }
+}

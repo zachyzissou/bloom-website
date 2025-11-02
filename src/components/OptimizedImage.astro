@@ -1,0 +1,120 @@
+---
+/**
+ * OptimizedImage Component
+ *
+ * Renders responsive images with AVIF/WebP formats and blur-up placeholder
+ * Automatically generates srcset for different screen sizes
+ *
+ * Usage:
+ *   <OptimizedImage
+ *     src="hero-screenshot"
+ *     alt="Bloom gameplay"
+ *     width={1200}
+ *     height={675}
+ *     loading="eager"
+ *     fetchpriority="high"
+ *   />
+ */
+
+interface Props {
+  /** Image filename (without extension) */
+  src: string;
+  /** Alt text for accessibility */
+  alt: string;
+  /** Image width (for aspect ratio) */
+  width: number;
+  /** Image height (for aspect ratio) */
+  height: number;
+  /** Loading strategy: eager (above fold) or lazy (below fold) */
+  loading?: 'eager' | 'lazy';
+  /** Fetch priority for LCP images */
+  fetchpriority?: 'high' | 'low' | 'auto';
+  /** CSS classes */
+  class?: string;
+  /** Show blur placeholder */
+  showBlur?: boolean;
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  loading = 'lazy',
+  fetchpriority = 'auto',
+  class: className = '',
+  showBlur = true,
+} = Astro.props;
+
+// Image sizes for srcset
+const sizes = [400, 800, 1200, 1600];
+
+// Generate srcset strings
+const avifSrcset = sizes.map(size => `/images/${src}-${size}.avif ${size}w`).join(', ');
+const webpSrcset = sizes.map(size => `/images/${src}-${size}.webp ${size}w`).join(', ');
+
+// Fallback image
+const fallbackSrc = `/images/${src}-1200.jpg`;
+
+// Blur placeholder
+const blurSrc = `/images/${src}-blur.webp`;
+
+// Calculate aspect ratio
+const aspectRatio = (height / width) * 100;
+---
+
+<div
+  class={`relative overflow-hidden ${className}`}
+  style={`aspect-ratio: ${width}/${height};`}
+>
+  {showBlur && loading === 'lazy' && (
+    <div
+      class="absolute inset-0 blur-sm scale-110 transition-opacity duration-300"
+      style={`background-image: url('${blurSrc}'); background-size: cover; background-position: center;`}
+      data-blur-placeholder
+    />
+  )}
+
+  <picture>
+    <!-- AVIF format (best compression) -->
+    <source
+      type="image/avif"
+      srcset={avifSrcset}
+      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 1200px"
+    />
+
+    <!-- WebP format (good compression, better support) -->
+    <source
+      type="image/webp"
+      srcset={webpSrcset}
+      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 1200px"
+    />
+
+    <!-- JPEG fallback (widest support) -->
+    <img
+      src={fallbackSrc}
+      alt={alt}
+      width={width}
+      height={height}
+      loading={loading}
+      fetchpriority={fetchpriority}
+      decoding={loading === 'eager' ? 'sync' : 'async'}
+      class="w-full h-full object-cover"
+      onload="this.parentElement.parentElement.querySelector('[data-blur-placeholder]')?.classList.add('opacity-0')"
+    />
+  </picture>
+</div>
+
+<style>
+  /* Ensure smooth image loading */
+  img {
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  /* Prevent layout shift */
+  picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+</style>

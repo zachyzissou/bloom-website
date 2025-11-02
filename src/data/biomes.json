@@ -1,0 +1,353 @@
+{
+  "biomes": [
+    {
+      "id": "snowpeaks",
+      "name": "SnowPeaks",
+      "displayName": "Snow Peaks",
+      "threatTier": "H2",
+      "threatLevel": "Medium",
+      "location": "North",
+      "launchStatus": "ea-launch",
+      "launchWindow": "EA Launch",
+      "geography": "Snow-covered mountains with high elevation peaks and valleys",
+      "macroFeatures": ["Mountains", "Glaciers", "Ice caves", "Frozen lakes"],
+      "visualCharacteristics": {
+        "climate": "Arctic",
+        "temperature": "Below freezing",
+        "weather": ["Heavy snow", "Blizzards", "Ice storms"],
+        "visibility": "Low during storms",
+        "terrain": "Steep slopes, icy surfaces"
+      },
+      "keyFeatures": [
+        "Skimmer crash sites",
+        "Directorate military outposts",
+        "Ice cave networks",
+        "High-altitude extraction points"
+      ],
+      "factionPresence": ["Directorate", "North Guard"],
+      "hazards": ["Extreme cold", "Avalanches", "Ice hazards", "Limited visibility"],
+      "resources": ["Military equipment", "Cold-weather gear", "Skimmer tech"],
+      "description": "The frozen northern peaks where the Directorate maintains military supremacy. Ancient Skimmer wrecks dot the landscape, offering valuable salvage to those brave enough to face the extreme cold."
+    },
+    {
+      "id": "westernmountains",
+      "name": "WesternMountains",
+      "displayName": "Western Mountains",
+      "threatTier": "H2",
+      "threatLevel": "Medium",
+      "location": "West",
+      "launchStatus": "ea-launch",
+      "launchWindow": "EA Launch",
+      "geography": "Rugged mountain ranges with the Machine Grave at its heart",
+      "macroFeatures": ["Mountains", "Canyons", "Machine wreckage", "Harrower zones"],
+      "visualCharacteristics": {
+        "climate": "Temperate mountain",
+        "temperature": "Cool to cold",
+        "weather": ["Rain", "Fog", "Snow at peaks"],
+        "visibility": "Variable",
+        "terrain": "Rocky, uneven, machine debris"
+      },
+      "keyFeatures": [
+        "Machine Grave central zone",
+        "Active Harrower drone patrols",
+        "Ancient battlefield sites",
+        "Archive Keeper research stations"
+      ],
+      "factionPresence": ["Obsidian Archive", "Iron Vultures"],
+      "hazards": ["Active drones", "Machine defenses", "Unstable structures", "Radiation zones"],
+      "resources": ["Advanced technology", "Drone components", "Ancient archives"],
+      "description": "A graveyard of massive machines and ongoing conflicts. The Archive seeks knowledge while Harrower drones patrol the ruins, making this a high-risk zone for tech salvage."
+    },
+    {
+      "id": "centralgrasslands",
+      "name": "CentralGrasslands",
+      "displayName": "Central Grasslands (IEZ Core)",
+      "threatTier": "H3",
+      "threatLevel": "Hardcore",
+      "location": "Center",
+      "launchStatus": "ea-launch",
+      "launchWindow": "EA Launch",
+      "geography": "The Interdiction Exclusion Zone - ground zero of the Monolith event",
+      "macroFeatures": ["Monolith crater", "Phase distortions", "Reality anomalies", "Radioactive grasslands"],
+      "visualCharacteristics": {
+        "climate": "Anomalous",
+        "temperature": "Unstable",
+        "weather": ["Energy storms", "Phase shears", "Reality distortions"],
+        "visibility": "Poor - energy interference",
+        "terrain": "Twisted reality, floating debris, temporal zones"
+      },
+      "keyFeatures": [
+        "Monolith ground zero",
+        "IEZ Core exclusion zone",
+        "North Guard forward bases",
+        "Aegis medical camps",
+        "Phase Pocket phenomena"
+      ],
+      "factionPresence": ["North Guard", "Aegis Collective"],
+      "hazards": ["Extreme radiation", "Phase shears", "Temporal jitter", "Reality distortions", "Monolith anomalies"],
+      "resources": ["Monolith-class technology", "Extreme high-value salvage", "Unique artifacts"],
+      "description": "The most dangerous zone in the game world. The Monolith Cascade of 2161 created an exclusion zone where reality itself is unstable. Only the most experienced operators dare venture here."
+    },
+    {
+      "id": "easternplateaus",
+      "name": "EasternPlateaus",
+      "displayName": "Eastern Plateaus (Crimson Freeport)",
+      "threatTier": "H2",
+      "threatLevel": "Medium",
+      "location": "East",
+      "launchStatus": "ea-launch",
+      "launchWindow": "EA Launch",
+      "geography": "Elevated plateaus with the major trading hub of Crimson Freeport",
+      "macroFeatures": ["Plateaus", "Trade routes", "Elevated terrain", "Commercial zones"],
+      "visualCharacteristics": {
+        "climate": "Arid",
+        "temperature": "Hot",
+        "weather": ["Clear", "Dust storms", "Heat waves"],
+        "visibility": "Good except during storms",
+        "terrain": "Flat-topped plateaus, mesa formations"
+      },
+      "keyFeatures": [
+        "Crimson Freeport trading hub",
+        "Iron Vultures headquarters",
+        "Apex Dynamics hunting grounds",
+        "Major extraction markets"
+      ],
+      "factionPresence": ["Iron Vultures", "Apex Dynamics"],
+      "hazards": ["Faction warfare", "Sandstorms", "Heat exhaustion", "Bandit activity"],
+      "resources": ["Trade goods", "Salvaged equipment", "Market access", "Rare loot"],
+      "description": "The commercial heart of the wasteland. Crimson Freeport serves as the primary trading hub where Iron Vultures fence their salvage and Apex Dynamics sell their trophies."
+    },
+    {
+      "id": "foresthills",
+      "name": "ForestHills",
+      "displayName": "Forest Hills (The Reach)",
+      "threatTier": "H1",
+      "threatLevel": "Safe",
+      "location": "South",
+      "launchStatus": "ea-launch",
+      "launchWindow": "EA Launch",
+      "geography": "Forested hills with metro tunnel networks and civilian zones",
+      "macroFeatures": ["Forests", "Hills", "Metro tunnels", "Civilian settlements"],
+      "visualCharacteristics": {
+        "climate": "Temperate",
+        "temperature": "Moderate",
+        "weather": ["Rain", "Fog", "Occasional snow"],
+        "visibility": "Good in clearings, limited in forest",
+        "terrain": "Rolling hills, dense forest, underground tunnels"
+      },
+      "keyFeatures": [
+        "Metro tunnel network",
+        "Civilian protected zones",
+        "Warden fortifications",
+        "Safe training areas"
+      ],
+      "factionPresence": ["Aegis Collective", "Civic Wardens"],
+      "hazards": ["Wildlife", "Tunnel collapses", "Minor bandit activity"],
+      "resources": ["Civilian supplies", "Basic equipment", "Medical supplies"],
+      "description": "The safest zone for new operators. Protected by Civic Wardens, this area offers Metro tunnel access and civilian amenities. Perfect for learning game mechanics."
+    },
+    {
+      "id": "southwestplains",
+      "name": "SouthwestPlains",
+      "displayName": "Southwest Plains (Greyreach District)",
+      "threatTier": "H1",
+      "threatLevel": "Safe",
+      "location": "Southwest",
+      "launchStatus": "ea-launch",
+      "launchWindow": "EA Launch",
+      "geography": "Agricultural plains dominated by Pact of Ash farmlands",
+      "macroFeatures": ["Plains", "Farmland", "Convoy routes", "Agricultural zones"],
+      "visualCharacteristics": {
+        "climate": "Temperate",
+        "temperature": "Moderate",
+        "weather": ["Clear", "Light rain", "Seasonal changes"],
+        "visibility": "Excellent - open terrain",
+        "terrain": "Flat farmland, road networks"
+      },
+      "keyFeatures": [
+        "Pact of Ash settlements",
+        "Roadborn convoy routes",
+        "Agricultural facilities",
+        "Food supply network"
+      ],
+      "factionPresence": ["Pact of Ash", "Roadborn Clans"],
+      "hazards": ["Convoy raids", "Resource competition", "Bandits"],
+      "resources": ["Food supplies", "Convoy goods", "Agricultural equipment"],
+      "description": "The breadbasket of the wasteland. The Pact of Ash maintains farms and food production while Roadborn convoys transport supplies across well-traveled routes."
+    },
+    {
+      "id": "urban",
+      "name": "Urban",
+      "displayName": "Urban Ruins",
+      "threatTier": "H3",
+      "threatLevel": "Hardcore",
+      "location": "Various city centers",
+      "launchStatus": "expansion",
+      "launchWindow": "Month 6-9",
+      "geography": "Ruined cities with corporate and military headquarters",
+      "macroFeatures": ["Skyscrapers", "Underground networks", "Corporate towers", "Street warfare zones"],
+      "visualCharacteristics": {
+        "climate": "Urban microclimate",
+        "temperature": "Variable",
+        "weather": ["Rain", "Smog", "Acid rain"],
+        "visibility": "Limited - urban canyons",
+        "terrain": "Vertical combat zones, rubble, underground"
+      },
+      "keyFeatures": [
+        "Directorate command centers",
+        "Helix Syndicate headquarters",
+        "Corporate warfare zones",
+        "Vertical combat opportunities"
+      ],
+      "factionPresence": ["Directorate", "Helix Syndicate", "Corporate Hegemony"],
+      "hazards": ["Urban combat", "Building collapses", "Corporate security", "Vertical hazards"],
+      "resources": ["Corporate technology", "Military equipment", "Data caches"],
+      "description": "Shattered cities where corporate power struggles become literal warfare. Vertical combat and close-quarters engagements dominate this high-risk urban environment."
+    },
+    {
+      "id": "desert",
+      "name": "Desert",
+      "displayName": "Desert Wastes",
+      "threatTier": "H2",
+      "threatLevel": "Medium",
+      "location": "Southeast",
+      "launchStatus": "expansion",
+      "launchWindow": "Month 6-9",
+      "geography": "Arid desert with energy crystal formations",
+      "macroFeatures": ["Sand dunes", "Energy crystals", "Rock formations", "Oasis zones"],
+      "visualCharacteristics": {
+        "climate": "Desert",
+        "temperature": "Extreme heat",
+        "weather": ["Clear", "Sandstorms", "Heat mirages"],
+        "visibility": "Excellent except during storms",
+        "terrain": "Sand dunes, rocky outcrops, crystal fields"
+      },
+      "keyFeatures": [
+        "Seventy-Seven headquarters",
+        "Energy crystal mining",
+        "Heat survival challenges",
+        "Long sightlines for combat"
+      ],
+      "factionPresence": ["The Seventy-Seven"],
+      "hazards": ["Extreme heat", "Sandstorms", "Dehydration", "Crystal radiation"],
+      "resources": ["Energy crystals", "Rare minerals", "Mercenary equipment"],
+      "description": "Scorching deserts where the Seventy-Seven maintain their neutral headquarters. Energy crystals offer valuable resources but extreme heat makes extended operations dangerous."
+    },
+    {
+      "id": "coastal",
+      "name": "Coastal",
+      "displayName": "Coastal Regions",
+      "threatTier": "H2",
+      "threatLevel": "Medium",
+      "location": "Eastern coast",
+      "launchStatus": "expansion",
+      "launchWindow": "Month 6-9",
+      "geography": "Beaches and cliffs with naval wreckage",
+      "macroFeatures": ["Beaches", "Cliffs", "Naval wrecks", "Tidal zones"],
+      "visualCharacteristics": {
+        "climate": "Maritime",
+        "temperature": "Moderate",
+        "weather": ["Sea fog", "Storms", "Rain"],
+        "visibility": "Variable with weather",
+        "terrain": "Sand, rock, tidal zones, wrecks"
+      },
+      "keyFeatures": [
+        "Wayfarer headquarters",
+        "Naval wreck salvage",
+        "Amphibious operations",
+        "Tidal mechanics"
+      ],
+      "factionPresence": ["The Wayfarers"],
+      "hazards": ["Tidal changes", "Naval hazards", "Sea storms", "Amphibious enemies"],
+      "resources": ["Naval salvage", "Coastal resources", "Maritime technology"],
+      "description": "Where land meets sea, the Wayfarers navigate tidal zones and naval wreckage. Unique amphibious gameplay and tidal mechanics create dynamic combat scenarios."
+    },
+    {
+      "id": "wetland",
+      "name": "Wetland",
+      "displayName": "Toxic Wetlands",
+      "threatTier": "H3",
+      "threatLevel": "Hardcore",
+      "location": "Southeast lowlands",
+      "launchStatus": "expansion",
+      "launchWindow": "Month 6-9",
+      "geography": "Toxic marshes with mutated fauna",
+      "macroFeatures": ["Swamps", "Toxic pools", "Marsh islands", "Mutation zones"],
+      "visualCharacteristics": {
+        "climate": "Humid",
+        "temperature": "Warm",
+        "weather": ["Toxic fog", "Acid rain", "Heavy humidity"],
+        "visibility": "Very poor - constant fog",
+        "terrain": "Shallow water, marsh, quicksand"
+      },
+      "keyFeatures": [
+        "Apex Dynamics hunting preserves",
+        "Mutated fauna spawns",
+        "Bio-hazard zones",
+        "Unique monster hunting"
+      ],
+      "factionPresence": ["Apex Dynamics"],
+      "hazards": ["Toxic water", "Bio-hazards", "Mutated creatures", "Disease", "Quicksand"],
+      "resources": ["Rare biological samples", "Mutation specimens", "Trophy hunts"],
+      "description": "A toxic nightmare where Apex Dynamics hunts mutated monsters. Bio-hazard suits required for extended operations in this contaminated marsh environment."
+    },
+    {
+      "id": "volcanic",
+      "name": "Volcanic",
+      "displayName": "Volcanic Fields",
+      "threatTier": "H3",
+      "threatLevel": "Hardcore",
+      "location": "West",
+      "launchStatus": "expansion",
+      "launchWindow": "Month 6-9",
+      "geography": "Obsidian fields with geothermal activity",
+      "macroFeatures": ["Lava flows", "Obsidian formations", "Geothermal vents", "Volcanic caves"],
+      "visualCharacteristics": {
+        "climate": "Volcanic",
+        "temperature": "Extreme heat",
+        "weather": ["Ash clouds", "Heat waves", "Toxic fumes"],
+        "visibility": "Poor - ash and smoke",
+        "terrain": "Lava rock, obsidian, unstable ground"
+      },
+      "keyFeatures": [
+        "Obsidian Archive hidden vaults",
+        "Geothermal power facilities",
+        "Extreme heat survival",
+        "Molten hazards"
+      ],
+      "factionPresence": ["Obsidian Archive"],
+      "hazards": ["Lava", "Extreme heat", "Toxic gases", "Unstable terrain", "Ash storms"],
+      "resources": ["Obsidian", "Geothermal tech", "Ancient archives", "Rare minerals"],
+      "description": "Hellish volcanic wasteland where the Obsidian Archive maintains secret vaults. Extreme environmental hazards make this one of the deadliest zones in the game."
+    },
+    {
+      "id": "arctic",
+      "name": "Arctic",
+      "displayName": "Arctic Tundra",
+      "threatTier": "H3",
+      "threatLevel": "Hardcore",
+      "location": "Far North",
+      "launchStatus": "expansion",
+      "launchWindow": "Month 6-9",
+      "geography": "Frozen tundra with underground Forged factory",
+      "macroFeatures": ["Tundra", "Ice sheets", "Underground facilities", "Forged structures"],
+      "visualCharacteristics": {
+        "climate": "Arctic",
+        "temperature": "Extreme cold",
+        "weather": ["Blizzards", "Whiteouts", "Ice storms"],
+        "visibility": "Near zero in storms",
+        "terrain": "Frozen ground, ice, underground complexes"
+      },
+      "keyFeatures": [
+        "North Guard primary base",
+        "Forged factory complex",
+        "Underground combat",
+        "Extreme cold survival"
+      ],
+      "factionPresence": ["North Guard"],
+      "hazards": ["Extreme cold", "Forged enemies", "Blizzards", "Underground dangers", "Isolation"],
+      "resources": ["Anti-Forged technology", "Military equipment", "Forged components"],
+      "description": "The frozen frontier where humanity battles the Forged menace. North Guard maintains the last line of defense against mechanical horrors emerging from underground factories."
+    }
+  ]
+}

@@ -1,0 +1,163 @@
+---
+/**
+ * Homepage - Bloom Marketing Website
+ * Main landing page for the game
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Bloom - Survive the Harvest"
+  description="A post-apocalyptic resource management game where survival depends on scavenging, strategy, and avoiding the Harvesters. Explore a world of decay, danger, and difficult choices."
+  type="game"
+>
+  <section class="hero">
+    <h1>Bloom</h1>
+    <p class="tagline">Survive the Harvest</p>
+    <p class="description">
+      In a world stripped bare by mysterious entities known as Harvesters,
+      survival is a daily struggle. Scavenge resources, navigate faction politics,
+      and stay one step ahead of the harvest.
+    </p>
+    <div class="cta-buttons">
+      <a href="#download" class="btn btn-primary">Download Demo</a>
+      <a href="/about" class="btn btn-secondary">Learn More</a>
+    </div>
+  </section>
+
+  <section class="features">
+    <h2>Key Features</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>Resource Management</h3>
+        <p>Scavenge and trade in a world of scarcity</p>
+      </div>
+      <div class="feature-card">
+        <h3>Faction Politics</h3>
+        <p>Navigate complex relationships between 8 unique factions</p>
+      </div>
+      <div class="feature-card">
+        <h3>Survival Strategy</h3>
+        <p>Make difficult choices in a harsh post-apocalyptic world</p>
+      </div>
+      <div class="feature-card">
+        <h3>Mystery & Lore</h3>
+        <p>Uncover the truth about the Harvesters and their origins</p>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem;
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 10vw, 6rem);
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .tagline {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      color: var(--color-gray);
+      margin-bottom: 2rem;
+    }
+
+    .description {
+      max-width: 600px;
+      font-size: 1.125rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      font-size: 1.125rem;
+      font-weight: 600;
+      border-radius: 0.5rem;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: var(--color-bg);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 255, 136, 0.3);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--color-primary);
+      color: var(--color-bg);
+    }
+
+    .features {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .features h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(0, 255, 136, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--color-primary);
+      transform: translateY(-5px);
+    }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--color-primary);
+    }
+
+    .feature-card p {
+      color: var(--color-gray);
+    }
+  </style>
+</BaseLayout>
