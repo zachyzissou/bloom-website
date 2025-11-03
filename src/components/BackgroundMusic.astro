@@ -1,8 +1,9 @@
 ---
 // Background Music Component with Mute Toggle
+// Uses transition:persist to maintain playback across page navigation
 ---
 
-<div id="music-controls" class="fixed bottom-6 right-6 z-50">
+<div id="music-controls" class="fixed bottom-6 right-6 z-50" transition:persist>
   <button
     id="music-toggle"
     class="bg-[#0a0f0a]/90 backdrop-blur-sm border border-primary-green/30 rounded-full p-3 hover:bg-[#0a0f0a] hover:border-primary-green transition-all duration-300 group"
@@ -22,7 +23,7 @@
   </button>
 </div>
 
-<audio id="background-music" loop preload="auto">
+<audio id="background-music" loop preload="auto" transition:persist>
   <source src="/audio/main-menu-theme.wav" type="audio/wav">
   Your browser does not support the audio element.
 </audio>
@@ -53,7 +54,7 @@
 </style>
 
 <script>
-  // Background Music Controller
+  // Background Music Controller with View Transitions support
   class BackgroundMusicController {
     constructor() {
       this.audio = document.getElementById('background-music') as HTMLAudioElement
@@ -132,20 +133,35 @@
     }
   }
 
-  // Initialize on page load
-  if (typeof window !== 'undefined') {
-    // Wait for user interaction before attempting to play
-    let musicController: BackgroundMusicController | null = null
+  // Initialize on page load and after View Transitions
+  let musicController: BackgroundMusicController | null = null
 
-    const initMusic = () => {
-      if (!musicController) {
-        musicController = new BackgroundMusicController()
-        // Remove the event listener after first interaction
-        document.removeEventListener('click', initMusic)
-      }
+  const initMusic = () => {
+    if (!musicController) {
+      musicController = new BackgroundMusicController()
     }
-
-    // Initialize on first click anywhere on the page
-    document.addEventListener('click', initMusic, { once: true })
   }
+
+  // Initialize on first load
+  if (typeof window !== 'undefined') {
+    // Initialize immediately if audio element exists
+    if (document.getElementById('background-music')) {
+      initMusic()
+    }
+    
+    // Also initialize on first click for browsers that block autoplay
+    const initOnClick = () => {
+      initMusic()
+      document.removeEventListener('click', initOnClick)
+    }
+    document.addEventListener('click', initOnClick, { once: true })
+  }
+
+  // Re-initialize after View Transitions (handles navigation)
+  document.addEventListener('astro:after-swap', () => {
+    // The audio element persists, so we just need to ensure controls are wired up
+    if (!musicController && document.getElementById('background-music')) {
+      initMusic()
+    }
+  })
 </script>
