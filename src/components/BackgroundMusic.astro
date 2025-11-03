@@ -64,6 +64,9 @@
     private mutedIcon: HTMLElement | null
     private isMuted: boolean
     private consentKey = 'audioConsentGiven'
+    private toggleHandler: (() => void) | null = null
+    private visibilityHandler: (() => void) | null = null
+    private consentHandler: (() => void) | null = null
 
     constructor() {
       this.audio = document.getElementById('background-music') as HTMLAudioElement
@@ -84,22 +87,10 @@
       this.audio.volume = 0.3 // 30% volume
       this.updateUI()
 
-      // Listen for consent event from AudioConsentModal
-      window.addEventListener('audioConsentGranted', () => {
-        this.handleConsentGranted()
-      })
-
-      // Check if consent was already given and audio should auto-play
-      const consent = localStorage.getItem(this.consentKey)
-      if (consent === 'true' && !this.isMuted) {
-        this.tryAutoplay()
-      }
-
-      // Toggle button click handler
-      this.toggleBtn.addEventListener('click', () => this.toggle())
-
-      // Handle page visibility changes (pause when tab is hidden)
-      document.addEventListener('visibilitychange', () => {
+      // Set up event handlers (stored to allow removal)
+      this.consentHandler = () => this.handleConsentGranted()
+      this.toggleHandler = () => this.toggle()
+      this.visibilityHandler = () => {
         if (!this.audio) return
         
         if (document.hidden) {
@@ -111,14 +102,59 @@
             // Autoplay prevented, user needs to interact
           })
         }
-      })
+      }
+
+      // Add event listeners (only once per controller instance)
+      window.addEventListener('audioConsentGranted', this.consentHandler)
+      this.toggleBtn.addEventListener('click', this.toggleHandler)
+      document.addEventListener('visibilitychange', this.visibilityHandler)
+
+      // Check if consent was already given and audio should auto-play
+      const consent = localStorage.getItem(this.consentKey)
+      if (consent === 'true' && !this.isMuted) {
+        this.tryAutoplay()
+      }
+    }
+
+    updateDOMReferences(audio: HTMLAudioElement, toggleBtn: HTMLElement) {
+      // Remove old event listeners before updating references
+      if (this.toggleBtn && this.toggleHandler) {
+        this.toggleBtn.removeEventListener('click', this.toggleHandler)
+      }
+
+      // Update DOM references
+      this.audio = audio
+      this.toggleBtn = toggleBtn
+      this.playingIcon = document.getElementById('music-icon-playing')
+      this.mutedIcon = document.getElementById('music-icon-muted')
+
+      // Re-attach toggle handler to new button
+      if (this.toggleBtn && this.toggleHandler) {
+        this.toggleBtn.addEventListener('click', this.toggleHandler)
+      }
+
+      // Update UI to reflect current state
+      this.updateUI()
+    }
+
+    cleanup() {
+      // Remove all event listeners to prevent memory leaks
+      if (this.consentHandler) {
+        window.removeEventListener('audioConsentGranted', this.consentHandler)
+      }
+      if (this.toggleHandler && this.toggleBtn) {
+        this.toggleBtn.removeEventListener('click', this.toggleHandler)
+      }
+      if (this.visibilityHandler) {
+        document.removeEventListener('visibilitychange', this.visibilityHandler)
+      }
     }
 
     async handleConsentGranted() {
       // User granted consent via modal, start playing
-      if (!this.isMuted) {
+      if (!this.isMuted && this.audio) {
         try {
-          await this.audio!.play()
+          await this.audio.play()
           console.log('Audio playback started after consent')
         } catch (error) {
           console.log('Failed to start audio after consent:', error)
@@ -127,12 +163,12 @@
     }
 
     async tryAutoplay() {
-      if (this.isMuted) {
+      if (this.isMuted || !this.audio) {
         return
       }
 
       try {
-        await this.audio!.play()
+        await this.audio.play()
       } catch (error) {
         // Autoplay prevented by browser policy
         // Music will start when user grants consent via modal or clicks the toggle
@@ -141,13 +177,15 @@
     }
 
     toggle() {
+      if (!this.audio) return
+
       this.isMuted = !this.isMuted
       localStorage.setItem('bgMusicMuted', this.isMuted.toString())
 
       if (this.isMuted) {
-        this.audio!.pause()
+        this.audio.pause()
       } else {
-        this.audio!.play().catch(() => {
+        this.audio.play().catch(() => {
           console.error('Failed to play audio')
         })
       }
@@ -169,75 +207,27 @@
   // Initialize on page load and after View Transitions
   let musicController: BackgroundMusicController | null = null
 
-  const initMusic = () => {
-    // Only create a new controller if one doesn't exist
-    // This prevents re-initialization when audio persists across pages
-    if (!musicController) {
-      musicController = new BackgroundMusicController()
-    } else {
-      // Controller exists, just re-wire the DOM elements after navigation
-      // This ensures the toggle button works after page transition
-      const toggleBtn = document.getElementById('music-toggle')
-      const playingIcon = document.getElementById('music-icon-playing')
-      const mutedIcon = document.getElementById('music-icon-muted')
-      
-      if (toggleBtn && musicController) {
-        // Re-attach click listener
-        toggleBtn.replaceWith(toggleBtn.cloneNode(true))
-        const newToggleBtn = document.getElementById('music-toggle')
-        newToggleBtn?.addEventListener('click', () => musicController!.toggle())
-      }
-    }
-  }
-
-    // Initialize on first load
+  // Initialize on first load
   if (typeof window !== 'undefined') {
     // Initialize immediately if audio element exists
     if (document.getElementById('background-music')) {
-      initMusic()
+      musicController = new BackgroundMusicController()
     }
   }
 
-  // Handle View Transitions - audio element persists, just update references
+  // Handle View Transitions - audio element persists, update DOM references only
   document.addEventListener('astro:after-swap', () => {
-    // Re-initialize to wire up new DOM references
     const audio = document.getElementById('background-music') as HTMLAudioElement
     const toggleBtn = document.getElementById('music-toggle')
     
-    if (audio && toggleBtn && musicController) {
-      // Update private properties via any cast (TypeScript workaround for private access)
-      // This is necessary because the DOM elements are recreated during View Transitions
-      (musicController as any).audio = audio;
-      (musicController as any).toggleBtn = toggleBtn;
-      (musicController as any).playingIcon = document.getElementById('music-icon-playing');
-      (musicController as any).mutedIcon = document.getElementById('music-icon-muted');
-      
-      // Remove any existing listeners to avoid duplicates, then re-attach
-      const newToggleBtn = toggleBtn.cloneNode(true) as HTMLElement
-      toggleBtn.parentNode?.replaceChild(newToggleBtn, toggleBtn)
-      
-      // Re-attach event listener to cloned button element
-      newToggleBtn.addEventListener('click', () => musicController!.toggle())
-      
-      // Update controller reference to new button
-      (musicController as any).toggleBtn = newToggleBtn
-      
-      // Update UI to reflect current state
-      musicController.updateUI()
-    } else if (audio && toggleBtn && !musicController) {
-      // Shouldn't happen, but initialize if needed
-      initMusic()
+    if (audio && toggleBtn) {
+      if (musicController) {
+        // Controller exists, just update DOM references and re-wire toggle button
+        musicController.updateDOMReferences(audio, toggleBtn)
+      } else {
+        // Controller doesn't exist (shouldn't happen), create new one
+        musicController = new BackgroundMusicController()
+      }
     }
-  })
-
-  // Prevent audio from pausing during page transitions
-  document.addEventListener('astro:before-preparation', () => {
-    // This event fires before the transition starts
-    // The audio element will persist, so no action needed
-  })
-
-  document.addEventListener('astro:before-swap', () => {
-    // This event fires right before the DOM swap
-    // The audio element will persist due to transition:persist
   })
 </script>
