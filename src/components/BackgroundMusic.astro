@@ -238,8 +238,8 @@
     // Run after view transitions complete
     // Only attach the listener once to prevent duplicates across page navigations
     if (!window.__backgroundMusicInitialized) {
-      document.addEventListener('astro:page-load', initController)
       window.__backgroundMusicInitialized = true
+      document.addEventListener('astro:page-load', initController)
     }
   }
 </script>
