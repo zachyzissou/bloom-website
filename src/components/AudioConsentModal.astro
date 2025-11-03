@@ -245,6 +245,7 @@
       
       if (consent === null) {
         // First visit - show modal after a short delay
+        // Delay allows page to fully load and avoids overwhelming the user immediately
         setTimeout(() => this.showModal(), 1000)
       }
 

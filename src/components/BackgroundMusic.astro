@@ -100,6 +100,8 @@
 
       // Handle page visibility changes (pause when tab is hidden)
       document.addEventListener('visibilitychange', () => {
+        if (!this.audio) return
+        
         if (document.hidden) {
           // Don't pause - let audio continue in background
           // Modern browsers handle this automatically
@@ -188,7 +190,7 @@
     }
   }
 
-  // Initialize on first load
+    // Initialize on first load
   if (typeof window !== 'undefined') {
     // Initialize immediately if audio element exists
     if (document.getElementById('background-music')) {
@@ -202,24 +204,29 @@
     const audio = document.getElementById('background-music') as HTMLAudioElement
     const toggleBtn = document.getElementById('music-toggle')
     
-    if (audio && toggleBtn) {
-      // Ensure controller is using latest DOM references
-      if (musicController) {
-        // Update private properties via any cast (TypeScript workaround)
-        (musicController as any).audio = audio;
-        (musicController as any).toggleBtn = toggleBtn;
-        (musicController as any).playingIcon = document.getElementById('music-icon-playing');
-        (musicController as any).mutedIcon = document.getElementById('music-icon-muted');
-        
-        // Re-attach event listener to new button element
-        toggleBtn.addEventListener('click', () => musicController!.toggle())
-        
-        // Update UI to reflect current state
-        musicController.updateUI()
-      } else {
-        // Shouldn't happen, but initialize if needed
-        initMusic()
-      }
+    if (audio && toggleBtn && musicController) {
+      // Update private properties via any cast (TypeScript workaround for private access)
+      // This is necessary because the DOM elements are recreated during View Transitions
+      (musicController as any).audio = audio;
+      (musicController as any).toggleBtn = toggleBtn;
+      (musicController as any).playingIcon = document.getElementById('music-icon-playing');
+      (musicController as any).mutedIcon = document.getElementById('music-icon-muted');
+      
+      // Remove any existing listeners to avoid duplicates, then re-attach
+      const newToggleBtn = toggleBtn.cloneNode(true) as HTMLElement
+      toggleBtn.parentNode?.replaceChild(newToggleBtn, toggleBtn)
+      
+      // Re-attach event listener to cloned button element
+      newToggleBtn.addEventListener('click', () => musicController!.toggle())
+      
+      // Update controller reference to new button
+      (musicController as any).toggleBtn = newToggleBtn
+      
+      // Update UI to reflect current state
+      musicController.updateUI()
+    } else if (audio && toggleBtn && !musicController) {
+      // Shouldn't happen, but initialize if needed
+      initMusic()
     }
   })
 
