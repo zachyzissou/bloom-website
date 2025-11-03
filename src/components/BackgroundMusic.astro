@@ -117,12 +117,25 @@
     }
 
     updateDOMReferences(audio: HTMLAudioElement, toggleBtn: HTMLElement) {
-      // Simply update DOM references - with transition:persist, 
-      // these should be the same elements, but we update just in case
+      // Check if toggle button is a different DOM element (defensive check)
+      // With transition:persist, this should rarely happen, but we handle it anyway
+      const isNewButton = this.toggleBtn !== toggleBtn
+      
+      if (isNewButton && this.toggleBtn && this.toggleHandler) {
+        // Remove listener from old button
+        this.toggleBtn.removeEventListener('click', this.toggleHandler)
+      }
+
+      // Update DOM references
       this.audio = audio
       this.toggleBtn = toggleBtn
       this.playingIcon = document.getElementById('music-icon-playing')
       this.mutedIcon = document.getElementById('music-icon-muted')
+
+      if (isNewButton && this.toggleBtn && this.toggleHandler) {
+        // Attach listener to new button
+        this.toggleBtn.addEventListener('click', this.toggleHandler)
+      }
 
       // Update UI to reflect current state
       this.updateUI()
