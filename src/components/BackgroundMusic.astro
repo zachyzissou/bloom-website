@@ -132,6 +132,9 @@
         const toggleBtn = document.getElementById('music-toggle')
         
         if (audio && toggleBtn) {
+          // Update DOM references
+          this.updateDOMReferences(audio, toggleBtn)
+          
           // Restore playback state if it was saved
           if (this.savedPlaybackState) {
             audio.currentTime = this.savedPlaybackState.currentTime
@@ -141,6 +144,12 @@
               })
             }
           }
+          
+          // Re-register all event listeners for next navigation
+          window.addEventListener('audioConsentGranted', this.consentHandler)
+          document.addEventListener('visibilitychange', this.visibilityHandler)
+          document.addEventListener('astro:before-swap', this.beforeSwapHandler)
+          document.addEventListener('astro:after-swap', this.afterSwapHandler)
         }
       }
 
@@ -266,15 +275,7 @@
       if (document.getElementById('background-music')) {
         window.__backgroundMusicController = new BackgroundMusicController()
       }
-    } else {
-      // Controller already exists from previous page
-      // Just update the DOM references since elements persisted
-      const audio = document.getElementById('background-music') as HTMLAudioElement
-      const toggleBtn = document.getElementById('music-toggle')
-      
-      if (audio && toggleBtn) {
-        window.__backgroundMusicController.updateDOMReferences(audio, toggleBtn)
-      }
     }
+    // On subsequent navigations, the afterSwapHandler handles DOM updates and listener re-registration
   }
 </script>
