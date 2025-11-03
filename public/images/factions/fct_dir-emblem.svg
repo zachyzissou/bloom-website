@@ -1,0 +1,23 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="dir-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#001F3F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#36454F;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="60" cy="60" r="55" fill="url(#dir-grad)" />
+
+  <!-- Military shield emblem -->
+  <path d="M60 25 L85 40 L85 70 L60 90 L35 70 L35 40 Z" fill="none" stroke="#FFFFFF" stroke-width="3" />
+  <path d="M60 35 L75 45 L75 65 L60 80 L45 65 L45 45 Z" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.6" />
+
+  <!-- Star emblem -->
+  <polygon points="60,45 62,52 70,52 64,57 66,65 60,60 54,65 56,57 50,52 58,52" fill="#FFFFFF" />
+
+  <!-- Rank bars -->
+  <rect x="52" y="70" width="16" height="2" fill="#FFFFFF" />
+  <rect x="52" y="74" width="16" height="2" fill="#FFFFFF" />
+  <rect x="52" y="78" width="16" height="2" fill="#FFFFFF" />
+</svg>

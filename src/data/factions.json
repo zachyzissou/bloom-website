@@ -18,8 +18,16 @@
         "accent": "#FFFFFF"
       },
       "playstyle": "Assault and hold tactics with heavy weapons and armor",
-      "strengths": ["Heavy weapons", "Superior armor", "Artillery support", "Command network"],
-      "weaknesses": ["Slow mobility", "High resource consumption"],
+      "strengths": [
+        "Heavy weapons",
+        "Superior armor",
+        "Artillery support",
+        "Command network"
+      ],
+      "weaknesses": [
+        "Slow mobility",
+        "High resource consumption"
+      ],
       "uniqueAbilities": [
         {
           "name": "Artillery Support",
@@ -36,14 +44,15 @@
           "description": "+15% damage resistance with faction gear",
           "cooldown": "passive"
         }
-      ]
+      ],
+      "lastSynced": "2025-11-02T21:45:02.187Z"
     },
     {
       "id": "FCT_VUL",
       "name": "Iron Vultures",
       "shortName": "Vultures",
       "role": "scavenger",
-      "coopAbility": "+30% loot detection, faster breaches",
+      "coopAbility": "+10% loot detection, faster breaches",
       "homeBiome": "EasternPlateaus",
       "launchStatus": "ea-launch",
       "launchWindow": "EA Launch",
@@ -56,12 +65,20 @@
         "accent": "#F0C27B"
       },
       "playstyle": "Hit-and-run tactics with stolen and modified equipment",
-      "strengths": ["Loot detection", "Equipment theft", "Adaptive engineering", "Crafting"],
-      "weaknesses": ["Light armor", "Disorganized tactics"],
+      "strengths": [
+        "Loot detection",
+        "Equipment theft",
+        "Adaptive engineering",
+        "Crafting"
+      ],
+      "weaknesses": [
+        "Light armor",
+        "Disorganized tactics"
+      ],
       "uniqueAbilities": [
         {
           "name": "Scavenger",
-          "description": "+25% loot from containers",
+          "description": "+10% loot from containers",
           "cooldown": "passive"
         },
         {
@@ -74,7 +91,8 @@
           "description": "Create improvised weapons from salvage",
           "cooldown": "medium"
         }
-      ]
+      ],
+      "lastSynced": "2025-11-02T21:45:02.187Z"
     },
     {
       "id": "FCT_AEG",
@@ -94,8 +112,16 @@
         "accent": "#FF4500"
       },
       "playstyle": "Defensive support with healing and fortification focus",
-      "strengths": ["Medical expertise", "Defensive fortifications", "Team support", "Safe zones"],
-      "weaknesses": ["Limited offensive capability", "Dependent on team"],
+      "strengths": [
+        "Medical expertise",
+        "Defensive fortifications",
+        "Team support",
+        "Safe zones"
+      ],
+      "weaknesses": [
+        "Limited offensive capability",
+        "Dependent on team"
+      ],
       "uniqueAbilities": [
         {
           "name": "Medical Drone",
@@ -112,7 +138,8 @@
           "description": "Enhanced threat detection for squad",
           "cooldown": "passive"
         }
-      ]
+      ],
+      "lastSynced": "2025-11-02T21:45:02.187Z"
     },
     {
       "id": "FCT_F77",
@@ -132,8 +159,16 @@
         "accent": "#2F2F2F"
       },
       "playstyle": "Professional combat with versatile equipment options",
-      "strengths": ["Versatility", "Professional equipment", "XP boost", "Adaptability"],
-      "weaknesses": ["No specialized bonuses", "Higher equipment costs"],
+      "strengths": [
+        "Versatility",
+        "Professional equipment",
+        "XP boost",
+        "Adaptability"
+      ],
+      "weaknesses": [
+        "No specialized bonuses",
+        "Higher equipment costs"
+      ],
       "uniqueAbilities": [
         {
           "name": "Cross-Training",
@@ -150,7 +185,8 @@
           "description": "Faster weapon swapping and reloading",
           "cooldown": "passive"
         }
-      ]
+      ],
+      "lastSynced": "2025-11-02T21:45:02.187Z"
     },
     {
       "id": "FCT_HLX",
@@ -170,8 +206,16 @@
         "accent": "#C0F3FF"
       },
       "playstyle": "Technology warfare with automated defenses",
-      "strengths": ["Hacking", "Automated defenses", "Tech manipulation", "Intelligence"],
-      "weaknesses": ["Direct combat", "Equipment dependent"],
+      "strengths": [
+        "Hacking",
+        "Automated defenses",
+        "Tech manipulation",
+        "Intelligence"
+      ],
+      "weaknesses": [
+        "Direct combat",
+        "Equipment dependent"
+      ],
       "uniqueAbilities": [
         {
           "name": "System Hack",
@@ -188,7 +232,8 @@
           "description": "Detect electronics and vulnerabilities",
           "cooldown": "passive"
         }
-      ]
+      ],
+      "lastSynced": "2025-11-02T21:45:02.187Z"
     },
     {
       "id": "FCT_WAY",
@@ -208,8 +253,16 @@
         "accent": "#FFD700"
       },
       "playstyle": "Hit-and-run with superior mobility and intelligence",
-      "strengths": ["Speed", "Reconnaissance", "Route knowledge", "Mobility buffs"],
-      "weaknesses": ["Light armor", "Limited firepower"],
+      "strengths": [
+        "Speed",
+        "Reconnaissance",
+        "Route knowledge",
+        "Mobility buffs"
+      ],
+      "weaknesses": [
+        "Light armor",
+        "Limited firepower"
+      ],
       "uniqueAbilities": [
         {
           "name": "Scout's Eye",
@@ -226,7 +279,8 @@
           "description": "Access to secret routes and shortcuts",
           "cooldown": "passive"
         }
-      ]
+      ],
+      "lastSynced": "2025-11-02T21:45:02.187Z"
     },
     {
       "id": "FCT_VAR",
@@ -246,8 +300,16 @@
         "accent": "#9370DB"
       },
       "playstyle": "Stealth and information warfare",
-      "strengths": ["Stealth technology", "Intelligence gathering", "Hidden loot detection", "Hacking"],
-      "weaknesses": ["Direct combat", "Low health pool"],
+      "strengths": [
+        "Stealth technology",
+        "Intelligence gathering",
+        "Hidden loot detection",
+        "Hacking"
+      ],
+      "weaknesses": [
+        "Direct combat",
+        "Low health pool"
+      ],
       "uniqueAbilities": [
         {
           "name": "Cloaking Field",
@@ -264,7 +326,8 @@
           "description": "Reveal hidden loot and secret caches",
           "cooldown": "passive"
         }
-      ]
+      ],
+      "lastSynced": "2025-11-02T21:45:02.187Z"
     },
     {
       "id": "FCT_NGD",
@@ -284,8 +347,16 @@
         "accent": "#87CEEB"
       },
       "playstyle": "Defensive specialists against AI enemies",
-      "strengths": ["Anti-Forged weapons", "Heavy armor", "Defensive positions", "Area denial"],
-      "weaknesses": ["Mobility", "PvP combat"],
+      "strengths": [
+        "Anti-Forged weapons",
+        "Heavy armor",
+        "Defensive positions",
+        "Area denial"
+      ],
+      "weaknesses": [
+        "Mobility",
+        "PvP combat"
+      ],
       "uniqueAbilities": [
         {
           "name": "Forged Hunter",
@@ -302,7 +373,8 @@
           "description": "Reduced damage from Forged attacks",
           "cooldown": "passive"
         }
-      ]
+      ],
+      "lastSynced": "2025-11-02T21:45:02.187Z"
     },
     {
       "id": "FCT_ASH",
@@ -322,8 +394,16 @@
         "accent": "#F4A460"
       },
       "playstyle": "Support role with food and supply bonuses",
-      "strengths": ["Resource management", "Convoy protection", "Team buffs", "Sustainability"],
-      "weaknesses": ["Combat power", "Equipment quality"],
+      "strengths": [
+        "Resource management",
+        "Convoy protection",
+        "Team buffs",
+        "Sustainability"
+      ],
+      "weaknesses": [
+        "Combat power",
+        "Equipment quality"
+      ],
       "uniqueAbilities": [
         {
           "name": "Field Rations",
@@ -340,14 +420,15 @@
           "description": "Increased resource yields from gathering",
           "cooldown": "passive"
         }
-      ]
+      ],
+      "lastSynced": "2025-11-02T21:45:02.187Z"
     },
     {
       "id": "FCT_APX",
       "name": "Apex Dynamics",
       "shortName": "Apex",
       "role": "elite-hunter",
-      "coopAbility": "Trophy bonuses, +30% rare loot",
+      "coopAbility": "Trophy bonuses, +15% rare loot",
       "homeBiome": "Wetland",
       "launchStatus": "expansion",
       "launchWindow": "Month 6-9",
@@ -360,12 +441,20 @@
         "accent": "#000000"
       },
       "playstyle": "High-risk, high-reward hunting gameplay",
-      "strengths": ["Rare loot bonus", "Tracking", "Single-target damage", "Trophy system"],
-      "weaknesses": ["Team support", "Group combat"],
+      "strengths": [
+        "Rare loot bonus",
+        "Tracking",
+        "Single-target damage",
+        "Trophy system"
+      ],
+      "weaknesses": [
+        "Team support",
+        "Group combat"
+      ],
       "uniqueAbilities": [
         {
           "name": "Trophy Hunter",
-          "description": "+30% chance for rare loot drops",
+          "description": "+15% chance for rare loot drops",
           "cooldown": "passive"
         },
         {
@@ -378,7 +467,8 @@
           "description": "Track wounded enemies and rare spawns",
           "cooldown": "passive"
         }
-      ]
+      ],
+      "lastSynced": "2025-11-02T21:45:02.187Z"
     }
   ]
 }

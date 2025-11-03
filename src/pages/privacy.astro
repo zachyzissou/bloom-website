@@ -1,0 +1,254 @@
+---
+/**
+ * Privacy Policy Page
+ * Legal compliance page for privacy and data protection
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro'
+---
+
+<BaseLayout
+  title="Privacy Policy - Bloom"
+  description="Bloom privacy policy and data protection information"
+  noindex={true}
+>
+  <div class="legal-page">
+    <div class="container">
+      <h1 class="page-title">Privacy Policy</h1>
+      <p class="last-updated">Last Updated: November 2, 2025</p>
+
+      <section class="legal-section">
+        <h2>Introduction</h2>
+        <p>
+          Your privacy is important to us. This Privacy Policy explains how Bloom ("we", "our", "us")
+          collects, uses, and protects your information when you use our game and related services.
+        </p>
+      </section>
+
+      <section class="legal-section">
+        <h2>Information We Collect</h2>
+        <p>We collect several types of information to provide and improve our service:</p>
+        <ul>
+          <li><strong>Account Information:</strong> Steam ID, username, and profile information provided through Steam authentication</li>
+          <li><strong>Gameplay Data:</strong> In-game statistics, progress, achievements, faction choices, and match history</li>
+          <li><strong>Technical Data:</strong> IP address, device information, operating system, hardware specifications, and performance metrics</li>
+          <li><strong>Analytics and Cookies:</strong> Usage patterns, session duration, feature interaction, and game performance data</li>
+        </ul>
+      </section>
+
+      <section class="legal-section">
+        <h2>How We Use Your Information</h2>
+        <p>We use the collected information for the following purposes:</p>
+        <ul>
+          <li><strong>Game Services:</strong> To provide, maintain, and improve the game experience</li>
+          <li><strong>Multiplayer Features:</strong> To enable matchmaking, squad formation, and competitive gameplay</li>
+          <li><strong>Security:</strong> To prevent cheating, detect exploits, and enforce our Terms of Service</li>
+          <li><strong>Communication:</strong> To send updates about game features, patches, and community events</li>
+          <li><strong>Analytics:</strong> To understand how players interact with the game and identify areas for improvement</li>
+        </ul>
+      </section>
+
+      <section class="legal-section">
+        <h2>Data Security</h2>
+        <p>
+          We implement industry-standard security measures to protect your personal data from unauthorized access,
+          alteration, disclosure, or destruction. This includes encryption of data in transit and at rest,
+          regular security audits, and access controls for our systems.
+        </p>
+        <p>
+          However, no method of transmission over the internet or electronic storage is 100% secure.
+          While we strive to protect your personal information, we cannot guarantee its absolute security.
+        </p>
+      </section>
+
+      <section class="legal-section">
+        <h2>Third-Party Services</h2>
+        <p>We work with the following third-party services:</p>
+        <ul>
+          <li><strong>Steam (Valve Corporation):</strong> For authentication, multiplayer networking, and user profiles.
+            Please review <a href="https://store.steampowered.com/privacy_agreement/" target="_blank" rel="noopener noreferrer">Steam's Privacy Policy</a>.</li>
+          <li><strong>Analytics Providers:</strong> For game improvement and performance monitoring.
+            Data is anonymized and aggregated where possible.</li>
+        </ul>
+        <p>These third-party services have their own privacy policies and we encourage you to review them.</p>
+      </section>
+
+      <section class="legal-section">
+        <h2>Data Retention</h2>
+        <p>
+          We retain your personal data for as long as necessary to provide our services and comply with legal obligations.
+          Gameplay data and statistics are retained indefinitely to maintain leaderboards and historical records.
+          You may request deletion of your account data as described in the "Your Rights" section below.
+        </p>
+      </section>
+
+      <section class="legal-section">
+        <h2>Your Rights</h2>
+        <p>You have the following rights regarding your personal data:</p>
+        <ul>
+          <li><strong>Access:</strong> Request a copy of the personal data we hold about you</li>
+          <li><strong>Correction:</strong> Request correction of inaccurate or incomplete data</li>
+          <li><strong>Deletion:</strong> Request deletion of your personal data (subject to legal retention requirements)</li>
+          <li><strong>Portability:</strong> Request transfer of your data in a machine-readable format</li>
+          <li><strong>Opt-out:</strong> Opt out of marketing communications and certain data collection practices</li>
+        </ul>
+        <p>To exercise these rights, please contact us at <a href="mailto:privacy@bloom-game.com">privacy@bloom-game.com</a>.</p>
+      </section>
+
+      <section class="legal-section">
+        <h2>Children's Privacy</h2>
+        <p>
+          Bloom is not intended for children under the age of 13. We do not knowingly collect personal information
+          from children under 13. If you are a parent or guardian and believe your child has provided us with personal
+          information, please contact us and we will delete such information.
+        </p>
+      </section>
+
+      <section class="legal-section">
+        <h2>International Data Transfers</h2>
+        <p>
+          Your information may be transferred to and processed in countries other than your country of residence.
+          These countries may have data protection laws that are different from the laws of your country.
+          We ensure appropriate safeguards are in place to protect your personal data in accordance with this Privacy Policy.
+        </p>
+      </section>
+
+      <section class="legal-section">
+        <h2>Changes to This Policy</h2>
+        <p>
+          We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements.
+          We will notify you of any material changes by posting the new Privacy Policy on this page and updating the
+          "Last Updated" date. We encourage you to review this Privacy Policy periodically.
+        </p>
+      </section>
+
+      <section class="legal-section">
+        <h2>Contact Us</h2>
+        <p>If you have questions or concerns about this Privacy Policy, please contact us at:</p>
+        <p><a href="mailto:privacy@bloom-game.com">privacy@bloom-game.com</a></p>
+      </section>
+
+      <div class="legal-notice">
+        <p>
+          <strong>Note:</strong> This is a placeholder privacy policy for development purposes.
+          The final privacy policy will be reviewed by legal counsel before the game's Early Access launch.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .legal-page {
+      padding: 4rem 0 6rem;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .page-title {
+      font-size: clamp(2.5rem, 6vw, 3.5rem);
+      text-align: center;
+      margin-bottom: 1rem;
+      color: var(--color-primary);
+    }
+
+    .last-updated {
+      text-align: center;
+      color: var(--color-gray);
+      font-size: 0.875rem;
+      margin-bottom: 3rem;
+      font-family: var(--font-heading);
+      letter-spacing: 0.05em;
+    }
+
+    .legal-section {
+      margin-bottom: 3rem;
+    }
+
+    .legal-section h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+      color: var(--color-primary);
+      border-bottom: 2px solid rgba(0, 255, 136, 0.3);
+      padding-bottom: 0.5rem;
+    }
+
+    .legal-section p {
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .legal-section ul {
+      margin: 1.5rem 0;
+      padding-left: 2rem;
+    }
+
+    .legal-section li {
+      margin-bottom: 1rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .legal-section li strong {
+      color: var(--color-text);
+    }
+
+    .legal-section a {
+      color: var(--color-primary);
+      text-decoration: underline;
+      transition: color 0.2s ease;
+    }
+
+    .legal-section a:hover {
+      color: var(--color-secondary);
+    }
+
+    .legal-notice {
+      background: rgba(255, 0, 85, 0.1);
+      border: 1px solid rgba(255, 0, 85, 0.3);
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      margin-top: 4rem;
+    }
+
+    .legal-notice p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.6;
+    }
+
+    .legal-notice strong {
+      color: var(--color-secondary);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .legal-page {
+        padding: 3rem 0 4rem;
+      }
+
+      .container {
+        padding: 0 1.5rem;
+      }
+
+      .legal-section h2 {
+        font-size: 1.5rem;
+      }
+
+      .legal-section ul {
+        padding-left: 1.5rem;
+      }
+    }
+
+    /* Reduce motion for accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</BaseLayout>

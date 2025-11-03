@@ -1,0 +1,34 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="var-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4B0082;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8B0000;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="60" cy="60" r="55" fill="url(#var-grad)" />
+
+  <!-- Book/archive structure -->
+  <rect x="35" y="35" width="50" height="55" fill="#2C2C2C" rx="2" />
+  <rect x="38" y="38" width="44" height="49" fill="#1A1A1A" rx="1" />
+
+  <!-- Book spine -->
+  <rect x="35" y="35" width="8" height="55" fill="#3C3C3C" rx="1" />
+  <line x1="40" y1="40" x2="40" y2="85" stroke="#4B0082" stroke-width="1" />
+
+  <!-- Eye symbol (all-seeing) -->
+  <ellipse cx="60" cy="60" rx="18" ry="12" fill="none" stroke="#C0C0C0" stroke-width="2" />
+  <circle cx="60" cy="60" r="7" fill="#C0C0C0" />
+  <circle cx="60" cy="60" r="4" fill="#4B0082" />
+
+  <!-- Keyhole accent -->
+  <circle cx="60" cy="75" r="4" fill="#8B0000" />
+  <rect x="58" y="75" width="4" height="8" fill="#8B0000" />
+
+  <!-- Decorative corner marks -->
+  <path d="M45 42 L50 42 L50 47" fill="none" stroke="#C0C0C0" stroke-width="1" opacity="0.6" />
+  <path d="M75 42 L70 42 L70 47" fill="none" stroke="#C0C0C0" stroke-width="1" opacity="0.6" />
+  <path d="M45 78 L50 78 L50 73" fill="none" stroke="#C0C0C0" stroke-width="1" opacity="0.6" />
+  <path d="M75 78 L70 78 L70 73" fill="none" stroke="#C0C0C0" stroke-width="1" opacity="0.6" />
+</svg>

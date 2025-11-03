@@ -1,0 +1,474 @@
+{
+  "factions": [
+    {
+      "id": "FCT_DIR",
+      "name": "Sky Bastion Directorate",
+      "shortName": "Directorate",
+      "role": "tank",
+      "coopAbility": "Supply drops, +20% team damage resist",
+      "homeBiome": "SnowPeaks",
+      "launchStatus": "ea-launch",
+      "launchWindow": "EA Launch",
+      "philosophy": "Order through force",
+      "specialty": "Military coordination, tank role",
+      "lore": "The last remnant of unified human military command. Born from the collapse of the Global Reconstruction Accord, they maintain strict military discipline and hierarchical structure in a fractured world.",
+      "colors": {
+        "primary": "#001F3F",
+        "secondary": "#36454F",
+        "accent": "#FFFFFF"
+      },
+      "playstyle": "Assault and hold tactics with heavy weapons and armor",
+      "strengths": [
+        "Heavy weapons",
+        "Superior armor",
+        "Artillery support",
+        "Command network"
+      ],
+      "weaknesses": [
+        "Slow mobility",
+        "High resource consumption"
+      ],
+      "uniqueAbilities": [
+        {
+          "name": "Artillery Support",
+          "description": "Call in devastating bombardments",
+          "cooldown": "long"
+        },
+        {
+          "name": "Supply Drop",
+          "description": "Request ammunition and medical supplies",
+          "cooldown": "medium"
+        },
+        {
+          "name": "Reinforced Armor",
+          "description": "+15% damage resistance with faction gear",
+          "cooldown": "passive"
+        }
+      ],
+      "lastSynced": "2025-11-02T21:26:10.125Z"
+    },
+    {
+      "id": "FCT_VUL",
+      "name": "Iron Vultures",
+      "shortName": "Vultures",
+      "role": "scavenger",
+      "coopAbility": "+10% loot detection, faster breaches",
+      "homeBiome": "EasternPlateaus",
+      "launchStatus": "ea-launch",
+      "launchWindow": "EA Launch",
+      "philosophy": "Profit through salvage",
+      "specialty": "Loot detection, DPS role",
+      "lore": "Elite salvage specialists and equipment thieves who have perfected the art of battlefield acquisition and adaptive engineering. They transform stolen faction gear into unique hybrid systems.",
+      "colors": {
+        "primary": "#D35400",
+        "secondary": "#7F8C8D",
+        "accent": "#F0C27B"
+      },
+      "playstyle": "Hit-and-run tactics with stolen and modified equipment",
+      "strengths": [
+        "Loot detection",
+        "Equipment theft",
+        "Adaptive engineering",
+        "Crafting"
+      ],
+      "weaknesses": [
+        "Light armor",
+        "Disorganized tactics"
+      ],
+      "uniqueAbilities": [
+        {
+          "name": "Scavenger",
+          "description": "+10% loot from containers",
+          "cooldown": "passive"
+        },
+        {
+          "name": "Field Repair",
+          "description": "Fix equipment mid-combat",
+          "cooldown": "short"
+        },
+        {
+          "name": "Jury Rig",
+          "description": "Create improvised weapons from salvage",
+          "cooldown": "medium"
+        }
+      ],
+      "lastSynced": "2025-11-02T21:26:10.125Z"
+    },
+    {
+      "id": "FCT_AEG",
+      "name": "Aegis Collective",
+      "shortName": "Aegis",
+      "role": "medic",
+      "coopAbility": "Faster revives, healing stations",
+      "homeBiome": "CentralGrasslands",
+      "launchStatus": "ea-launch",
+      "launchWindow": "EA Launch",
+      "philosophy": "Community through aid",
+      "specialty": "Healing, support role",
+      "lore": "Community protectors and emergency responders who emerged from civilian emergency services. They focus on defensive operations, civilian protection, and disaster response.",
+      "colors": {
+        "primary": "#0080FF",
+        "secondary": "#FFFFFF",
+        "accent": "#FF4500"
+      },
+      "playstyle": "Defensive support with healing and fortification focus",
+      "strengths": [
+        "Medical expertise",
+        "Defensive fortifications",
+        "Team support",
+        "Safe zones"
+      ],
+      "weaknesses": [
+        "Limited offensive capability",
+        "Dependent on team"
+      ],
+      "uniqueAbilities": [
+        {
+          "name": "Medical Drone",
+          "description": "Automated healing support for team",
+          "cooldown": "medium"
+        },
+        {
+          "name": "Deployable Shields",
+          "description": "Energy barriers for cover",
+          "cooldown": "short"
+        },
+        {
+          "name": "Overwatch",
+          "description": "Enhanced threat detection for squad",
+          "cooldown": "passive"
+        }
+      ],
+      "lastSynced": "2025-11-02T21:26:10.125Z"
+    },
+    {
+      "id": "FCT_F77",
+      "name": "The Seventy-Seven",
+      "shortName": "Seventy-Seven",
+      "role": "all-rounder",
+      "coopAbility": "Any faction weapons, +10% team XP",
+      "homeBiome": "Desert",
+      "launchStatus": "ea-launch",
+      "launchWindow": "EA Launch",
+      "philosophy": "Unity through diversity",
+      "specialty": "All-rounder, XP boost",
+      "lore": "Elite mercenary contractors who operate with corporate efficiency and professional military standards. They bridge the gap between military precision and commercial pragmatism.",
+      "colors": {
+        "primary": "#D2B48C",
+        "secondary": "#556B2F",
+        "accent": "#2F2F2F"
+      },
+      "playstyle": "Professional combat with versatile equipment options",
+      "strengths": [
+        "Versatility",
+        "Professional equipment",
+        "XP boost",
+        "Adaptability"
+      ],
+      "weaknesses": [
+        "No specialized bonuses",
+        "Higher equipment costs"
+      ],
+      "uniqueAbilities": [
+        {
+          "name": "Cross-Training",
+          "description": "Use any faction's weapons and equipment",
+          "cooldown": "passive"
+        },
+        {
+          "name": "Team Leader",
+          "description": "+10% XP for entire squad",
+          "cooldown": "passive"
+        },
+        {
+          "name": "Mercenary Efficiency",
+          "description": "Faster weapon swapping and reloading",
+          "cooldown": "passive"
+        }
+      ],
+      "lastSynced": "2025-11-02T21:26:10.125Z"
+    },
+    {
+      "id": "FCT_HLX",
+      "name": "Helix Syndicate",
+      "shortName": "Helix",
+      "role": "tech",
+      "coopAbility": "Hack terminals, deploy turrets/shields",
+      "homeBiome": "Urban",
+      "launchStatus": "expansion",
+      "launchWindow": "Month 3-6",
+      "philosophy": "Technology supremacy",
+      "specialty": "Tech, engineering",
+      "lore": "Advanced technologists who control the digital battlefield through hacking and automated systems. They deploy AI-controlled defenses and manipulate enemy equipment.",
+      "colors": {
+        "primary": "#00C2FF",
+        "secondary": "#0C0F12",
+        "accent": "#C0F3FF"
+      },
+      "playstyle": "Technology warfare with automated defenses",
+      "strengths": [
+        "Hacking",
+        "Automated defenses",
+        "Tech manipulation",
+        "Intelligence"
+      ],
+      "weaknesses": [
+        "Direct combat",
+        "Equipment dependent"
+      ],
+      "uniqueAbilities": [
+        {
+          "name": "System Hack",
+          "description": "Disable enemy equipment and terminals",
+          "cooldown": "medium"
+        },
+        {
+          "name": "Deploy Turret",
+          "description": "Place automated defense turrets",
+          "cooldown": "long"
+        },
+        {
+          "name": "Tech Scanner",
+          "description": "Detect electronics and vulnerabilities",
+          "cooldown": "passive"
+        }
+      ],
+      "lastSynced": "2025-11-02T21:26:10.125Z"
+    },
+    {
+      "id": "FCT_WAY",
+      "name": "The Wayfarers",
+      "shortName": "Wayfarers",
+      "role": "scout",
+      "coopAbility": "+15% squad speed, mark enemies",
+      "homeBiome": "Coastal",
+      "launchStatus": "expansion",
+      "launchWindow": "Month 3-6",
+      "philosophy": "Freedom through movement",
+      "specialty": "Scouting, mobility",
+      "lore": "Nomadic scouts and pathfinders who excel at reconnaissance and rapid movement. They maintain an extensive network of safe routes and hidden paths across the wasteland.",
+      "colors": {
+        "primary": "#32CD32",
+        "secondary": "#8B4513",
+        "accent": "#FFD700"
+      },
+      "playstyle": "Hit-and-run with superior mobility and intelligence",
+      "strengths": [
+        "Speed",
+        "Reconnaissance",
+        "Route knowledge",
+        "Mobility buffs"
+      ],
+      "weaknesses": [
+        "Light armor",
+        "Limited firepower"
+      ],
+      "uniqueAbilities": [
+        {
+          "name": "Scout's Eye",
+          "description": "Mark enemies for entire squad to see",
+          "cooldown": "short"
+        },
+        {
+          "name": "Fleet Footed",
+          "description": "+15% movement speed for squad",
+          "cooldown": "passive"
+        },
+        {
+          "name": "Hidden Paths",
+          "description": "Access to secret routes and shortcuts",
+          "cooldown": "passive"
+        }
+      ],
+      "lastSynced": "2025-11-02T21:26:10.125Z"
+    },
+    {
+      "id": "FCT_VAR",
+      "name": "Obsidian Archive",
+      "shortName": "Archive",
+      "role": "stealth",
+      "coopAbility": "Cloak squad, reveal hidden loot",
+      "homeBiome": "Volcanic",
+      "launchStatus": "expansion",
+      "launchWindow": "Month 3-6",
+      "philosophy": "Knowledge is power",
+      "specialty": "Stealth, intel",
+      "lore": "Information keepers and data specialists who weaponize knowledge. They operate from the shadows, using intelligence and digital warfare to control the battlefield.",
+      "colors": {
+        "primary": "#4B0082",
+        "secondary": "#2F2F2F",
+        "accent": "#9370DB"
+      },
+      "playstyle": "Stealth and information warfare",
+      "strengths": [
+        "Stealth technology",
+        "Intelligence gathering",
+        "Hidden loot detection",
+        "Hacking"
+      ],
+      "weaknesses": [
+        "Direct combat",
+        "Low health pool"
+      ],
+      "uniqueAbilities": [
+        {
+          "name": "Cloaking Field",
+          "description": "Brief invisibility for squad",
+          "cooldown": "long"
+        },
+        {
+          "name": "Data Mine",
+          "description": "Extract intel from terminals and bodies",
+          "cooldown": "medium"
+        },
+        {
+          "name": "Treasure Sense",
+          "description": "Reveal hidden loot and secret caches",
+          "cooldown": "passive"
+        }
+      ],
+      "lastSynced": "2025-11-02T21:26:10.125Z"
+    },
+    {
+      "id": "FCT_NGD",
+      "name": "North Guard",
+      "shortName": "North Guard",
+      "role": "defender",
+      "coopAbility": "Forged tracking, +50% Forged damage",
+      "homeBiome": "Arctic",
+      "launchStatus": "expansion",
+      "launchWindow": "Month 6-9",
+      "philosophy": "Defend humanity",
+      "specialty": "Anti-Forged specialist",
+      "lore": "Elite defenders specialized in combating the Forged menace. They maintain the northern frontier against mechanical horrors from the wastes.",
+      "colors": {
+        "primary": "#FFFFFF",
+        "secondary": "#4682B4",
+        "accent": "#87CEEB"
+      },
+      "playstyle": "Defensive specialists against AI enemies",
+      "strengths": [
+        "Anti-Forged weapons",
+        "Heavy armor",
+        "Defensive positions",
+        "Area denial"
+      ],
+      "weaknesses": [
+        "Mobility",
+        "PvP combat"
+      ],
+      "uniqueAbilities": [
+        {
+          "name": "Forged Hunter",
+          "description": "+50% damage against Forged enemies",
+          "cooldown": "passive"
+        },
+        {
+          "name": "Detection Grid",
+          "description": "Reveal Forged enemies in large radius",
+          "cooldown": "medium"
+        },
+        {
+          "name": "Hardened Defense",
+          "description": "Reduced damage from Forged attacks",
+          "cooldown": "passive"
+        }
+      ],
+      "lastSynced": "2025-11-02T21:26:10.125Z"
+    },
+    {
+      "id": "FCT_ASH",
+      "name": "The Pact of Ash",
+      "shortName": "Pact",
+      "role": "food-provider",
+      "coopAbility": "Food buffs, +20% convoy defense",
+      "homeBiome": "SouthwestPlains",
+      "launchStatus": "expansion",
+      "launchWindow": "Month 6-9",
+      "philosophy": "Sustain the people",
+      "specialty": "Defense, supply",
+      "lore": "Agricultural defenders who protect food supplies and convoy routes. They believe survival depends on maintaining the food network across the wasteland.",
+      "colors": {
+        "primary": "#8B4513",
+        "secondary": "#DEB887",
+        "accent": "#F4A460"
+      },
+      "playstyle": "Support role with food and supply bonuses",
+      "strengths": [
+        "Resource management",
+        "Convoy protection",
+        "Team buffs",
+        "Sustainability"
+      ],
+      "weaknesses": [
+        "Combat power",
+        "Equipment quality"
+      ],
+      "uniqueAbilities": [
+        {
+          "name": "Field Rations",
+          "description": "Provide food buffs to squad",
+          "cooldown": "medium"
+        },
+        {
+          "name": "Convoy Guardian",
+          "description": "+20% defense when near convoy",
+          "cooldown": "passive"
+        },
+        {
+          "name": "Abundant Harvest",
+          "description": "Increased resource yields from gathering",
+          "cooldown": "passive"
+        }
+      ],
+      "lastSynced": "2025-11-02T21:26:10.125Z"
+    },
+    {
+      "id": "FCT_APX",
+      "name": "Apex Dynamics",
+      "shortName": "Apex",
+      "role": "elite-hunter",
+      "coopAbility": "Trophy bonuses, +15% rare loot",
+      "homeBiome": "Wetland",
+      "launchStatus": "expansion",
+      "launchWindow": "Month 6-9",
+      "philosophy": "Hunt the greatest prey",
+      "specialty": "Elite hunting, rare loot",
+      "lore": "Elite hunters who track the most dangerous targets for sport and profit. They specialize in rare loot acquisition and trophy collection.",
+      "colors": {
+        "primary": "#8B0000",
+        "secondary": "#FFD700",
+        "accent": "#000000"
+      },
+      "playstyle": "High-risk, high-reward hunting gameplay",
+      "strengths": [
+        "Rare loot bonus",
+        "Tracking",
+        "Single-target damage",
+        "Trophy system"
+      ],
+      "weaknesses": [
+        "Team support",
+        "Group combat"
+      ],
+      "uniqueAbilities": [
+        {
+          "name": "Trophy Hunter",
+          "description": "+15% chance for rare loot drops",
+          "cooldown": "passive"
+        },
+        {
+          "name": "Predator's Mark",
+          "description": "Mark high-value targets for bonus damage",
+          "cooldown": "medium"
+        },
+        {
+          "name": "Hunter's Instinct",
+          "description": "Track wounded enemies and rare spawns",
+          "cooldown": "passive"
+        }
+      ],
+      "lastSynced": "2025-11-02T21:26:10.125Z"
+    }
+  ]
+}

@@ -1,0 +1,669 @@
+---
+/**
+ * System Requirements Page
+ *
+ * Displays PC specifications needed to run Bloom, including:
+ * - Minimum requirements (RTX 2060 6GB target)
+ * - Recommended requirements (RTX 3070 8GB target)
+ * - Technical details (Unity 6, HDRP, multiplayer specs)
+ * - Performance targets and optimization status
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const pageTitle = 'System Requirements - Bloom';
+const pageDescription = 'Bloom system requirements: RTX 2060 6GB minimum, Unity 6 HDRP, 60+ FPS target. Check if your PC can run it!';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} type="game">
+  <div class="system-requirements-page">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1 class="hero-title">System Requirements</h1>
+        <p class="hero-description">
+          Can Your PC Run Bloom?
+        </p>
+      </div>
+    </section>
+
+    <!-- Requirements Section -->
+    <section class="requirements-section">
+      <div class="container">
+        <div class="requirements-grid">
+          <!-- Minimum Requirements -->
+          <div class="requirements-card">
+            <div class="card-header">
+              <h2 class="card-title">Minimum Requirements</h2>
+              <p class="card-subtitle">60 FPS at 1080p Medium</p>
+            </div>
+            <div class="card-content">
+              <div class="requirement-item">
+                <span class="requirement-label">OS</span>
+                <span class="requirement-value">Windows 10 64-bit</span>
+              </div>
+              <div class="requirement-item">
+                <span class="requirement-label">Processor</span>
+                <span class="requirement-value">Intel Core i5-8400<br>AMD Ryzen 5 2600</span>
+              </div>
+              <div class="requirement-item">
+                <span class="requirement-label">Memory</span>
+                <span class="requirement-value">16 GB RAM</span>
+              </div>
+              <div class="requirement-item">
+                <span class="requirement-label">Graphics</span>
+                <span class="requirement-value">NVIDIA GeForce RTX 2060 6GB<br>AMD Radeon RX 5700</span>
+              </div>
+              <div class="requirement-item">
+                <span class="requirement-label">DirectX</span>
+                <span class="requirement-value">Version 12</span>
+              </div>
+              <div class="requirement-item">
+                <span class="requirement-label">Storage</span>
+                <span class="requirement-value">40 GB available space</span>
+              </div>
+              <div class="requirement-item">
+                <span class="requirement-label">Network</span>
+                <span class="requirement-value">Broadband Internet connection</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recommended Requirements -->
+          <div class="requirements-card featured">
+            <div class="card-header">
+              <h2 class="card-title">Recommended Requirements</h2>
+              <p class="card-subtitle">60+ FPS at 1440p High</p>
+            </div>
+            <div class="card-content">
+              <div class="requirement-item">
+                <span class="requirement-label">OS</span>
+                <span class="requirement-value">Windows 11 64-bit</span>
+              </div>
+              <div class="requirement-item">
+                <span class="requirement-label">Processor</span>
+                <span class="requirement-value">Intel Core i7-10700K<br>AMD Ryzen 7 3700X</span>
+              </div>
+              <div class="requirement-item">
+                <span class="requirement-label">Memory</span>
+                <span class="requirement-value">32 GB RAM</span>
+              </div>
+              <div class="requirement-item">
+                <span class="requirement-label">Graphics</span>
+                <span class="requirement-value">NVIDIA GeForce RTX 3070 8GB<br>AMD Radeon RX 6800</span>
+              </div>
+              <div class="requirement-item">
+                <span class="requirement-label">DirectX</span>
+                <span class="requirement-value">Version 12</span>
+              </div>
+              <div class="requirement-item">
+                <span class="requirement-label">Storage</span>
+                <span class="requirement-value">40 GB SSD</span>
+              </div>
+              <div class="requirement-item">
+                <span class="requirement-label">Network</span>
+                <span class="requirement-value">Broadband Internet connection</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Details Section -->
+    <section class="technical-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Technical Details</h2>
+          <p class="section-description">
+            Bloom is built on cutting-edge technology to deliver stunning visuals and smooth performance
+          </p>
+        </div>
+
+        <div class="technical-grid">
+          <div class="technical-card">
+            <h3 class="technical-title">Engine</h3>
+            <p class="technical-detail">Unity 6000.2.2f1</p>
+            <p class="technical-description">Latest Unity 6 with High Definition Render Pipeline</p>
+          </div>
+
+          <div class="technical-card">
+            <h3 class="technical-title">Graphics</h3>
+            <p class="technical-detail">HDRP 17.2.0</p>
+            <p class="technical-description">High Definition Render Pipeline for stunning visuals</p>
+          </div>
+
+          <div class="technical-card">
+            <h3 class="technical-title">Performance Target</h3>
+            <p class="technical-detail">60+ FPS</p>
+            <p class="technical-description">On minimum spec at 1080p Medium settings</p>
+          </div>
+
+          <div class="technical-card">
+            <h3 class="technical-title">Multiplayer</h3>
+            <p class="technical-detail">8-10 Players</p>
+            <p class="technical-description">Via Steam P2P networking</p>
+          </div>
+
+          <div class="technical-card">
+            <h3 class="technical-title">World Size</h3>
+            <p class="technical-detail">32km x 32km</p>
+            <p class="technical-description">1024 procedurally generated tiles</p>
+          </div>
+
+          <div class="technical-card">
+            <h3 class="technical-title">Networking</h3>
+            <p class="technical-detail">Unity Netcode</p>
+            <p class="technical-description">Steamworks P2P transport layer</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Performance Notes Section -->
+    <section class="notes-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Performance Notes</h2>
+        </div>
+
+        <div class="notes-grid">
+          <div class="note-card">
+            <div class="note-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+              </svg>
+            </div>
+            <h3 class="note-title">Minimum GPU</h3>
+            <p class="note-description">
+              RTX 2060 6GB is minimum for 60 FPS at 1080p Medium settings.
+              Equivalent AMD cards: RX 5700 or better.
+            </p>
+          </div>
+
+          <div class="note-card">
+            <div class="note-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 class="note-title">Recommended GPU</h3>
+            <p class="note-description">
+              RTX 3070 recommended for 60+ FPS at 1440p High settings.
+              Equivalent AMD cards: RX 6800 or better.
+            </p>
+          </div>
+
+          <div class="note-card">
+            <div class="note-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+              </svg>
+            </div>
+            <h3 class="note-title">SSD Recommended</h3>
+            <p class="note-description">
+              SSD strongly recommended for faster load times.
+              HDD may experience longer loading screens.
+            </p>
+          </div>
+
+          <div class="note-card">
+            <div class="note-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+              </svg>
+            </div>
+            <h3 class="note-title">RAM Requirements</h3>
+            <p class="note-description">
+              16GB RAM minimum, 32GB recommended for optimal performance with large world streaming.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Optimization Status Section -->
+    <section class="status-section">
+      <div class="container">
+        <div class="status-card">
+          <div class="status-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <div class="status-content">
+            <h2 class="status-title">Early Access Performance</h2>
+            <p class="status-description">
+              Bloom is currently in optimization phase. System requirements may change before launch
+              as we continue to refine and improve performance. Performance improvements are ongoing
+              to ensure the best possible experience on minimum spec hardware.
+            </p>
+            <div class="status-badge">
+              <span class="badge-text">In Development</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-content">
+          <h2 class="cta-title">Ready to Survive the Harvest?</h2>
+          <p class="cta-description">
+            Wishlist Bloom on Steam to be notified when Early Access launches
+          </p>
+          <a href="https://store.steampowered.com" class="cta-button">
+            Wishlist on Steam
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .system-requirements-page {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%);
+  }
+
+  /* Container */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Hero Section */
+  .hero {
+    padding: 4rem 1.5rem 2rem;
+    text-align: center;
+    background: linear-gradient(180deg, rgba(0, 255, 136, 0.1) 0%, transparent 100%);
+  }
+
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    font-family: var(--font-heading, 'Orbitron', sans-serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: linear-gradient(135deg, var(--color-primary), #00ccff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-description {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+  }
+
+  /* Requirements Section */
+  .requirements-section {
+    padding: 3rem 1.5rem;
+  }
+
+  .requirements-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .requirements-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .requirements-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .requirements-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(0, 255, 136, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+  }
+
+  .requirements-card.featured {
+    border-color: rgba(0, 255, 136, 0.5);
+    background: rgba(0, 255, 136, 0.05);
+  }
+
+  .card-header {
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .card-title {
+    font-family: var(--font-heading, 'Orbitron', sans-serif);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .card-subtitle {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .card-content {
+    padding: 1.5rem;
+  }
+
+  .requirement-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .requirement-item:last-child {
+    border-bottom: none;
+  }
+
+  .requirement-label {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    min-width: 100px;
+  }
+
+  .requirement-value {
+    text-align: right;
+    color: #ffffff;
+    line-height: 1.6;
+  }
+
+  /* Technical Details Section */
+  .technical-section {
+    padding: 3rem 1.5rem;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.5) 100%);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-title {
+    font-family: var(--font-heading, 'Orbitron', sans-serif);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .section-description {
+    font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .technical-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .technical-card {
+    flex: 0 0 270px;
+    max-width: 100%;
+  }
+
+  .technical-grid .technical-card {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .technical-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(0, 255, 136, 0.3);
+    transform: translateY(-3px);
+  }
+
+  .technical-title {
+    font-family: var(--font-heading, 'Orbitron', sans-serif);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .technical-detail {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .technical-description {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+  }
+
+  /* Performance Notes Section */
+  .notes-section {
+    padding: 3rem 1.5rem;
+  }
+
+  .notes-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .note-card {
+    flex: 0 0 300px;
+    max-width: 100%;
+  }
+
+  .notes-grid .note-card {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .note-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(0, 255, 136, 0.3);
+    transform: translateY(-3px);
+  }
+
+  .note-icon {
+    width: 48px;
+    height: 48px;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+  }
+
+  .note-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .note-title {
+    font-family: var(--font-heading, 'Orbitron', sans-serif);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 0.75rem;
+  }
+
+  .note-description {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+  }
+
+  /* Optimization Status Section */
+  .status-section {
+    padding: 3rem 1.5rem;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.5) 100%);
+  }
+
+  .status-card {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    background: rgba(255, 136, 0, 0.1);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 136, 0, 0.3);
+  }
+
+  .status-icon {
+    width: 64px;
+    height: 64px;
+    color: #ff8800;
+    flex-shrink: 0;
+  }
+
+  .status-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .status-content {
+    flex: 1;
+  }
+
+  .status-title {
+    font-family: var(--font-heading, 'Orbitron', sans-serif);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ff8800;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .status-description {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .status-badge {
+    display: inline-block;
+  }
+
+  .badge-text {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 136, 0, 0.2);
+    border: 1px solid rgba(255, 136, 0, 0.5);
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #ff8800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 768px) {
+    .status-card {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .status-icon {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  /* CTA Section */
+  .cta-section {
+    padding: 4rem 1.5rem;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 255, 136, 0.05) 100%);
+  }
+
+  .cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .cta-title {
+    font-family: var(--font-heading, 'Orbitron', sans-serif);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1rem;
+  }
+
+  .cta-description {
+    font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #000000;
+    background: linear-gradient(135deg, var(--color-primary), #00ccff);
+    border-radius: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 255, 136, 0.3);
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 255, 136, 0.4);
+    color: #000000;
+  }
+
+  .cta-button:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 4px;
+  }
+
+  /* Performance optimizations */
+  @media (prefers-reduced-motion: reduce) {
+    .requirements-card,
+    .technical-card,
+    .note-card,
+    .cta-button {
+      transition: none;
+    }
+  }
+</style>

@@ -4,6 +4,7 @@
  * Custom error page with analytics tracking
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import Button from '@/components/Button.astro';
 ---
 
 <BaseLayout
@@ -19,13 +20,13 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
       Perhaps you'd like to return to safer territory?
     </p>
     <div class="cta-buttons">
-      <a href="/" class="btn btn-primary">Return Home</a>
-      <a href="/factions" class="btn btn-secondary">Explore Factions</a>
+      <Button href="/" variant="primary">Return Home</Button>
+      <Button href="/factions" variant="secondary">Explore Factions</Button>
     </div>
   </section>
 
   <!-- Track 404 pages in analytics -->
-  <script>
+  <script is:inline>
     // Track 404 in Plausible
     if (window.plausible) {
       window.plausible('404', {
@@ -68,41 +69,12 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
       color: var(--color-gray);
     }
 
+    /* Button Containers */
     .cta-buttons {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
       justify-content: center;
-    }
-
-    .btn {
-      padding: 1rem 2rem;
-      font-size: 1.125rem;
-      font-weight: 600;
-      border-radius: 0.5rem;
-      transition: all 0.3s ease;
-      display: inline-block;
-    }
-
-    .btn-primary {
-      background: var(--color-primary);
-      color: var(--color-bg);
-    }
-
-    .btn-primary:hover {
-      background: var(--color-secondary);
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      border: 2px solid var(--color-primary);
-      color: var(--color-primary);
-    }
-
-    .btn-secondary:hover {
-      background: var(--color-primary);
-      color: var(--color-bg);
     }
   </style>
 </BaseLayout>

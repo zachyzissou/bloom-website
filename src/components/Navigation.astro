@@ -1,0 +1,408 @@
+---
+/**
+ * Navigation Component - Global site navigation
+ * Features:
+ * - Responsive design (mobile hamburger, desktop horizontal)
+ * - CSS-only mobile menu toggle (no JavaScript)
+ * - Active page highlighting
+ * - Sticky header
+ * - Accessibility (ARIA labels, keyboard navigation)
+ * - Post-apocalyptic aesthetic
+ */
+
+// Get current pathname for active link highlighting
+const currentPath = Astro.url.pathname
+
+// Navigation links
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/features', label: 'Features' },
+  { href: '/factions', label: 'Factions' },
+  { href: '/biomes', label: 'Biomes' },
+  { href: '/media', label: 'Media' },
+  { href: '/system-requirements', label: 'System Requirements' },
+]
+
+// Helper function to check if link is active
+const isActive = (href: string) => {
+  if (href === '/') {
+    return currentPath === '/'
+  }
+  return currentPath.startsWith(href)
+}
+---
+
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="navbar-container">
+    <!-- Logo/Brand -->
+    <a href="/" class="navbar-brand" aria-label="Bloom home">
+      <span class="brand-text">Bloom</span>
+      <span class="brand-tagline">Survive the Harvest</span>
+    </a>
+
+    <!-- Mobile menu toggle (checkbox hack for CSS-only solution) -->
+    <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" />
+    <label for="menu-toggle" class="menu-icon" aria-label="Menu">
+      <span class="menu-icon-bar"></span>
+      <span class="menu-icon-bar"></span>
+      <span class="menu-icon-bar"></span>
+    </label>
+
+    <!-- Navigation links -->
+    <ul class="nav-links" aria-hidden="true">
+      {
+        navLinks.map((link) => (
+          <li class="nav-item">
+            <a
+              href={link.href}
+              class={`nav-link ${isActive(link.href) ? 'active' : ''}`}
+              aria-current={isActive(link.href) ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</nav>
+
+<style>
+  /* Navbar container */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  .navbar-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  /* Logo/Brand */
+  .navbar-brand {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    z-index: 1001;
+  }
+
+  .brand-text {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    transition: opacity 0.2s ease;
+  }
+
+  .navbar-brand:hover .brand-text {
+    opacity: 0.8;
+  }
+
+  .brand-tagline {
+    font-size: 0.625rem;
+    color: var(--color-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 0.25rem;
+  }
+
+  /* Mobile menu toggle (hidden checkbox) */
+  .menu-toggle {
+    display: none;
+  }
+
+  /* Hamburger icon */
+  .menu-icon {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    z-index: 1001;
+    padding: 0.25rem;
+  }
+
+  .menu-icon-bar {
+    width: 100%;
+    height: 3px;
+    background: var(--color-primary);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+
+  /* Hamburger animation when checked */
+  .menu-toggle:checked ~ .menu-icon .menu-icon-bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .menu-toggle:checked ~ .menu-icon .menu-icon-bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle:checked ~ .menu-icon .menu-icon-bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* Navigation links */
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-item {
+    margin: 0;
+  }
+
+  .nav-link {
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 2px solid transparent;
+    border-radius: 0.25rem;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  /* Underline effect on hover */
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--color-primary);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+
+  .nav-link:hover {
+    color: var(--color-primary);
+  }
+
+  .nav-link:hover::after {
+    width: 80%;
+  }
+
+  /* Active link styling */
+  .nav-link.active {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    background: rgba(0, 255, 136, 0.1);
+  }
+
+  .nav-link.active::after {
+    width: 0;
+  }
+
+  /* Focus styles for accessibility */
+  .nav-link:focus-visible,
+  .menu-icon:focus-visible,
+  .navbar-brand:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 4px;
+    border-radius: 0.25rem;
+  }
+
+  .menu-toggle:focus-visible ~ .menu-icon {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 4px;
+    border-radius: 0.25rem;
+  }
+
+  /* Mobile responsive styles */
+  @media (max-width: 768px) {
+    .navbar-container {
+      padding: 1rem 1.5rem;
+    }
+
+    /* Show hamburger icon on mobile */
+    .menu-icon {
+      display: flex;
+    }
+
+    /* Mobile menu */
+    .nav-links {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      background: rgba(0, 0, 0, 0.98);
+      backdrop-filter: blur(10px);
+      padding: 4rem 2rem;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Show menu when checkbox is checked */
+    .menu-toggle:checked ~ .nav-links {
+      transform: translateX(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .nav-item {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+    }
+
+    /* Staggered animation for menu items */
+    .menu-toggle:checked ~ .nav-links .nav-item {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .menu-toggle:checked ~ .nav-links .nav-item:nth-child(1) {
+      transition-delay: 0.1s;
+    }
+
+    .menu-toggle:checked ~ .nav-links .nav-item:nth-child(2) {
+      transition-delay: 0.2s;
+    }
+
+    .menu-toggle:checked ~ .nav-links .nav-item:nth-child(3) {
+      transition-delay: 0.3s;
+    }
+
+    .menu-toggle:checked ~ .nav-links .nav-item:nth-child(4) {
+      transition-delay: 0.4s;
+    }
+
+    .menu-toggle:checked ~ .nav-links .nav-item:nth-child(5) {
+      transition-delay: 0.5s;
+    }
+
+    .menu-toggle:checked ~ .nav-links .nav-item:nth-child(6) {
+      transition-delay: 0.6s;
+    }
+
+    .nav-link {
+      font-size: 1.5rem;
+      padding: 1rem 2rem;
+    }
+
+    .brand-text {
+      font-size: 1.5rem;
+    }
+
+    .brand-tagline {
+      font-size: 0.5rem;
+    }
+  }
+
+  /* Tablet styles */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .nav-links {
+      gap: 1.5rem;
+    }
+
+    .nav-link {
+      font-size: 0.8rem;
+      padding: 0.5rem 0.75rem;
+    }
+  }
+
+  /* Large desktop styles */
+  @media (min-width: 1400px) {
+    .navbar-container {
+      padding: 1.25rem 3rem;
+    }
+
+    .nav-links {
+      gap: 2.5rem;
+    }
+
+    .nav-link {
+      font-size: 1rem;
+    }
+  }
+
+  /* Prevent body scroll when mobile menu is open */
+  :root:has(.menu-toggle:checked) {
+    overflow: hidden;
+  }
+
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+</style>
+
+<script>
+  // Enhance mobile menu with proper ARIA states and keyboard support
+  const menuToggle = document.getElementById('menu-toggle') as HTMLInputElement;
+  const navLinks = document.querySelector('.nav-links') as HTMLElement;
+
+  if (menuToggle && navLinks) {
+    // Update ARIA states when menu toggles
+    menuToggle.addEventListener('change', () => {
+      const isOpen = menuToggle.checked;
+      menuToggle.setAttribute('aria-expanded', isOpen.toString());
+      navLinks.setAttribute('aria-hidden', (!isOpen).toString());
+
+      // Focus trap: focus first nav link when menu opens
+      if (isOpen) {
+        const firstLink = navLinks.querySelector('.nav-link') as HTMLElement;
+        if (firstLink) {
+          setTimeout(() => firstLink.focus(), 350); // After animation
+        }
+      }
+    });
+
+    // Close menu on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menuToggle.checked) {
+        menuToggle.checked = false;
+        menuToggle.setAttribute('aria-expanded', 'false');
+        navLinks.setAttribute('aria-hidden', 'true');
+        menuToggle.focus(); // Return focus to toggle
+      }
+    });
+
+    // Close menu when navigating to a new page
+    navLinks.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.checked = false;
+        menuToggle.setAttribute('aria-expanded', 'false');
+        navLinks.setAttribute('aria-hidden', 'true');
+      });
+    });
+  }
+</script>

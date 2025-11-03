@@ -1,0 +1,190 @@
+---
+/**
+ * Footer Component - Comprehensive site footer with navigation links
+ * Features:
+ * - 4-column layout on desktop, single column on mobile
+ * - Bloom branding with tagline
+ * - Game, Community, Resources, and Legal link sections
+ * - Dark theme with primary green accent colors
+ * - Responsive design with hover effects
+ */
+---
+
+<footer class="footer" role="contentinfo">
+  <div class="footer-container">
+    <!-- Branding Section -->
+    <div class="footer-branding">
+      <h2 class="footer-logo">BLOOM</h2>
+      <p class="footer-tagline">Survive the Harvest</p>
+    </div>
+
+    <!-- Footer Navigation Grid -->
+    <div class="footer-grid">
+      <!-- Game Section -->
+      <div class="footer-column">
+        <h3 class="footer-heading">Game</h3>
+        <ul class="footer-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/features">Features</a></li>
+          <li><a href="/factions">Factions</a></li>
+          <li><a href="/biomes">Biomes</a></li>
+          <li><a href="/roadmap">Roadmap</a></li>
+        </ul>
+      </div>
+
+      <!-- Community Section -->
+      <div class="footer-column">
+        <h3 class="footer-heading">Community</h3>
+        <ul class="footer-links">
+          <li><a href="#" rel="noopener noreferrer" target="_blank" aria-label="Join our Discord community (coming soon)" aria-disabled="true">Discord</a></li>
+          <li><a href="#" rel="noopener noreferrer" target="_blank" aria-label="Follow us on Twitter (coming soon)" aria-disabled="true">Twitter</a></li>
+          <li><a href="#" rel="noopener noreferrer" target="_blank" aria-label="Join our Reddit community (coming soon)" aria-disabled="true">Reddit</a></li>
+          <li><a href="#" rel="noopener noreferrer" target="_blank" aria-label="Subscribe to our YouTube channel (coming soon)" aria-disabled="true">YouTube</a></li>
+        </ul>
+      </div>
+
+      <!-- Resources Section -->
+      <div class="footer-column">
+        <h3 class="footer-heading">Resources</h3>
+        <ul class="footer-links">
+          <li><a href="#" aria-label="Press Kit (coming soon)" aria-disabled="true">Press Kit</a></li>
+          <li><a href="/media">Media</a></li>
+          <li><a href="/faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <!-- Legal Section -->
+      <div class="footer-column">
+        <h3 class="footer-heading">Legal</h3>
+        <ul class="footer-links">
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="footer-copyright">
+      <p>&copy; {new Date().getFullYear()} Bloom. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: #0a0a0a;
+    border-top: 1px solid #1a1a1a;
+    padding: 4rem 1rem 2rem;
+    margin-top: 6rem;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Branding Section */
+  .footer-branding {
+    margin-bottom: 3rem;
+  }
+
+  .footer-logo {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.1em;
+  }
+
+  .footer-tagline {
+    font-size: 1rem;
+    color: var(--color-gray);
+    font-style: italic;
+  }
+
+  /* Footer Grid */
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  @media (min-width: 640px) {
+    .footer-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .footer-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* Footer Columns */
+  .footer-column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-heading {
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+  }
+
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .footer-links a {
+    color: var(--color-gray);
+    font-size: 0.875rem;
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+  }
+
+  .footer-links a:hover {
+    color: var(--color-primary);
+    transform: translateX(2px);
+    text-decoration: underline;
+  }
+
+  /* Copyright Section */
+  .footer-copyright {
+    padding-top: 2rem;
+    border-top: 1px solid #1a1a1a;
+    text-align: center;
+  }
+
+  .footer-copyright p {
+    color: var(--color-gray);
+    font-size: 0.875rem;
+  }
+
+  /* Accessibility: Focus styles */
+  .footer-links a:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Dark mode enhancement */
+  @media (prefers-color-scheme: dark) {
+    .footer {
+      background-color: #050505;
+    }
+  }
+</style>

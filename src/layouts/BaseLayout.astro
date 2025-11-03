@@ -1,10 +1,12 @@
 ---
 /**
  * Base Layout - Main layout wrapper for all pages
- * Includes SEO, Analytics, and global styles
+ * Includes SEO, Analytics, Navigation, and global styles
  */
 import SEO from '@/components/SEO.astro';
 import Analytics from '@/components/Analytics.astro';
+import Navigation from '@/components/Navigation.astro';
+import Footer from '@/components/Footer.astro';
 
 export interface Props {
   title: string;
@@ -36,7 +38,15 @@ const { title, description, image, type = 'website', noindex = false } = Astro.p
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
-    <!-- Fonts - Preload critical fonts -->
+    <!-- Fonts - Self-hosted (optional) -->
+    <!--
+      IMPORTANT: Self-hosted fonts are optional for development.
+      - See public/fonts/README.md for font installation instructions
+      - To use Google Fonts CDN instead, uncomment the links below and remove the preload links
+    -->
+
+    <!-- Option 1: Self-hosted fonts (requires fonts in public/fonts/) -->
+    <!--
     <link
       rel="preload"
       href="/fonts/orbitron-v29-latin-regular.woff2"
@@ -51,6 +61,12 @@ const { title, description, image, type = 'website', noindex = false } = Astro.p
       type="font/woff2"
       crossorigin
     />
+    -->
+
+    <!-- Option 2: Google Fonts CDN (uncomment to use) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- Analytics Component -->
     <Analytics />
@@ -74,7 +90,7 @@ const { title, description, image, type = 'website', noindex = false } = Astro.p
         --color-secondary: #ff0055;
         --color-bg: #000000;
         --color-text: #ffffff;
-        --color-gray: #808080;
+        --color-gray: #a0a0a0;
       }
 
       /* Base Styles */
@@ -90,6 +106,11 @@ const { title, description, image, type = 'website', noindex = false } = Astro.p
       body {
         min-height: 100vh;
         overflow-x: hidden;
+      }
+
+      /* Main content padding for fixed navbar */
+      main {
+        padding-top: 5rem;
       }
 
       /* Typography */
@@ -142,14 +163,15 @@ const { title, description, image, type = 'website', noindex = false } = Astro.p
     <!-- Skip to content link for keyboard navigation -->
     <a href="#main-content" class="skip-to-content">Skip to main content</a>
 
-    <!-- Main content slot -->
+    <!-- Navigation Component -->
+    <Navigation />
+
+    <!-- Main content slot with padding for fixed navbar -->
     <main id="main-content">
       <slot />
     </main>
 
-    <!-- Footer -->
-    <footer>
-      <p>&copy; {new Date().getFullYear()} Bloom. All rights reserved.</p>
-    </footer>
+    <!-- Footer Component -->
+    <Footer />
   </body>
 </html>

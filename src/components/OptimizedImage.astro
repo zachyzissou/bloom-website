@@ -58,9 +58,6 @@ const fallbackSrc = `/images/${src}-1200.jpg`;
 
 // Blur placeholder
 const blurSrc = `/images/${src}-blur.webp`;
-
-// Calculate aspect ratio
-const aspectRatio = (height / width) * 100;
 ---
 
 <div
@@ -101,6 +98,7 @@ const aspectRatio = (height / width) * 100;
       decoding={loading === 'eager' ? 'sync' : 'async'}
       class="w-full h-full object-cover"
       onload="this.parentElement.parentElement.querySelector('[data-blur-placeholder]')?.classList.add('opacity-0')"
+      onerror="this.style.display='none'; this.parentElement.parentElement.classList.add('image-error'); this.onerror=null;"
     />
   </picture>
 </div>
@@ -116,5 +114,19 @@ const aspectRatio = (height / width) * 100;
     display: block;
     width: 100%;
     height: 100%;
+  }
+
+  /* Error state styling */
+  .image-error {
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .image-error::after {
+    content: 'Image unavailable';
+    color: var(--color-gray);
+    font-size: 0.875rem;
   }
 </style>

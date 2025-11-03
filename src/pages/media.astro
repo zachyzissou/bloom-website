@@ -1,0 +1,869 @@
+---
+/**
+ * Media & Press Kit Page - Bloom Marketing Website
+ * Screenshots, videos, logos, and press resources
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import factionsData from '@/data/factions.json'
+
+// Prepare faction emblems for download
+const factions = factionsData.factions.map(faction => ({
+  id: faction.id,
+  name: faction.shortName,
+  emblem: `/images/factions/${faction.id.toLowerCase()}-emblem.svg`
+}))
+
+// Placeholder categories for screenshots
+const screenshotCategories = [
+  { id: 'factions', name: 'Factions', count: 0 },
+  { id: 'biomes', name: 'Biomes', count: 0 },
+  { id: 'combat', name: 'Combat', count: 0 },
+  { id: 'coop', name: 'Co-op', count: 0 },
+  { id: 'ui', name: 'UI/UX', count: 0 }
+]
+
+// Placeholder videos
+const videos = [
+  { id: 'announcement', title: 'Announcement Trailer', coming: true },
+  { id: 'gameplay', title: 'Gameplay Preview', coming: true },
+  { id: 'devdiary', title: 'Developer Diary', coming: true },
+  { id: 'factions', title: 'Faction Spotlights', coming: true }
+]
+
+// Logo variants
+const logos = [
+  { id: 'logo-light', name: 'Logo (Light)', format: 'SVG', note: 'Coming Soon' },
+  { id: 'logo-dark', name: 'Logo (Dark)', format: 'SVG', note: 'Coming Soon' },
+  { id: 'wordmark-light', name: 'Wordmark (Light)', format: 'SVG', note: 'Coming Soon' },
+  { id: 'wordmark-dark', name: 'Wordmark (Dark)', format: 'SVG', note: 'Coming Soon' },
+  { id: 'icon', name: 'Icon/Favicon', format: 'PNG/SVG', note: 'Coming Soon' }
+]
+
+// Key facts for fact sheet
+const keyFacts = [
+  { label: 'Title', value: 'Bloom' },
+  { label: 'Genre', value: 'Extraction FPS, PvPvE Co-op' },
+  { label: 'Developer', value: '[Your Studio]' },
+  { label: 'Platform', value: 'PC (Steam)' },
+  { label: 'Players', value: '1-10 (8-10 recommended)' },
+  { label: 'Release', value: 'Q1 2026 (Early Access)' }
+]
+
+const keyFeatures = [
+  '10 unique factions with distinct co-op abilities',
+  '32km x 32km procedurally generated world',
+  '12 distinct biomes with dynamic weather',
+  'High-stakes extraction shooter mechanics',
+  'Tactical PvPvE co-op gameplay with player combat',
+  'Deep faction-based progression systems'
+]
+---
+
+<BaseLayout
+  title="Media & Press Kit - Bloom"
+  description="Bloom game media: screenshots, videos, logos, and press kit. Download assets for coverage of the post-apocalyptic extraction FPS."
+  type="website"
+>
+  <!-- Hero Section -->
+  <section class="media-hero">
+    <div class="container">
+      <h1 class="page-title">Media & Press Kit</h1>
+      <p class="page-subtitle">Screenshots, Videos, and Press Resources</p>
+    </div>
+  </section>
+
+  <!-- Screenshots Gallery -->
+  <section class="screenshots-section">
+    <div class="container">
+      <h2 class="section-title">Screenshots</h2>
+      <p class="section-description">
+        Game screenshots coming soon. Bloom is currently in active development.
+      </p>
+
+      <div class="category-tabs">
+        {screenshotCategories.map(category => (
+          <button class="tab" data-category={category.id}>
+            {category.name}
+            {category.count > 0 && <span class="count">({category.count})</span>}
+          </button>
+        ))}
+      </div>
+
+      <div class="screenshot-grid">
+        {[...Array(6)].map(() => (
+          <div class="screenshot-placeholder">
+            <div class="placeholder-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <p class="placeholder-text">Coming Soon</p>
+          </div>
+        ))}
+      </div>
+
+      <p class="note">
+        Note: Screenshots will be added as development progresses. Check back regularly for updates.
+      </p>
+    </div>
+  </section>
+
+  <!-- Video Gallery -->
+  <section class="video-section">
+    <div class="container">
+      <h2 class="section-title">Videos</h2>
+      <p class="section-description">
+        Trailers and gameplay videos coming soon.
+      </p>
+
+      <div class="video-grid">
+        {videos.map(video => (
+          <div class="video-card">
+            <div class="video-placeholder">
+              <div class="play-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              {video.coming && <span class="coming-badge">Coming Soon</span>}
+            </div>
+            <h3 class="video-title">{video.title}</h3>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Logos & Branding -->
+  <section class="logos-section">
+    <div class="container">
+      <h2 class="section-title">Logos & Branding</h2>
+      <p class="section-description">
+        Download official Bloom logos and faction emblems for press coverage.
+      </p>
+
+      <div class="assets-grid">
+        <!-- Main Logo Assets -->
+        <div class="asset-category">
+          <h3 class="category-title">Main Logos</h3>
+          <div class="asset-list">
+            {logos.map(logo => (
+              <div class="asset-item">
+                <div class="asset-info">
+                  <span class="asset-name">{logo.name}</span>
+                  <span class="asset-format">{logo.format}</span>
+                </div>
+                <button class="btn-download" disabled>
+                  {logo.note}
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Faction Emblems -->
+        <div class="asset-category">
+          <h3 class="category-title">Faction Emblems</h3>
+          <p class="category-description">
+            High-resolution SVG emblems for all 10 factions. Perfect for press coverage.
+          </p>
+          <div class="emblem-grid">
+            {factions.map(faction => (
+              <div class="emblem-card">
+                <div class="emblem-preview">
+                  <img src={faction.emblem} alt={`${faction.name} emblem`} loading="lazy" />
+                </div>
+                <p class="emblem-name">{faction.name}</p>
+                <a href={faction.emblem} download class="btn-download-emblem">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                  Download SVG
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fact Sheet -->
+  <section class="factsheet-section">
+    <div class="container">
+      <h2 class="section-title">Fact Sheet</h2>
+
+      <div class="factsheet">
+        <div class="factsheet-column">
+          <h3 class="factsheet-heading">Game Information</h3>
+          <dl class="fact-list">
+            {keyFacts.map(fact => (
+              <>
+                <dt class="fact-label">{fact.label}</dt>
+                <dd class="fact-value">{fact.value}</dd>
+              </>
+            ))}
+          </dl>
+        </div>
+
+        <div class="factsheet-column">
+          <h3 class="factsheet-heading">Key Features</h3>
+          <ul class="feature-list">
+            {keyFeatures.map(feature => (
+              <li>{feature}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="factsheet-column">
+          <h3 class="factsheet-heading">About Bloom</h3>
+          <p class="about-text">
+            Bloom is a tactical extraction FPS set in a post-apocalyptic world where 10 unique factions battle for survival and resources. Players must choose their faction wisely, master unique abilities, coordinate with teammates, and extract valuable loot before time runs out. With high-stakes gameplay where death means losing your gear, every raid is a calculated risk.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Press Contact -->
+  <section class="contact-section">
+    <div class="container">
+      <h2 class="section-title">Press Contact</h2>
+      <p class="section-description">
+        For press inquiries, review copies, or interview requests:
+      </p>
+
+      <div class="contact-info">
+        <div class="contact-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          <a href="mailto:press@bloom-game.com" class="contact-link">press@bloom-game.com</a>
+        </div>
+        <div class="contact-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg>
+          <a href="https://twitter.com/BloomGame" target="_blank" rel="noopener noreferrer" class="contact-link">@BloomGame</a>
+        </div>
+      </div>
+
+      <div class="press-kit-download">
+        <button class="btn btn-primary btn-large" disabled>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          Download Full Press Kit (Coming Soon)
+        </button>
+        <p class="kit-note">Complete press kit with logos, screenshots, and fact sheet will be available soon.</p>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Hero Section */
+    .media-hero {
+      padding: 6rem 0 4rem;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(0, 255, 136, 0.1) 0%, transparent 100%);
+    }
+
+    .page-title {
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-subtitle {
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      color: rgba(255, 255, 255, 0.8);
+      font-family: var(--font-heading);
+    }
+
+    /* Section Styles */
+    .screenshots-section,
+    .video-section,
+    .logos-section,
+    .factsheet-section,
+    .contact-section {
+      padding: 5rem 0;
+    }
+
+    .screenshots-section {
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .video-section {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.5) 100%);
+    }
+
+    .logos-section {
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .factsheet-section {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.8) 100%);
+    }
+
+    .contact-section {
+      background: linear-gradient(135deg, rgba(0, 255, 136, 0.05) 0%, rgba(255, 0, 85, 0.05) 100%);
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      text-align: center;
+      margin-bottom: 1rem;
+      color: var(--color-primary);
+    }
+
+    .section-description {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      font-size: 1.125rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Category Tabs */
+    .category-tabs {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+
+    .tab {
+      padding: 0.75rem 1.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      border-radius: 0.5rem;
+      color: var(--color-text);
+      font-family: var(--font-heading);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .tab:hover {
+      background: rgba(0, 255, 136, 0.1);
+      border-color: var(--color-primary);
+    }
+
+    .tab.active {
+      background: var(--color-primary);
+      color: var(--color-bg);
+      border-color: var(--color-primary);
+    }
+
+    .count {
+      margin-left: 0.5rem;
+      opacity: 0.7;
+      font-size: 0.875rem;
+    }
+
+    /* Screenshot Grid */
+    .screenshot-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .screenshot-placeholder {
+      flex: 0 0 350px;
+      max-width: 100%;
+    }
+
+    .screenshot-grid .screenshot-placeholder {
+      aspect-ratio: 16 / 9;
+      background: rgba(255, 255, 255, 0.03);
+      border: 2px dashed rgba(0, 255, 136, 0.3);
+      border-radius: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .screenshot-placeholder:hover {
+      border-color: var(--color-primary);
+      background: rgba(0, 255, 136, 0.05);
+    }
+
+    .placeholder-icon {
+      width: 64px;
+      height: 64px;
+      color: rgba(0, 255, 136, 0.4);
+    }
+
+    .placeholder-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .placeholder-text {
+      color: rgba(255, 255, 255, 0.5);
+      font-family: var(--font-heading);
+      font-size: 1.125rem;
+    }
+
+    .note {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.6);
+      font-style: italic;
+      margin-top: 2rem;
+    }
+
+    /* Video Grid */
+    .video-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .video-card {
+      flex: 0 0 300px;
+      max-width: 100%;
+    }
+
+    .video-grid .video-card {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 1rem;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 255, 136, 0.2);
+    }
+
+    .video-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--color-primary);
+      box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+    }
+
+    .video-placeholder {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .play-icon {
+      width: 80px;
+      height: 80px;
+      color: rgba(0, 255, 136, 0.6);
+    }
+
+    .play-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .coming-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255, 0, 85, 0.9);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-family: var(--font-heading);
+      font-size: 0.875rem;
+    }
+
+    .video-title {
+      padding: 1.5rem;
+      font-size: 1.25rem;
+      text-align: center;
+    }
+
+    /* Assets Grid */
+    .assets-grid {
+      display: grid;
+      gap: 4rem;
+    }
+
+    .asset-category {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 2.5rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(0, 255, 136, 0.2);
+    }
+
+    .category-title {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+      color: var(--color-primary);
+    }
+
+    .category-description {
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .asset-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .asset-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 0.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .asset-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .asset-name {
+      font-weight: 600;
+      font-size: 1.125rem;
+    }
+
+    .asset-format {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.6);
+      font-family: var(--font-heading);
+    }
+
+    /* Emblem Grid */
+    .emblem-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .emblem-card {
+      flex: 0 0 180px;
+      max-width: 100%;
+    }
+
+    .emblem-grid .emblem-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .emblem-preview {
+      width: 120px;
+      height: 120px;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(0, 255, 136, 0.2);
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .emblem-card:hover .emblem-preview {
+      border-color: var(--color-primary);
+      background: rgba(0, 255, 136, 0.1);
+      transform: scale(1.05);
+    }
+
+    .emblem-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .emblem-name {
+      font-family: var(--font-heading);
+      text-align: center;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .btn-download-emblem {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(0, 255, 136, 0.1);
+      border: 1px solid var(--color-primary);
+      border-radius: 0.5rem;
+      color: var(--color-primary);
+      font-size: 0.875rem;
+      font-family: var(--font-heading);
+      transition: all 0.3s ease;
+    }
+
+    .btn-download-emblem svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .btn-download-emblem:hover {
+      background: var(--color-primary);
+      color: var(--color-bg);
+      transform: translateY(-2px);
+    }
+
+    .btn-download {
+      padding: 0.75rem 1.5rem;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 0.5rem;
+      color: rgba(255, 255, 255, 0.6);
+      font-family: var(--font-heading);
+      cursor: not-allowed;
+      font-size: 0.875rem;
+    }
+
+    /* Fact Sheet */
+    .factsheet {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 3rem;
+    }
+
+    .factsheet-column {
+      flex: 0 0 300px;
+      max-width: 100%;
+    }
+
+    .factsheet .factsheet-column {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 2rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(0, 255, 136, 0.2);
+    }
+
+    .factsheet-heading {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--color-primary);
+      border-bottom: 2px solid rgba(0, 255, 136, 0.3);
+      padding-bottom: 0.75rem;
+    }
+
+    .fact-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .fact-label {
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-family: var(--font-heading);
+    }
+
+    .fact-value {
+      color: var(--color-text);
+      font-size: 1.125rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .feature-list li {
+      padding-left: 1.5rem;
+      position: relative;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .feature-list li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--color-primary);
+      font-size: 1.25rem;
+    }
+
+    .about-text {
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* Contact Section */
+    .contact-info {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin: 3rem 0;
+      flex-wrap: wrap;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .contact-item svg {
+      width: 32px;
+      height: 32px;
+      color: var(--color-primary);
+    }
+
+    .contact-link {
+      font-size: 1.25rem;
+      font-family: var(--font-heading);
+      color: var(--color-primary);
+      transition: all 0.3s ease;
+    }
+
+    .contact-link:hover {
+      color: var(--color-secondary);
+      transform: translateX(5px);
+    }
+
+    .press-kit-download {
+      text-align: center;
+      margin-top: 4rem;
+    }
+
+    .kit-note {
+      margin-top: 1rem;
+      color: rgba(255, 255, 255, 0.6);
+      font-style: italic;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 2rem;
+      font-size: 1.125rem;
+      font-weight: 600;
+      font-family: var(--font-heading);
+      border-radius: 0.5rem;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .btn-large {
+      padding: 1.25rem 2.5rem;
+      font-size: 1.25rem;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: var(--color-bg);
+      box-shadow: 0 4px 14px rgba(0, 255, 136, 0.4);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: var(--color-secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 0, 85, 0.4);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .media-hero {
+        padding: 4rem 0 3rem;
+      }
+
+      .screenshots-section,
+      .video-section,
+      .logos-section,
+      .factsheet-section,
+      .contact-section {
+        padding: 3rem 0;
+      }
+
+      .screenshot-grid,
+      .video-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .emblem-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      }
+
+      .factsheet {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .contact-info {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .contact-item {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .category-tabs {
+        flex-direction: column;
+      }
+
+      .tab {
+        width: 100%;
+      }
+
+      .asset-item {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+    }
+
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</BaseLayout>

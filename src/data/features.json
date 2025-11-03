@@ -4,8 +4,8 @@
       "title": "Core Gameplay",
       "features": [
         {
-          "name": "8-10 Player PvE Co-op",
-          "description": "Team up with friends in cooperative extraction missions across a massive world",
+          "name": "8-10 Player PvPvE Co-op",
+          "description": "Team up with friends in cooperative extraction missions with PvP combat and AI threats",
           "icon": "users",
           "status": "in-development"
         },
@@ -234,7 +234,7 @@
     "multiplayer": {
       "maxPlayers": 10,
       "minPlayers": 1,
-      "coopMode": "PvE",
+      "coopMode": "PvPvE",
       "matchmaking": "Steam-based"
     },
     "world": {

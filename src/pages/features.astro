@@ -1,0 +1,669 @@
+---
+/**
+ * Features Page - Comprehensive showcase of all 30+ game features
+ * Displays features across 5 categories plus technical specifications
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Button from '@/components/Button.astro'
+import featuresData from '@/data/features.json'
+
+const { gameFeatures, technicalSpecs, gameplaySystems } = featuresData
+
+// Calculate total feature count
+const totalFeatures = Object.values(gameFeatures).reduce(
+  (sum, category) => sum + category.features.length,
+  0
+)
+
+// Status badge colors
+const statusColors: Record<string, string> = {
+  complete: 'var(--color-primary)',
+  'in-development': '#ffa500',
+  planned: 'var(--color-gray)',
+  partial: '#ffdb58'
+}
+
+// Icon mapping - simple text-based icons for now
+const iconMap: Record<string, string> = {
+  users: '👥',
+  map: '🗺️',
+  crosshair: '🎯',
+  shield: '🛡️',
+  mountain: '⛰️',
+  zap: '⚡',
+  'cloud-rain': '🌧️',
+  compass: '🧭',
+  grid: '▦',
+  droplet: '💧',
+  cpu: '💻',
+  'alert-circle': '⚠️',
+  code: '<//>',
+  wifi: '📡',
+  database: '🗄️',
+  activity: '📊',
+  eye: '👁️',
+  'bar-chart': '📈',
+  target: '🎯',
+  package: '📦',
+  'alert-triangle': '⚠️',
+  'shield-alert': '🛡️',
+  heart: '❤️',
+  star: '⭐',
+  'trending-up': '📈',
+  tool: '🔧',
+  truck: '🚚',
+  home: '🏠',
+  award: '🏆'
+}
+---
+
+<BaseLayout
+  title="Game Features - Bloom Extraction FPS"
+  description="Explore 30+ features across 5 game systems in Bloom: 8-10 player co-op, 32km procedural world, 10 unique factions, Unity 6 HDRP, and dynamic weather. Built for tactical extraction gameplay."
+  type="game"
+>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Game Features</h1>
+      <p class="hero-tagline">{totalFeatures}+ Features Across 5 Game Systems</p>
+      <p class="hero-description">
+        Built on Unity 6 with cutting-edge technology, Bloom delivers a massive co-op extraction experience
+        with procedural worlds, dynamic weather, and unique faction abilities. Every feature designed for
+        intense tactical gameplay and squad cooperation.
+      </p>
+      <div class="feature-stats">
+        <div class="stat">
+          <div class="stat-value">{gameplaySystems.factions.total}</div>
+          <div class="stat-label">Unique Factions</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">{gameplaySystems.world.biomes}</div>
+          <div class="stat-label">Distinct Biomes</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">{gameplaySystems.multiplayer.maxPlayers}</div>
+          <div class="stat-label">Max Players</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">{gameplaySystems.world.size}</div>
+          <div class="stat-label">World Size</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-bg" aria-hidden="true"></div>
+  </section>
+
+  <!-- Core Gameplay Features -->
+  <section class="feature-category">
+    <div class="container">
+      <div class="category-header">
+        <h2 class="category-title">{gameFeatures.core.title}</h2>
+        <p class="category-description">
+          The foundation of Bloom's extraction gameplay: co-op missions, massive worlds, and faction diversity.
+        </p>
+      </div>
+      <div class="feature-grid">
+        {gameFeatures.core.features.map((feature) => (
+          <div class="feature-card">
+            <div class="feature-icon">{iconMap[feature.icon] || '●'}</div>
+            <div class="feature-status" style={`background: ${statusColors[feature.status]}`}>
+              {feature.status.replace('-', ' ')}
+            </div>
+            <h3 class="feature-name">{feature.name}</h3>
+            <p class="feature-description">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Dynamic World Systems -->
+  <section class="feature-category alt">
+    <div class="container">
+      <div class="category-header">
+        <h2 class="category-title">{gameFeatures.world.title}</h2>
+        <p class="category-description">
+          Advanced procedural generation creates a living, breathing world with realistic terrain and dynamic weather.
+        </p>
+      </div>
+      <div class="feature-grid">
+        {gameFeatures.world.features.map((feature) => (
+          <div class="feature-card">
+            <div class="feature-icon">{iconMap[feature.icon] || '●'}</div>
+            <div class="feature-status" style={`background: ${statusColors[feature.status]}`}>
+              {feature.status.replace('-', ' ')}
+            </div>
+            <h3 class="feature-name">{feature.name}</h3>
+            <p class="feature-description">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Excellence -->
+  <section class="feature-category">
+    <div class="container">
+      <div class="category-header">
+        <h2 class="category-title">{gameFeatures.technical.title}</h2>
+        <p class="category-description">
+          Powered by Unity 6 and optimized for 8-10 player co-op with 60+ FPS performance targets.
+        </p>
+      </div>
+      <div class="feature-grid">
+        {gameFeatures.technical.features.map((feature) => (
+          <div class="feature-card">
+            <div class="feature-icon">{iconMap[feature.icon] || '●'}</div>
+            <div class="feature-status" style={`background: ${statusColors[feature.status]}`}>
+              {feature.status.replace('-', ' ')}
+            </div>
+            <h3 class="feature-name">{feature.name}</h3>
+            <p class="feature-description">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Combat & Survival -->
+  <section class="feature-category alt">
+    <div class="container">
+      <div class="category-header">
+        <h2 class="category-title">{gameFeatures.combat.title}</h2>
+        <p class="category-description">
+          High-stakes extraction gameplay with faction abilities, environmental hazards, and alien enemies.
+        </p>
+      </div>
+      <div class="feature-grid">
+        {gameFeatures.combat.features.map((feature) => (
+          <div class="feature-card">
+            <div class="feature-icon">{iconMap[feature.icon] || '●'}</div>
+            <div class="feature-status" style={`background: ${statusColors[feature.status]}`}>
+              {feature.status.replace('-', ' ')}
+            </div>
+            <h3 class="feature-name">{feature.name}</h3>
+            <p class="feature-description">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Progression & Customization -->
+  <section class="feature-category">
+    <div class="container">
+      <div class="category-header">
+        <h2 class="category-title">{gameFeatures.progression.title}</h2>
+        <p class="category-description">
+          Deep progression systems with faction ranks, skill trees, gear customization, and base building.
+        </p>
+      </div>
+      <div class="feature-grid">
+        {gameFeatures.progression.features.map((feature) => (
+          <div class="feature-card">
+            <div class="feature-icon">{iconMap[feature.icon] || '●'}</div>
+            <div class="feature-status" style={`background: ${statusColors[feature.status]}`}>
+              {feature.status.replace('-', ' ')}
+            </div>
+            <h3 class="feature-name">{feature.name}</h3>
+            <p class="feature-description">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Specifications -->
+  <section class="tech-specs">
+    <div class="container">
+      <h2 class="section-title">Technical Specifications</h2>
+      <p class="section-description">
+        Built on cutting-edge technology to deliver a seamless co-op extraction experience.
+      </p>
+
+      <div class="specs-grid">
+        <!-- Engine -->
+        <div class="spec-card">
+          <h3 class="spec-heading">Game Engine</h3>
+          <div class="spec-details">
+            <div class="spec-row">
+              <span class="spec-label">Engine:</span>
+              <span class="spec-value">{technicalSpecs.engine.name} {technicalSpecs.engine.version}</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Render Pipeline:</span>
+              <span class="spec-value">{technicalSpecs.engine.renderPipeline}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Networking -->
+        <div class="spec-card">
+          <h3 class="spec-heading">Multiplayer</h3>
+          <div class="spec-details">
+            <div class="spec-row">
+              <span class="spec-label">Framework:</span>
+              <span class="spec-value">{technicalSpecs.networking.framework}</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Transport:</span>
+              <span class="spec-value">{technicalSpecs.networking.transport}</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Players:</span>
+              <span class="spec-value">{technicalSpecs.networking.playerCapacity}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Performance -->
+        <div class="spec-card">
+          <h3 class="spec-heading">Performance</h3>
+          <div class="spec-details">
+            <div class="spec-row">
+              <span class="spec-label">Target FPS:</span>
+              <span class="spec-value">{technicalSpecs.performance.targetFPS}</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Min Spec:</span>
+              <span class="spec-value">{technicalSpecs.performance.minSpec}</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">World Size:</span>
+              <span class="spec-value">{technicalSpecs.performance.worldSize}</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Tile Count:</span>
+              <span class="spec-value">{technicalSpecs.performance.tileCount.toLocaleString()}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Systems -->
+        <div class="spec-card">
+          <h3 class="spec-heading">Core Systems</h3>
+          <div class="spec-details">
+            <div class="spec-row">
+              <span class="spec-label">Architecture:</span>
+              <span class="spec-value">{technicalSpecs.systems.architecture}</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Weather Types:</span>
+              <span class="spec-value">{technicalSpecs.systems.weatherTypes}</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Macro Features:</span>
+              <span class="spec-value">{technicalSpecs.systems.macroFeatures}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="cta-title">Experience Bloom</h2>
+      <p class="cta-description">
+        Join thousands of operators preparing for Early Access. Choose your faction,
+        master your abilities, and conquer the wasteland.
+      </p>
+      <div class="cta-buttons">
+        <Button href="#wishlist" variant="primary" size="large">Wishlist on Steam</Button>
+        <Button href="/factions" variant="secondary" size="large">Explore Factions</Button>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 4rem 2rem;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 900px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-heading);
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      color: var(--color-gray);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-description {
+      max-width: 800px;
+      margin: 0 auto 3rem;
+      font-size: clamp(1rem, 2vw, 1.125rem);
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(255, 0, 85, 0.1) 0%, transparent 50%);
+      animation: pulse 15s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 0.8; }
+    }
+
+    /* Feature Stats */
+    .feature-stats {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .stat {
+      flex: 0 0 160px;
+      max-width: 100%;
+    }
+
+    .feature-stats .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--color-primary);
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Feature Categories */
+    .feature-category {
+      padding: 5rem 0;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .feature-category.alt {
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .category-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .category-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 1rem;
+      color: var(--color-primary);
+    }
+
+    .category-description {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.125rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Feature Grid */
+    .feature-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .feature-card {
+      flex: 0 0 350px;
+      max-width: 100%;
+    }
+
+    .feature-grid .feature-card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 2rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(0, 255, 136, 0.2);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .feature-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--color-primary);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      line-height: 1;
+    }
+
+    .feature-status {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+      color: #000;
+    }
+
+    .feature-name {
+      font-size: 1.375rem;
+      margin-bottom: 0.75rem;
+      color: var(--color-text);
+    }
+
+    .feature-description {
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+      font-size: 0.9375rem;
+    }
+
+    /* Technical Specifications */
+    .tech-specs {
+      padding: 5rem 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.5) 100%);
+    }
+
+    .section-title {
+      font-size: clamp(2.5rem, 6vw, 3.5rem);
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: var(--color-primary);
+    }
+
+    .section-description {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 4rem;
+      font-size: 1.125rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .specs-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .spec-card {
+      flex: 0 0 300px;
+      max-width: 100%;
+    }
+
+    .specs-grid .spec-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .spec-heading {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      color: var(--color-primary);
+      font-family: var(--font-heading);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .spec-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .spec-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .spec-row:last-child {
+      border-bottom: none;
+    }
+
+    .spec-label {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 600;
+    }
+
+    .spec-value {
+      font-size: 0.875rem;
+      color: var(--color-text);
+      font-family: var(--font-heading);
+      text-align: right;
+    }
+
+    /* Call to Action */
+    .cta-section {
+      padding: 6rem 0;
+      background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(255, 0, 85, 0.1) 100%);
+      text-align: center;
+    }
+
+    .cta-title {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .cta-description {
+      max-width: 700px;
+      margin: 0 auto 2.5rem;
+      font-size: 1.25rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* Button Containers */
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero {
+        min-height: 100vh;
+        padding: 2rem 1rem;
+      }
+
+      .feature-grid,
+      .specs-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .feature-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+
+      .feature-category,
+      .tech-specs,
+      .cta-section {
+        padding: 3rem 0;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+
+    /* Reduce motion for accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</BaseLayout>

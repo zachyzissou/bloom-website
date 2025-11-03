@@ -1,0 +1,168 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://bloom-game.com/schemas/faction.schema.json",
+  "title": "Faction",
+  "description": "Schema for faction data in Bloom marketing website",
+  "type": "object",
+  "required": ["id", "name", "shortName", "role", "colors", "launchStatus"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique faction identifier (format: FCT_XXX)",
+      "pattern": "^FCT_[A-Z]{3}$",
+      "examples": ["FCT_DIR", "FCT_VUL"]
+    },
+    "name": {
+      "type": "string",
+      "description": "Full faction name",
+      "minLength": 3,
+      "maxLength": 100,
+      "examples": ["Sky Bastion Directorate", "Iron Vultures"]
+    },
+    "shortName": {
+      "type": "string",
+      "description": "Short display name for faction",
+      "minLength": 2,
+      "maxLength": 50,
+      "examples": ["Directorate", "Vultures"]
+    },
+    "role": {
+      "type": "string",
+      "description": "Gameplay role classification",
+      "enum": ["tank", "scout", "scavenger", "support", "assault", "specialist"],
+      "examples": ["tank", "scavenger"]
+    },
+    "coopAbility": {
+      "type": "string",
+      "description": "Co-op bonus ability description",
+      "minLength": 5,
+      "maxLength": 200
+    },
+    "homeBiome": {
+      "type": "string",
+      "description": "Home biome identifier (matches biome name field)",
+      "minLength": 2
+    },
+    "launchStatus": {
+      "type": "string",
+      "description": "Launch window status for faction availability",
+      "enum": ["ea-launch", "expansion-1", "expansion-2", "planned"]
+    },
+    "launchWindow": {
+      "type": "string",
+      "description": "Human-readable launch window label",
+      "examples": ["EA Launch", "Expansion 1", "Expansion 2"]
+    },
+    "philosophy": {
+      "type": "string",
+      "description": "Faction philosophy or motto",
+      "minLength": 3,
+      "maxLength": 200
+    },
+    "specialty": {
+      "type": "string",
+      "description": "Faction gameplay specialty description",
+      "minLength": 5,
+      "maxLength": 300
+    },
+    "lore": {
+      "type": "string",
+      "description": "Faction lore and backstory",
+      "minLength": 10,
+      "maxLength": 2000
+    },
+    "colors": {
+      "type": "object",
+      "description": "Faction visual identity colors (must be hex format #RRGGBB)",
+      "required": ["primary", "secondary", "accent"],
+      "properties": {
+        "primary": {
+          "type": "string",
+          "description": "Primary faction color (hex format)",
+          "pattern": "^#[0-9A-F]{6}$",
+          "examples": ["#001F3F", "#FF5733"]
+        },
+        "secondary": {
+          "type": "string",
+          "description": "Secondary faction color (hex format)",
+          "pattern": "^#[0-9A-F]{6}$",
+          "examples": ["#36454F", "#8B4513"]
+        },
+        "accent": {
+          "type": "string",
+          "description": "Accent faction color (hex format)",
+          "pattern": "^#[0-9A-F]{6}$",
+          "examples": ["#FFFFFF", "#FFD700"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "playstyle": {
+      "type": "string",
+      "description": "Faction playstyle description",
+      "minLength": 10,
+      "maxLength": 500
+    },
+    "strengths": {
+      "type": "array",
+      "description": "List of faction strengths",
+      "items": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 100
+      },
+      "minItems": 1,
+      "maxItems": 10,
+      "uniqueItems": true
+    },
+    "weaknesses": {
+      "type": "array",
+      "description": "List of faction weaknesses",
+      "items": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 100
+      },
+      "minItems": 1,
+      "maxItems": 10,
+      "uniqueItems": true
+    },
+    "uniqueAbilities": {
+      "type": "array",
+      "description": "List of faction unique abilities",
+      "items": {
+        "type": "object",
+        "required": ["name", "description", "cooldown"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Ability name",
+            "minLength": 2,
+            "maxLength": 100
+          },
+          "description": {
+            "type": "string",
+            "description": "Ability description",
+            "minLength": 5,
+            "maxLength": 500
+          },
+          "cooldown": {
+            "type": "string",
+            "description": "Ability cooldown classification",
+            "enum": ["passive", "short", "medium", "long"]
+          }
+        },
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "maxItems": 10
+    },
+    "lastSynced": {
+      "type": "string",
+      "description": "ISO 8601 timestamp of last wiki synchronization (optional)",
+      "format": "date-time",
+      "examples": ["2025-11-02T12:00:00Z"]
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,45 @@
+{
+  "color": {
+    "iez-core-red": {
+      "value": "#DC2626",
+      "type": "color"
+    },
+    "harvester-platinum": {
+      "value": "#E5E7EB",
+      "type": "color"
+    },
+    "tactical-slate": {
+      "value": "#475569",
+      "type": "color"
+    },
+    "extraction-green": {
+      "value": "#22C55E",
+      "type": "color"
+    },
+    "snowpeaks": {
+      "value": "#1E3A8A",
+      "type": "color"
+    },
+    "westernmountains": {
+      "value": "#7C3AED",
+      "type": "color"
+    },
+    "centralgrasslands": {
+      "value": "#F59E0B",
+      "type": "color"
+    },
+    "easternplateaus": {
+      "value": "#DC2626",
+      "type": "color"
+    },
+    "foresthills": {
+      "value": "#65A30D",
+      "type": "color"
+    },
+    "southwestplains": {
+      "value": "#EA580C",
+      "type": "color"
+    }
+  },
+  "typography": {}
+}

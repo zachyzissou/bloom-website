@@ -1,0 +1,24 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="f77-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D2B48C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#556B2F;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="60" cy="60" r="55" fill="url(#f77-grad)" />
+
+  <!-- Number 77 -->
+  <text x="60" y="75" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#2F2F2F" text-anchor="middle">77</text>
+
+  <!-- Star accents -->
+  <polygon points="60,25 62,32 69,32 63,37 65,44 60,39 55,44 57,37 51,32 58,32" fill="#2F2F2F" opacity="0.7" />
+
+  <!-- Crosshair design -->
+  <circle cx="60" cy="60" r="45" fill="none" stroke="#2F2F2F" stroke-width="2" opacity="0.5" />
+  <line x1="60" y1="15" x2="60" y2="35" stroke="#2F2F2F" stroke-width="2" opacity="0.5" />
+  <line x1="60" y1="85" x2="60" y2="105" stroke="#2F2F2F" stroke-width="2" opacity="0.5" />
+  <line x1="15" y1="60" x2="35" y2="60" stroke="#2F2F2F" stroke-width="2" opacity="0.5" />
+  <line x1="85" y1="60" x2="105" y2="60" stroke="#2F2F2F" stroke-width="2" opacity="0.5" />
+</svg>

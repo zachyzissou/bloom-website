@@ -1,0 +1,41 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="apx-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF4500;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFD700;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="60" cy="60" r="55" fill="url(#apx-grad)" />
+
+  <!-- Beast skull outline -->
+  <ellipse cx="60" cy="55" rx="25" ry="20" fill="#2C2C2C" />
+  <ellipse cx="60" cy="55" rx="20" ry="16" fill="#3C3C3C" />
+
+  <!-- Eye sockets -->
+  <ellipse cx="50" cy="52" rx="6" ry="8" fill="#000000" />
+  <ellipse cx="70" cy="52" rx="6" ry="8" fill="#000000" />
+
+  <!-- Nasal cavity -->
+  <path d="M58 60 L60 65 L62 60 Z" fill="#000000" />
+
+  <!-- Horns/fangs -->
+  <path d="M40 50 L35 40 L38 50 Z" fill="#FFFFFF" stroke="#2C2C2C" stroke-width="1" />
+  <path d="M80 50 L85 40 L82 50 Z" fill="#FFFFFF" stroke="#2C2C2C" stroke-width="1" />
+
+  <!-- Trophy teeth -->
+  <rect x="52" y="70" width="4" height="8" fill="#FFFFFF" rx="1" />
+  <rect x="64" y="70" width="4" height="8" fill="#FFFFFF" rx="1" />
+  <rect x="58" y="72" width="4" height="6" fill="#FFFFFF" rx="1" />
+
+  <!-- Crosshair overlay -->
+  <circle cx="60" cy="55" r="35" fill="none" stroke="#2C2C2C" stroke-width="3" opacity="0.6" />
+  <line x1="60" y1="15" x2="60" y2="30" stroke="#2C2C2C" stroke-width="3" />
+  <line x1="60" y1="80" x2="60" y2="95" stroke="#2C2C2C" stroke-width="3" />
+  <line x1="25" y1="55" x2="40" y2="55" stroke="#2C2C2C" stroke-width="3" />
+  <line x1="80" y1="55" x2="95" y2="55" stroke="#2C2C2C" stroke-width="3" />
+
+  <!-- Crosshair center dot -->
+  <circle cx="60" cy="55" r="3" fill="#2C2C2C" />
+</svg>

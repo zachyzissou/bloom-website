@@ -1,0 +1,946 @@
+---
+/**
+ * Squad Composition Guide Page
+ * Explains faction synergies and recommended team compositions
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import factionsData from '@/data/factions.json'
+
+const factions = factionsData.factions
+
+// Squad composition examples
+const squadCompositions = [
+  {
+    name: 'Military Might',
+    description: 'Balanced assault squad built for aggressive pushes and sustained combat',
+    playstyle: 'Aggressive',
+    difficulty: 'Medium',
+    members: [
+      {
+        faction: factions.find((f) => f.id === 'FCT_DIR'),
+        role: 'Tank/Leader',
+        contribution: 'Artillery support + supply drops',
+      },
+      {
+        faction: factions.find((f) => f.id === 'FCT_AEG'),
+        role: 'Medic',
+        contribution: 'Healing + deployable shields',
+      },
+      {
+        faction: factions.find((f) => f.id === 'FCT_F77'),
+        role: 'All-Rounder',
+        contribution: 'Versatile weapons + XP boost',
+      },
+      {
+        faction: factions.find((f) => f.id === 'FCT_VUL'),
+        role: 'DPS',
+        contribution: 'Loot detection + high damage',
+      },
+    ],
+    synergy:
+      "Directorate's +20% team damage resist combines with Aegis healing to create an unkillable frontline. Seventy-Seven provides flexibility while Vultures ensure maximum loot efficiency.",
+    bestFor: 'High-value extraction zones, PvP confrontations',
+  },
+  {
+    name: 'Scavenger Kings',
+    description: 'Loot-focused squad designed to maximize resource acquisition and fast extractions',
+    playstyle: 'Opportunistic',
+    difficulty: 'Easy',
+    members: [
+      {
+        faction: factions.find((f) => f.id === 'FCT_VUL'),
+        role: 'Lead Scavenger',
+        contribution: '+30% loot detection, faster breaches',
+      },
+      {
+        faction: factions.find((f) => f.id === 'FCT_WAY'),
+        role: 'Scout/Extraction',
+        contribution: '+15% squad speed, mark enemies',
+      },
+      {
+        faction: factions.find((f) => f.id === 'FCT_HLX'),
+        role: 'Tech Support',
+        contribution: 'Hack terminals for extra loot',
+      },
+      {
+        faction: factions.find((f) => f.id === 'FCT_F77'),
+        role: 'Support',
+        contribution: 'Any faction weapons, +10% team XP',
+      },
+    ],
+    synergy:
+      "Vultures' loot detection + Helix terminal hacking = maximum resource gain. Wayfarers provide speed buffs for quick escapes. Seventy-Seven adds XP bonus for faster progression.",
+    bestFor: 'Resource farming, low-risk runs, leveling new players',
+  },
+  {
+    name: 'Stealth Ops',
+    description: 'Hit-and-run squad specializing in covert operations and avoiding detection',
+    playstyle: 'Tactical',
+    difficulty: 'Hard',
+    members: [
+      {
+        faction: factions.find((f) => f.id === 'FCT_WAY'),
+        role: 'Lead Scout',
+        contribution: 'Speed advantage + enemy marking',
+      },
+      {
+        faction: factions.find((f) => f.id === 'FCT_VAR'),
+        role: 'Stealth/Intel',
+        contribution: 'Cloak squad, reveal hidden loot',
+      },
+      {
+        faction: factions.find((f) => f.id === 'FCT_HLX'),
+        role: 'Tech/Sabotage',
+        contribution: 'Disable security systems',
+      },
+      {
+        faction: factions.find((f) => f.id === 'FCT_VUL'),
+        role: 'Quick Strikes',
+        contribution: 'Fast breaches + loot grab',
+      },
+    ],
+    synergy:
+      "Archive's cloaking field combined with Wayfarers' speed creates perfect hit-and-run tactics. Helix disables security while Vultures breach objectives quickly.",
+    bestFor: 'High-security zones, avoiding PvP, contested areas',
+  },
+  {
+    name: 'Defender Squad',
+    description: 'Area control specialists built for holding positions and long engagements',
+    playstyle: 'Defensive',
+    difficulty: 'Medium',
+    members: [
+      {
+        faction: factions.find((f) => f.id === 'FCT_NGD'),
+        role: 'Lead Defender',
+        contribution: 'Heavy armor + Forged tracking',
+      },
+      {
+        faction: factions.find((f) => f.id === 'FCT_AEG'),
+        role: 'Medic',
+        contribution: 'Healing stations + shields',
+      },
+      {
+        faction: factions.find((f) => f.id === 'FCT_HLX'),
+        role: 'Tech Defense',
+        contribution: 'Deploy turrets and shields',
+      },
+      {
+        faction: factions.find((f) => f.id === 'FCT_ASH'),
+        role: 'Support/Sustain',
+        contribution: 'Food buffs + resource management',
+      },
+    ],
+    synergy:
+      "North Guard's defensive power + Aegis healing + Helix turrets = impenetrable fortress. Pact of Ash provides sustain for long battles.",
+    bestFor: 'Convoy escort missions, PvE defense, resource extraction',
+  },
+  {
+    name: 'Hunter Pack',
+    description: 'Aggressive PvP squad designed to track and eliminate other players',
+    playstyle: 'Aggressive',
+    difficulty: 'Hard',
+    members: [
+      {
+        faction: factions.find((f) => f.id === 'FCT_APX'),
+        role: 'Lead Hunter',
+        contribution: 'Track players + trophy bonuses',
+      },
+      {
+        faction: factions.find((f) => f.id === 'FCT_DIR'),
+        role: 'Tank/Push',
+        contribution: 'Heavy firepower + team resist',
+      },
+      {
+        faction: factions.find((f) => f.id === 'FCT_HLX'),
+        role: 'Intel/Tech',
+        contribution: 'Tech scanning + detection',
+      },
+      {
+        faction: factions.find((f) => f.id === 'FCT_WAY'),
+        role: 'Flanker',
+        contribution: 'Cut off escape routes',
+      },
+    ],
+    synergy:
+      "Apex's tracking abilities + Helix tech scanner = no one escapes. Directorate provides firepower while Wayfarers cut off retreat paths.",
+    bestFor: 'PvP bounty hunting, eliminating rivals, high-risk PvP zones',
+  },
+  {
+    name: 'Treasure Hunters',
+    description: 'Elite loot squad focused on rare item acquisition and hidden caches',
+    playstyle: 'Opportunistic',
+    difficulty: 'Medium',
+    members: [
+      {
+        faction: factions.find((f) => f.id === 'FCT_APX'),
+        role: 'Lead Looter',
+        contribution: '+30% rare loot chance',
+      },
+      {
+        faction: factions.find((f) => f.id === 'FCT_VAR'),
+        role: 'Cache Finder',
+        contribution: 'Reveal hidden loot',
+      },
+      {
+        faction: factions.find((f) => f.id === 'FCT_VUL'),
+        role: 'Scavenger',
+        contribution: '+30% loot detection',
+      },
+      {
+        faction: factions.find((f) => f.id === 'FCT_WAY'),
+        role: 'Fast Extraction',
+        contribution: 'Speed buffs for quick escape',
+      },
+    ],
+    synergy:
+      "Apex's rare loot bonus + Archive's hidden cache detection + Vultures' loot detection = maximum legendary drops. Wayfarers ensure safe extraction.",
+    bestFor: 'Rare item farming, legendary weapon hunting, cache runs',
+  },
+]
+
+// Role descriptions
+const roleDescriptions = [
+  {
+    role: 'Tank',
+    factions: ['Directorate', 'North Guard'],
+    description: 'Frontline fighters who absorb damage and lead charges',
+    icon: '🛡️',
+  },
+  {
+    role: 'DPS/Scavenger',
+    factions: ['Vultures', 'Apex'],
+    description: 'High damage dealers with loot efficiency bonuses',
+    icon: '⚔️',
+  },
+  {
+    role: 'Support/Medic',
+    factions: ['Aegis'],
+    description: 'Healing specialists who keep the team alive',
+    icon: '❤️',
+  },
+  {
+    role: 'All-Rounder',
+    factions: ['Seventy-Seven'],
+    description: 'Flexible operators who adapt to any situation',
+    icon: '🔄',
+  },
+  {
+    role: 'Tech/Specialist',
+    factions: ['Helix'],
+    description: 'Hacking and gadget experts with tech advantage',
+    icon: '💻',
+  },
+  {
+    role: 'Scout/Mobility',
+    factions: ['Wayfarers'],
+    description: 'Speed and reconnaissance specialists',
+    icon: '🏃',
+  },
+  {
+    role: 'Stealth',
+    factions: ['Archive'],
+    description: 'Covert operatives who excel at remaining undetected',
+    icon: '👁️',
+  },
+  {
+    role: 'Defender',
+    factions: ['North Guard'],
+    description: 'Area control specialists focused on holding ground',
+    icon: '🏰',
+  },
+  {
+    role: 'Provider',
+    factions: ['Pact of Ash'],
+    description: 'Support role providing resources and team buffs',
+    icon: '🌾',
+  },
+  {
+    role: 'Elite Hunter',
+    factions: ['Apex'],
+    description: 'Aggressive hunters tracking high-value targets',
+    icon: '🎯',
+  },
+]
+
+// Tips for squad building
+const tips = [
+  {
+    title: 'Always Bring Support',
+    description:
+      'At least one support role (Aegis or Seventy-Seven) dramatically increases survival rates and mission success.',
+  },
+  {
+    title: 'Balance Offense and Defense',
+    description:
+      "Don't stack all DPS or all tanks. Mix roles to handle different combat scenarios effectively.",
+  },
+  {
+    title: 'Consider Biome Synergies',
+    description:
+      'Factions in their home biome receive bonuses. Plan compositions around your target extraction zone.',
+  },
+  {
+    title: 'Adapt to Playstyle',
+    description:
+      'Aggressive players benefit from tank + DPS combos. Defensive players should focus on support + tech builds.',
+  },
+  {
+    title: 'Communication is Key',
+    description:
+      'Squad abilities require coordination. Use voice chat to maximize synergy effectiveness.',
+  },
+  {
+    title: 'Plan Your Extraction',
+    description:
+      'Always include at least one mobility faction (Wayfarers) for quick escapes when things go south.',
+  },
+]
+---
+
+<BaseLayout
+  title="Squad Composition Guide | Bloom"
+  description="Master team synergies in Bloom. Learn how to build effective 4-player squads with optimal faction combinations for PvE and PvP."
+  type="game"
+>
+  <!-- Hero Section -->
+  <section class="relative py-20 bg-gradient-to-b from-gray-900 to-black">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1
+          class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent"
+        >
+          Squad Composition Guide
+        </h1>
+        <p class="text-xl text-gray-300 mb-8">
+          Master the art of team synergies. Build the perfect 4-player squad
+          and dominate the wasteland through tactical faction combinations.
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center text-sm text-gray-400">
+          <span>10 Factions</span>
+          <span>•</span>
+          <span>6 Squad Archetypes</span>
+          <span>•</span>
+          <span>Infinite Combinations</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Understanding Roles Section -->
+  <section class="py-16 bg-black">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2
+          class="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent"
+        >
+          Understanding Faction Roles
+        </h2>
+        <p class="text-gray-400 text-center mb-12 max-w-3xl mx-auto">
+          Each faction fills a specific role in squad combat. Understanding
+          these roles is crucial for building effective teams.
+        </p>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {
+            roleDescriptions.map((role) => (
+              <div class="bg-gray-900 border border-gray-800 rounded-lg p-6 hover:border-green-500 transition-colors">
+                <div class="text-4xl mb-3">{role.icon}</div>
+                <h3 class="text-xl font-bold text-white mb-2">{role.role}</h3>
+                <p class="text-gray-400 text-sm mb-4">{role.description}</p>
+                <div class="flex flex-wrap gap-2">
+                  {role.factions.map((faction) => (
+                    <span class="text-xs bg-gray-800 text-green-400 px-3 py-1 rounded-full">
+                      {faction}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recommended Squad Compositions -->
+  <section class="py-16 bg-gradient-to-b from-gray-900 to-black">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2
+          class="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent"
+        >
+          Recommended Squad Compositions
+        </h2>
+        <p class="text-gray-400 text-center mb-12 max-w-3xl mx-auto">
+          Battle-tested squad builds designed for specific playstyles and
+          mission types. Use these as templates or inspiration for your own
+          custom compositions.
+        </p>
+
+        <div class="space-y-8">
+          {
+            squadCompositions.map((squad) => (
+              <div class="bg-gray-900 border border-gray-800 rounded-lg overflow-hidden hover:border-green-500 transition-colors">
+                <div class="p-6">
+                  {/* Squad Header */}
+                  <div class="flex flex-wrap items-start justify-between mb-4">
+                    <div>
+                      <h3 class="text-2xl font-bold text-white mb-2">
+                        {squad.name}
+                      </h3>
+                      <p class="text-gray-400">{squad.description}</p>
+                    </div>
+                    <div class="flex gap-2 mt-2 md:mt-0">
+                      <span class="text-xs bg-blue-900 text-blue-300 px-3 py-1 rounded-full">
+                        {squad.playstyle}
+                      </span>
+                      <span
+                        class={`text-xs px-3 py-1 rounded-full ${
+                          squad.difficulty === 'Easy'
+                            ? 'bg-green-900 text-green-300'
+                            : squad.difficulty === 'Medium'
+                              ? 'bg-yellow-900 text-yellow-300'
+                              : 'bg-red-900 text-red-300'
+                        }`}
+                      >
+                        {squad.difficulty}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Squad Members */}
+                  <div class="grid md:grid-cols-2 gap-4 mb-6">
+                    {squad.members.map((member) => (
+                      <div
+                        class="bg-gray-800 rounded-lg p-4 border border-gray-700"
+                        style={`border-left: 4px solid ${member.faction?.colors?.primary ?? '#a0a0a0'}`}
+                      >
+                        <div class="flex items-start gap-3">
+                          <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                              <span class="font-bold text-white">
+                                {member.faction?.shortName ?? 'Unknown'}
+                              </span>
+                              <span class="text-xs text-gray-500">
+                                {member.role}
+                              </span>
+                            </div>
+                            <p class="text-sm text-gray-400">
+                              {member.contribution}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Synergy Explanation */}
+                  <div class="bg-gradient-to-r from-green-900/20 to-blue-900/20 border border-green-800/30 rounded-lg p-4 mb-4">
+                    <div class="flex items-start gap-3">
+                      <svg
+                        class="w-6 h-6 text-green-400 flex-shrink-0 mt-0.5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M13 10V3L4 14h7v7l9-11h-7z"
+                        />
+                      </svg>
+                      <div>
+                        <h4 class="font-bold text-green-400 mb-1">
+                          Squad Synergy
+                        </h4>
+                        <p class="text-gray-300 text-sm">{squad.synergy}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Best For */}
+                  <div class="flex items-center gap-2 text-sm text-gray-400">
+                    <span class="font-semibold text-white">Best For:</span>
+                    <span>{squad.bestFor}</span>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Faction Role Matrix -->
+  <section class="py-16 bg-black">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2
+          class="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent"
+        >
+          Faction Role Matrix
+        </h2>
+        <p class="text-gray-400 text-center mb-12 max-w-3xl mx-auto">
+          Quick reference guide showing each faction's primary role and ideal
+          team pairings.
+        </p>
+
+        <div class="overflow-x-auto">
+          <table class="w-full bg-gray-900 border border-gray-800 rounded-lg">
+            <thead>
+              <tr class="bg-gray-800 border-b border-gray-700">
+                <th class="px-6 py-4 text-left text-white font-bold">
+                  Faction
+                </th>
+                <th class="px-6 py-4 text-left text-white font-bold">Role</th>
+                <th class="px-6 py-4 text-left text-white font-bold">
+                  Squad Ability
+                </th>
+                <th class="px-6 py-4 text-left text-white font-bold">
+                  Best Paired With
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-800">
+              <tr class="hover:bg-gray-800/50 transition-colors">
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-3 h-3 rounded-full"
+                      style="background-color: #001F3F"
+                    />
+                    <span class="font-semibold text-white">Directorate</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-gray-400">Tank</td>
+                <td class="px-6 py-4 text-gray-400 text-sm">
+                  +20% team damage resist
+                </td>
+                <td class="px-6 py-4 text-green-400 text-sm">
+                  Aegis, Seventy-Seven
+                </td>
+              </tr>
+              <tr class="hover:bg-gray-800/50 transition-colors">
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-3 h-3 rounded-full"
+                      style="background-color: #D35400"
+                    />
+                    <span class="font-semibold text-white">Vultures</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-gray-400">Scavenger</td>
+                <td class="px-6 py-4 text-gray-400 text-sm">
+                  +30% loot detection
+                </td>
+                <td class="px-6 py-4 text-green-400 text-sm">
+                  Wayfarers, Helix
+                </td>
+              </tr>
+              <tr class="hover:bg-gray-800/50 transition-colors">
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-3 h-3 rounded-full"
+                      style="background-color: #0080FF"
+                    />
+                    <span class="font-semibold text-white">Aegis</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-gray-400">Medic</td>
+                <td class="px-6 py-4 text-gray-400 text-sm">
+                  Faster revives, healing stations
+                </td>
+                <td class="px-6 py-4 text-green-400 text-sm">
+                  Any (universal)
+                </td>
+              </tr>
+              <tr class="hover:bg-gray-800/50 transition-colors">
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-3 h-3 rounded-full"
+                      style="background-color: #D2B48C"
+                    />
+                    <span class="font-semibold text-white">Seventy-Seven</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-gray-400">All-Rounder</td>
+                <td class="px-6 py-4 text-gray-400 text-sm">
+                  +10% team XP, any weapons
+                </td>
+                <td class="px-6 py-4 text-green-400 text-sm">Any (flexible)</td>
+              </tr>
+              <tr class="hover:bg-gray-800/50 transition-colors">
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-3 h-3 rounded-full"
+                      style="background-color: #00C2FF"
+                    />
+                    <span class="font-semibold text-white">Helix</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-gray-400">Tech</td>
+                <td class="px-6 py-4 text-gray-400 text-sm">
+                  Hack terminals, deploy turrets
+                </td>
+                <td class="px-6 py-4 text-green-400 text-sm">
+                  Archive, Wayfarers
+                </td>
+              </tr>
+              <tr class="hover:bg-gray-800/50 transition-colors">
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-3 h-3 rounded-full"
+                      style="background-color: #32CD32"
+                    />
+                    <span class="font-semibold text-white">Wayfarers</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-gray-400">Scout</td>
+                <td class="px-6 py-4 text-gray-400 text-sm">
+                  +15% squad speed
+                </td>
+                <td class="px-6 py-4 text-green-400 text-sm">
+                  Vultures, Archive
+                </td>
+              </tr>
+              <tr class="hover:bg-gray-800/50 transition-colors">
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-3 h-3 rounded-full"
+                      style="background-color: #4B0082"
+                    />
+                    <span class="font-semibold text-white">Archive</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-gray-400">Stealth</td>
+                <td class="px-6 py-4 text-gray-400 text-sm">
+                  Cloak squad, reveal hidden loot
+                </td>
+                <td class="px-6 py-4 text-green-400 text-sm">
+                  Helix, Wayfarers
+                </td>
+              </tr>
+              <tr class="hover:bg-gray-800/50 transition-colors">
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-3 h-3 rounded-full"
+                      style="background-color: #FFFFFF"
+                    />
+                    <span class="font-semibold text-white">North Guard</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-gray-400">Defender</td>
+                <td class="px-6 py-4 text-gray-400 text-sm">
+                  +50% Forged damage
+                </td>
+                <td class="px-6 py-4 text-green-400 text-sm">Aegis, Pact</td>
+              </tr>
+              <tr class="hover:bg-gray-800/50 transition-colors">
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-3 h-3 rounded-full"
+                      style="background-color: #8B4513"
+                    />
+                    <span class="font-semibold text-white">Pact of Ash</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-gray-400">Provider</td>
+                <td class="px-6 py-4 text-gray-400 text-sm">
+                  Food buffs, +20% convoy defense
+                </td>
+                <td class="px-6 py-4 text-green-400 text-sm">
+                  North Guard, Aegis
+                </td>
+              </tr>
+              <tr class="hover:bg-gray-800/50 transition-colors">
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-3 h-3 rounded-full"
+                      style="background-color: #8B0000"
+                    />
+                    <span class="font-semibold text-white">Apex</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-gray-400">Elite Hunter</td>
+                <td class="px-6 py-4 text-gray-400 text-sm">
+                  +30% rare loot
+                </td>
+                <td class="px-6 py-4 text-green-400 text-sm">
+                  Directorate, Helix
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solo vs Squad Comparison -->
+  <section class="py-16 bg-gradient-to-b from-gray-900 to-black">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2
+          class="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent"
+        >
+          Solo Play vs Squad Play
+        </h2>
+        <p class="text-gray-400 text-center mb-12 max-w-3xl mx-auto">
+          Understanding the differences between solo and squad gameplay helps
+          you choose the right approach for each mission.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Solo Play -->
+          <div
+            class="bg-gradient-to-br from-red-900/20 to-gray-900 border border-red-800/30 rounded-lg p-8"
+          >
+            <div class="flex items-center gap-3 mb-6">
+              <svg
+                class="w-8 h-8 text-red-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                ></path>
+              </svg>
+              <h3 class="text-2xl font-bold text-white">Solo Play</h3>
+            </div>
+
+            <div class="space-y-4">
+              <div>
+                <h4 class="font-bold text-green-400 mb-2">Advantages</h4>
+                <ul class="space-y-2 text-gray-300 text-sm">
+                  <li class="flex items-start gap-2">
+                    <span class="text-green-400 mt-1">+</span>
+                    <span>Complete loot control - no sharing</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-green-400 mt-1">+</span>
+                    <span>Stealth gameplay easier</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-green-400 mt-1">+</span>
+                    <span>Flexible mission pacing</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-green-400 mt-1">+</span>
+                    <span>No coordination required</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 class="font-bold text-red-400 mb-2">Disadvantages</h4>
+                <ul class="space-y-2 text-gray-300 text-sm">
+                  <li class="flex items-start gap-2">
+                    <span class="text-red-400 mt-1">-</span>
+                    <span>No squad abilities or synergies</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-red-400 mt-1">-</span>
+                    <span>Vulnerable to enemy squads</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-red-400 mt-1">-</span>
+                    <span>No backup if downed</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-red-400 mt-1">-</span>
+                    <span>Limited tactical options</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="pt-4 border-t border-red-800/30">
+                <p class="text-xs text-gray-400 italic">
+                  Best for: Stealth missions, low-risk farming, learning maps
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Squad Play -->
+          <div
+            class="bg-gradient-to-br from-green-900/20 to-gray-900 border border-green-800/30 rounded-lg p-8"
+          >
+            <div class="flex items-center gap-3 mb-6">
+              <svg
+                class="w-8 h-8 text-green-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                ></path>
+              </svg>
+              <h3 class="text-2xl font-bold text-white">Squad Play</h3>
+            </div>
+
+            <div class="space-y-4">
+              <div>
+                <h4 class="font-bold text-green-400 mb-2">Advantages</h4>
+                <ul class="space-y-2 text-gray-300 text-sm">
+                  <li class="flex items-start gap-2">
+                    <span class="text-green-400 mt-1">+</span>
+                    <span>Powerful squad ability synergies</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-green-400 mt-1">+</span>
+                    <span>Can revive downed teammates</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-green-400 mt-1">+</span>
+                    <span>Tackle high-risk zones safely</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-green-400 mt-1">+</span>
+                    <span>Overwhelming combat advantage</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 class="font-bold text-red-400 mb-2">Disadvantages</h4>
+                <ul class="space-y-2 text-gray-300 text-sm">
+                  <li class="flex items-start gap-2">
+                    <span class="text-red-400 mt-1">-</span>
+                    <span>Loot must be shared among team</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-red-400 mt-1">-</span>
+                    <span>Requires coordination and communication</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-red-400 mt-1">-</span>
+                    <span>Stealth gameplay more difficult</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-red-400 mt-1">-</span>
+                    <span>Slower decision making</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="pt-4 border-t border-green-800/30">
+                <p class="text-xs text-gray-400 italic">
+                  Best for: High-value extractions, PvP dominance, boss fights
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tips for Squad Building -->
+  <section class="py-16 bg-black">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2
+          class="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent"
+        >
+          Essential Squad Building Tips
+        </h2>
+        <p class="text-gray-400 text-center mb-12 max-w-3xl mx-auto">
+          Pro strategies to maximize your squad's effectiveness and avoid common
+          mistakes.
+        </p>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {
+            tips.map((tip) => (
+              <div class="bg-gray-900 border border-gray-800 rounded-lg p-6 hover:border-green-500 transition-colors">
+                <div class="flex items-start gap-3">
+                  <svg
+                    class="w-6 h-6 text-green-400 flex-shrink-0 mt-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <div>
+                    <h3 class="font-bold text-white mb-2">{tip.title}</h3>
+                    <p class="text-gray-400 text-sm">{tip.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-gradient-to-b from-gray-900 to-black">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2
+          class="text-4xl font-bold mb-6 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent"
+        >
+          Ready to Build Your Squad?
+        </h2>
+        <p class="text-xl text-gray-300 mb-8">
+          Join the Bloom community to find teammates, share strategies, and
+          dominate the wasteland together.
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a
+            href="https://discord.gg/bloom"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-gradient-to-r from-green-500 to-blue-500 text-white px-8 py-4 rounded-lg font-bold hover:scale-105 transition-transform"
+          >
+            Join Discord Community
+          </a>
+          <a
+            href="https://store.steampowered.com/app/bloom"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-gray-800 text-white px-8 py-4 rounded-lg font-bold border border-gray-700 hover:border-green-500 transition-colors"
+          >
+            Wishlist on Steam
+          </a>
+        </div>
+
+        <div
+          class="mt-12 p-6 bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-blue-800/30 rounded-lg"
+        >
+          <p class="text-gray-300">
+            <strong class="text-white">Pro Tip:</strong> Experiment with different
+            squad compositions in low-risk zones before tackling high-value extractions.
+            Every team has a unique playstyle - find what works for you!
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

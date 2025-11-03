@@ -1,0 +1,62 @@
+{
+  "wikiPages": [
+    {
+      "slug": "Marketing/Brand_Guidelines",
+      "url": "https://gitlab.slurpgg.net/zachgonser/bloom/-/wikis/Marketing/Brand_Guidelines",
+      "purpose": "Extract official color palette, typography, visual identity specifications",
+      "outputPath": "temp/wiki-raw/brand-guidelines.md",
+      "dataType": "designTokens"
+    },
+    {
+      "slug": "Marketing/Marketing_Strategy",
+      "url": "https://gitlab.slurpgg.net/zachgonser/bloom/-/wikis/Marketing/Marketing_Strategy",
+      "purpose": "Extract brand voice, messaging framework, positioning statements",
+      "outputPath": "temp/wiki-raw/marketing-strategy.md",
+      "dataType": "content"
+    },
+    {
+      "slug": "Marketing/Faction_Marketing_Profiles",
+      "url": "https://gitlab.slurpgg.net/zachgonser/bloom/-/wikis/Marketing/Faction_Marketing_Profiles",
+      "purpose": "Extract faction data (names, roles, colors, philosophies)",
+      "outputPath": "temp/wiki-raw/faction-marketing-profiles.md",
+      "dataType": "factions"
+    },
+    {
+      "slug": "Lore/index",
+      "url": "https://gitlab.slurpgg.net/zachgonser/bloom/-/wikis/Lore/index",
+      "purpose": "Extract canonical game description, tagline, overview",
+      "outputPath": "temp/wiki-raw/lore-index.md",
+      "dataType": "content"
+    },
+    {
+      "slug": "Factions/index",
+      "url": "https://gitlab.slurpgg.net/zachgonser/bloom/-/wikis/Factions/index",
+      "purpose": "Extract faction list, launch status, faction count validation",
+      "outputPath": "temp/wiki-raw/factions-index.md",
+      "dataType": "factions"
+    },
+    {
+      "slug": "Lore/Characters",
+      "url": "https://gitlab.slurpgg.net/zachgonser/bloom/-/wikis/Lore/Characters",
+      "purpose": "Extract character names, backstories, canonical descriptions",
+      "outputPath": "temp/wiki-raw/lore-characters.md",
+      "dataType": "content"
+    },
+    {
+      "slug": "Lore/Technology",
+      "url": "https://gitlab.slurpgg.net/zachgonser/bloom/-/wikis/Lore/Technology",
+      "purpose": "Extract technology descriptions, terminology, canonical names",
+      "outputPath": "temp/wiki-raw/lore-technology.md",
+      "dataType": "content"
+    },
+    {
+      "slug": "Lore/Timeline",
+      "url": "https://gitlab.slurpgg.net/zachgonser/bloom/-/wikis/Lore/Timeline",
+      "purpose": "Extract timeline events, dates, canonical chronology",
+      "outputPath": "temp/wiki-raw/lore-timeline.md",
+      "dataType": "content"
+    }
+  ],
+  "cacheTTL": 86400000,
+  "description": "Configuration for GitLab wiki synchronization - defines which wiki pages to fetch and their purpose"
+}
