@@ -1,9 +1,9 @@
 ---
 // Background Music Component with Mute Toggle
-// Uses transition:persist to maintain playback across page navigation
+// Uses transition:persist with unique name to maintain playback across page navigation
 ---
 
-<div id="music-controls" class="fixed bottom-6 right-6 z-50" transition:persist>
+<div id="music-controls" class="fixed bottom-6 right-6 z-50" transition:persist="music-controls">
   <button
     id="music-toggle"
     class="bg-[#0a0f0a]/90 backdrop-blur-sm border border-primary-green/30 rounded-full p-3 hover:bg-[#0a0f0a] hover:border-primary-green transition-all duration-300 group"
@@ -23,8 +23,10 @@
   </button>
 </div>
 
-<audio id="background-music" loop preload="auto" transition:persist>
+<!-- eslint-disable-next-line jsx-a11y/media-has-caption -->
+<audio id="background-music" loop preload="auto" transition:persist="background-audio">
   <source src="/audio/main-menu-theme.wav" type="audio/wav">
+  <!-- No caption track needed as this is background music without spoken content -->
   Your browser does not support the audio element.
 </audio>
 
@@ -54,8 +56,15 @@
 </style>
 
 <script>
-  // Background Music Controller with View Transitions support
+  // Background Music Controller with View Transitions support and consent handling
   class BackgroundMusicController {
+    private audio: HTMLAudioElement | null
+    private toggleBtn: HTMLElement | null
+    private playingIcon: HTMLElement | null
+    private mutedIcon: HTMLElement | null
+    private isMuted: boolean
+    private consentKey = 'audioConsentGiven'
+
     constructor() {
       this.audio = document.getElementById('background-music') as HTMLAudioElement
       this.toggleBtn = document.getElementById('music-toggle')
@@ -75,8 +84,16 @@
       this.audio.volume = 0.3 // 30% volume
       this.updateUI()
 
-      // Try to autoplay (will only work after user interaction)
-      this.tryAutoplay()
+      // Listen for consent event from AudioConsentModal
+      window.addEventListener('audioConsentGranted', () => {
+        this.handleConsentGranted()
+      })
+
+      // Check if consent was already given and audio should auto-play
+      const consent = localStorage.getItem(this.consentKey)
+      if (consent === 'true' && !this.isMuted) {
+        this.tryAutoplay()
+      }
 
       // Toggle button click handler
       this.toggleBtn.addEventListener('click', () => this.toggle())
@@ -84,13 +101,27 @@
       // Handle page visibility changes (pause when tab is hidden)
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
-          this.audio.pause()
-        } else if (!this.isMuted) {
+          // Don't pause - let audio continue in background
+          // Modern browsers handle this automatically
+        } else if (!this.isMuted && this.audio.paused) {
+          // Resume if returning to tab and audio was supposed to be playing
           this.audio.play().catch(() => {
             // Autoplay prevented, user needs to interact
           })
         }
       })
+    }
+
+    async handleConsentGranted() {
+      // User granted consent via modal, start playing
+      if (!this.isMuted) {
+        try {
+          await this.audio!.play()
+          console.log('Audio playback started after consent')
+        } catch (error) {
+          console.log('Failed to start audio after consent:', error)
+        }
+      }
     }
 
     async tryAutoplay() {
@@ -99,11 +130,11 @@
       }
 
       try {
-        await this.audio.play()
+        await this.audio!.play()
       } catch (error) {
         // Autoplay prevented by browser policy
-        // Music will start when user clicks the toggle
-        console.log('Autoplay prevented. Click the music button to start.')
+        // Music will start when user grants consent via modal or clicks the toggle
+        console.log('Autoplay prevented. Waiting for user consent.')
       }
     }
 
@@ -112,9 +143,9 @@
       localStorage.setItem('bgMusicMuted', this.isMuted.toString())
 
       if (this.isMuted) {
-        this.audio.pause()
+        this.audio!.pause()
       } else {
-        this.audio.play().catch(() => {
+        this.audio!.play().catch(() => {
           console.error('Failed to play audio')
         })
       }
@@ -137,8 +168,23 @@
   let musicController: BackgroundMusicController | null = null
 
   const initMusic = () => {
+    // Only create a new controller if one doesn't exist
+    // This prevents re-initialization when audio persists across pages
     if (!musicController) {
       musicController = new BackgroundMusicController()
+    } else {
+      // Controller exists, just re-wire the DOM elements after navigation
+      // This ensures the toggle button works after page transition
+      const toggleBtn = document.getElementById('music-toggle')
+      const playingIcon = document.getElementById('music-icon-playing')
+      const mutedIcon = document.getElementById('music-icon-muted')
+      
+      if (toggleBtn && musicController) {
+        // Re-attach click listener
+        toggleBtn.replaceWith(toggleBtn.cloneNode(true))
+        const newToggleBtn = document.getElementById('music-toggle')
+        newToggleBtn?.addEventListener('click', () => musicController!.toggle())
+      }
     }
   }
 
@@ -148,19 +194,43 @@
     if (document.getElementById('background-music')) {
       initMusic()
     }
-    
-    // Also initialize on first click for browsers that block autoplay
-    const initOnClick = () => {
-      initMusic()
-    }
-    document.addEventListener('click', initOnClick, { once: true })
   }
 
-  // Re-initialize after View Transitions (handles navigation)
+  // Handle View Transitions - audio element persists, just update references
   document.addEventListener('astro:after-swap', () => {
-    // The audio element persists, so we just need to ensure controls are wired up
-    if (!musicController && document.getElementById('background-music')) {
-      initMusic()
+    // Re-initialize to wire up new DOM references
+    const audio = document.getElementById('background-music') as HTMLAudioElement
+    const toggleBtn = document.getElementById('music-toggle')
+    
+    if (audio && toggleBtn) {
+      // Ensure controller is using latest DOM references
+      if (musicController) {
+        // Update private properties via any cast (TypeScript workaround)
+        (musicController as any).audio = audio;
+        (musicController as any).toggleBtn = toggleBtn;
+        (musicController as any).playingIcon = document.getElementById('music-icon-playing');
+        (musicController as any).mutedIcon = document.getElementById('music-icon-muted');
+        
+        // Re-attach event listener to new button element
+        toggleBtn.addEventListener('click', () => musicController!.toggle())
+        
+        // Update UI to reflect current state
+        musicController.updateUI()
+      } else {
+        // Shouldn't happen, but initialize if needed
+        initMusic()
+      }
     }
+  })
+
+  // Prevent audio from pausing during page transitions
+  document.addEventListener('astro:before-preparation', () => {
+    // This event fires before the transition starts
+    // The audio element will persist, so no action needed
+  })
+
+  document.addEventListener('astro:before-swap', () => {
+    // This event fires right before the DOM swap
+    // The audio element will persist due to transition:persist
   })
 </script>
