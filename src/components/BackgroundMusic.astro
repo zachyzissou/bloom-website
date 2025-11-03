@@ -199,6 +199,7 @@
   declare global {
     interface Window {
       __backgroundMusicController?: BackgroundMusicController
+      __backgroundMusicInitialized?: boolean
     }
   }
 
@@ -206,6 +207,11 @@
   // With transition:persist, the audio element stays in DOM and keeps playing
   // We just need to ensure the controller is initialized once
   if (typeof window !== 'undefined') {
+    /**
+     * Initializes or updates the BackgroundMusicController
+     * Called on initial page load and after each view transition completes
+     * Creates controller on first call, updates DOM references on subsequent calls
+     */
     const initController = () => {
       const audio = document.getElementById('background-music') as HTMLAudioElement
       const toggleBtn = document.getElementById('music-toggle')
@@ -230,7 +236,10 @@
     }
 
     // Run after view transitions complete
-    // This ensures controller has correct DOM references after navigation
-    document.addEventListener('astro:page-load', initController)
+    // Only attach the listener once to prevent duplicates across page navigations
+    if (!window.__backgroundMusicInitialized) {
+      document.addEventListener('astro:page-load', initController)
+      window.__backgroundMusicInitialized = true
+    }
   }
 </script>
