@@ -67,6 +67,9 @@
     private toggleHandler: (() => void) | null = null
     private visibilityHandler: (() => void) | null = null
     private consentHandler: (() => void) | null = null
+    private beforeSwapHandler: (() => void) | null = null
+    private afterSwapHandler: (() => void) | null = null
+    private savedPlaybackState: { currentTime: number; paused: boolean } | null = null
 
     constructor() {
       this.audio = document.getElementById('background-music') as HTMLAudioElement
@@ -104,10 +107,58 @@
         }
       }
 
+      // Preserve audio state before View Transition swap AND remove event listeners
+      this.beforeSwapHandler = () => {
+        // Save playback state
+        if (this.audio) {
+          this.savedPlaybackState = {
+            currentTime: this.audio.currentTime,
+            paused: this.audio.paused
+          }
+        }
+        // Remove event listeners to prevent duplicates
+        window.removeEventListener('audioConsentGranted', this.consentHandler)
+        if (this.toggleBtn) {
+          this.toggleBtn.removeEventListener('click', this.toggleHandler)
+        }
+        document.removeEventListener('visibilitychange', this.visibilityHandler)
+        document.removeEventListener('astro:before-swap', this.beforeSwapHandler)
+        document.removeEventListener('astro:after-swap', this.afterSwapHandler)
+      }
+
+      // Restore audio state after View Transition swap
+      this.afterSwapHandler = () => {
+        const audio = document.getElementById('background-music') as HTMLAudioElement
+        const toggleBtn = document.getElementById('music-toggle')
+        
+        if (audio && toggleBtn) {
+          // Update DOM references
+          this.updateDOMReferences(audio, toggleBtn)
+          
+          // Restore playback state if it was saved
+          if (this.savedPlaybackState) {
+            audio.currentTime = this.savedPlaybackState.currentTime
+            if (!this.savedPlaybackState.paused && !this.isMuted) {
+              audio.play().catch((error) => {
+                console.log('Failed to resume audio after navigation:', error)
+              })
+            }
+          }
+          
+          // Re-register all event listeners for next navigation
+          window.addEventListener('audioConsentGranted', this.consentHandler)
+          document.addEventListener('visibilitychange', this.visibilityHandler)
+          document.addEventListener('astro:before-swap', this.beforeSwapHandler)
+          document.addEventListener('astro:after-swap', this.afterSwapHandler)
+        }
+      }
+
       // Add event listeners (only once per controller instance)
       window.addEventListener('audioConsentGranted', this.consentHandler)
       this.toggleBtn.addEventListener('click', this.toggleHandler)
       document.addEventListener('visibilitychange', this.visibilityHandler)
+      document.addEventListener('astro:before-swap', this.beforeSwapHandler)
+      document.addEventListener('astro:after-swap', this.afterSwapHandler)
 
       // Check if consent was already given and audio should auto-play
       const consent = localStorage.getItem(this.consentKey)
@@ -147,6 +198,12 @@
       }
       if (this.visibilityHandler) {
         document.removeEventListener('visibilitychange', this.visibilityHandler)
+      }
+      if (this.beforeSwapHandler) {
+        document.removeEventListener('astro:before-swap', this.beforeSwapHandler)
+      }
+      if (this.afterSwapHandler) {
+        document.removeEventListener('astro:after-swap', this.afterSwapHandler)
       }
     }
 
@@ -204,30 +261,21 @@
     }
   }
 
-  // Initialize on page load and after View Transitions
-  let musicController: BackgroundMusicController | null = null
-
-  // Initialize on first load
-  if (typeof window !== 'undefined') {
-    // Initialize immediately if audio element exists
-    if (document.getElementById('background-music')) {
-      musicController = new BackgroundMusicController()
+  // Global controller instance - stored on window to persist across View Transitions
+  declare global {
+    interface Window {
+      __backgroundMusicController?: BackgroundMusicController
     }
   }
 
-  // Handle View Transitions - audio element persists, update DOM references only
-  document.addEventListener('astro:after-swap', () => {
-    const audio = document.getElementById('background-music') as HTMLAudioElement
-    const toggleBtn = document.getElementById('music-toggle')
-    
-    if (audio && toggleBtn) {
-      if (musicController) {
-        // Controller exists, just update DOM references and re-wire toggle button
-        musicController.updateDOMReferences(audio, toggleBtn)
-      } else {
-        // Controller doesn't exist (shouldn't happen), create new one
-        musicController = new BackgroundMusicController()
+  // Initialize controller if it doesn't already exist
+  if (typeof window !== 'undefined') {
+    if (!window.__backgroundMusicController) {
+      // First time initialization
+      if (document.getElementById('background-music')) {
+        window.__backgroundMusicController = new BackgroundMusicController()
       }
     }
-  })
+    // On subsequent navigations, the afterSwapHandler handles DOM updates and listener re-registration
+  }
 </script>
