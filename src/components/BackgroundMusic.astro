@@ -107,14 +107,23 @@
         }
       }
 
-      // Preserve audio state before View Transition swap
+      // Preserve audio state before View Transition swap AND remove event listeners
       this.beforeSwapHandler = () => {
+        // Save playback state
         if (this.audio) {
           this.savedPlaybackState = {
             currentTime: this.audio.currentTime,
             paused: this.audio.paused
           }
         }
+        // Remove event listeners to prevent duplicates
+        window.removeEventListener('audioConsentGranted', this.consentHandler)
+        if (this.toggleBtn) {
+          this.toggleBtn.removeEventListener('click', this.toggleHandler)
+        }
+        document.removeEventListener('visibilitychange', this.visibilityHandler)
+        document.removeEventListener('astro:before-swap', this.beforeSwapHandler)
+        document.removeEventListener('astro:after-swap', this.afterSwapHandler)
       }
 
       // Restore audio state after View Transition swap
