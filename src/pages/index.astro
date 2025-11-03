@@ -1,163 +1,412 @@
 ---
 /**
  * Homepage - Bloom Marketing Website
- * Main landing page for the game
+ * Main landing page showcasing the post-apocalyptic extraction FPS
  */
-import BaseLayout from '@/layouts/BaseLayout.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Button from '@/components/Button.astro'
+import FactionCard from '@/components/FactionCard.astro'
+import factionsData from '@/data/factions.json'
+
+// Get EA Launch factions (4 factions available at Early Access)
+const eaLaunchFactions = factionsData.factions
+  .filter(faction => faction.launchStatus === 'ea-launch')
+  .slice(0, 4)
+
+// Prepare faction data for FactionCard component
+const featuredFactions = eaLaunchFactions.map(faction => ({
+  name: faction.name,
+  tagline: faction.philosophy,
+  emblem: `/images/factions/${faction.id.toLowerCase()}-emblem.svg`,
+  colors: {
+    primary: faction.colors.primary,
+    secondary: faction.colors.secondary
+  },
+  href: `/factions#${faction.id}`
+}))
 ---
 
 <BaseLayout
   title="Bloom - Survive the Harvest"
-  description="A post-apocalyptic resource management game where survival depends on scavenging, strategy, and avoiding the Harvesters. Explore a world of decay, danger, and difficult choices."
+  description="An 8-10 player PvE co-op extraction shooter where your faction role matters as much as your loadout. Deploy into a quarantined city-zone reshaped by Harvester phenomena, extract artifacts, and survive dynamic weather across a 32km world."
   type="game"
 >
+  <!-- Hero Section -->
   <section class="hero">
-    <h1>Bloom</h1>
-    <p class="tagline">Survive the Harvest</p>
-    <p class="description">
-      In a world stripped bare by mysterious entities known as Harvesters,
-      survival is a daily struggle. Scavenge resources, navigate faction politics,
-      and stay one step ahead of the harvest.
-    </p>
-    <div class="cta-buttons">
-      <a href="#download" class="btn btn-primary">Download Demo</a>
-      <a href="/about" class="btn btn-secondary">Learn More</a>
+    <div class="hero-content">
+      <h1 class="hero-title">Bloom</h1>
+      <p class="hero-tagline">Survive the Harvest</p>
+      <p class="hero-description">
+        An 8-10 player PvE co-op extraction shooter where your faction role matters as much as your loadout.
+        Deploy into a quarantined city-zone reshaped by Harvester phenomena, extract artifacts, and survive
+        dynamic weather and faction warfare across a 32km world.
+      </p>
+      <div class="cta-buttons">
+        <Button href="#early-access" variant="primary">Join Early Access</Button>
+        <Button href="#factions" variant="secondary">Explore Factions</Button>
+      </div>
+    </div>
+
+    <!-- Animated background gradient -->
+    <div class="hero-bg" aria-hidden="true"></div>
+  </section>
+
+  <!-- Game Overview Section -->
+  <section class="overview">
+    <div class="container">
+      <h2 class="section-title">A World in Decay</h2>
+      <p class="section-description">
+        In the aftermath of the Harvest, humanity has fractured into competing factions.
+        Each raid is a desperate gamble: extract valuable resources before time runs out,
+        or lose everything to rival factions and the ever-present threat of the Harvesters.
+      </p>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+          </div>
+          <h3>10 Unique Factions</h3>
+          <p>Choose from diverse factions, each with unique abilities, playstyles, and squad bonuses. From military precision to stealth operations.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3>Extraction Gameplay</h3>
+          <p>High-stakes raids where every decision matters. Extract your loot or risk losing it all. Death means losing your gear.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+          </div>
+          <h3>Tactical Squad Play</h3>
+          <p>Coordinate with teammates to leverage faction synergies. Team composition and cooperation are key to survival.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3>Diverse Biomes</h3>
+          <p>Battle across snow-capped peaks, scorching deserts, toxic wetlands, and crumbling urban ruins. Each biome favors different tactics.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="features">
-    <h2>Key Features</h2>
-    <div class="feature-grid">
-      <div class="feature-card">
-        <h3>Resource Management</h3>
-        <p>Scavenge and trade in a world of scarcity</p>
+  <!-- Featured Factions Section -->
+  <section id="factions" class="factions">
+    <div class="container">
+      <h2 class="section-title">Choose Your Faction</h2>
+      <p class="section-description">
+        Four factions available at Early Access launch, with six more coming in post-launch expansions.
+        Each faction offers distinct abilities, playstyles, and roles in squad composition.
+      </p>
+
+      <div class="faction-grid">
+        {featuredFactions.map(faction => (
+          <FactionCard
+            name={faction.name}
+            tagline={faction.tagline}
+            emblem={faction.emblem}
+            colors={faction.colors}
+            href={faction.href}
+          />
+        ))}
       </div>
-      <div class="feature-card">
-        <h3>Faction Politics</h3>
-        <p>Navigate complex relationships between 8 unique factions</p>
+
+      <div class="faction-cta">
+        <Button href="/factions" variant="outline">View All Factions</Button>
       </div>
-      <div class="feature-card">
-        <h3>Survival Strategy</h3>
-        <p>Make difficult choices in a harsh post-apocalyptic world</p>
+    </div>
+  </section>
+
+  <!-- Call to Action Section -->
+  <section id="early-access" class="cta-section">
+    <div class="container">
+      <h2 class="cta-title">Join the Fight</h2>
+      <p class="cta-description">
+        Early Access launches with 4 factions, multiple biomes, and intense extraction gameplay.
+        Be among the first to stake your claim in the wasteland.
+      </p>
+      <div class="cta-buttons">
+        <Button href="#wishlist" variant="primary" size="large">Wishlist on Steam</Button>
+        <Button href="/biomes" variant="secondary" size="large">Explore Biomes</Button>
       </div>
-      <div class="feature-card">
-        <h3>Mystery & Lore</h3>
-        <p>Uncover the truth about the Harvesters and their origins</p>
-      </div>
+      <p class="release-info">
+        Early Access: Q2 2025 | Full Release: Q4 2025
+      </p>
     </div>
   </section>
 
   <style>
-    .hero {
-      text-align: center;
-      padding: 4rem 2rem;
-      min-height: 80vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
     }
 
-    h1 {
-      font-size: clamp(3rem, 10vw, 6rem);
+    /* Hero Section */
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 2rem;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 800px;
+    }
+
+    .hero-title {
+      font-size: clamp(3.5rem, 12vw, 7rem);
       margin-bottom: 1rem;
-      background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      letter-spacing: 0.05em;
+      animation: fadeInUp 0.8s ease-out;
     }
 
-    .tagline {
-      font-size: clamp(1.5rem, 4vw, 2rem);
+    .hero-tagline {
+      font-family: var(--font-heading);
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
       color: var(--color-gray);
       margin-bottom: 2rem;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
     }
 
-    .description {
-      max-width: 600px;
-      font-size: 1.125rem;
+    .hero-description {
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      font-size: clamp(1rem, 2vw, 1.25rem);
       line-height: 1.8;
-      margin-bottom: 2rem;
+      color: rgba(255, 255, 255, 0.9);
+      animation: fadeInUp 0.8s ease-out 0.4s both;
     }
 
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(255, 0, 85, 0.1) 0%, transparent 50%);
+      animation: pulse 15s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 0.8; }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Button Containers */
     .cta-buttons {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
       justify-content: center;
+      animation: fadeInUp 0.8s ease-out 0.6s both;
     }
 
-    .btn {
-      padding: 1rem 2rem;
-      font-size: 1.125rem;
-      font-weight: 600;
-      border-radius: 0.5rem;
-      transition: all 0.3s ease;
-      display: inline-block;
+    /* Overview Section */
+    .overview {
+      padding: 6rem 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.8) 100%);
     }
 
-    .btn-primary {
-      background: var(--color-primary);
-      color: var(--color-bg);
-    }
-
-    .btn-primary:hover {
-      background: var(--color-secondary);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(0, 255, 136, 0.3);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      border: 2px solid var(--color-primary);
+    .section-title {
+      font-size: clamp(2.5rem, 6vw, 3.5rem);
+      text-align: center;
+      margin-bottom: 1.5rem;
       color: var(--color-primary);
     }
 
-    .btn-secondary:hover {
-      background: var(--color-primary);
-      color: var(--color-bg);
-    }
-
-    .features {
-      padding: 4rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .features h2 {
+    .section-description {
       text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
+      max-width: 800px;
+      margin: 0 auto 4rem;
+      font-size: 1.125rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.8);
     }
 
+    /* Feature Grid */
     .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      display: flex;
+      flex-wrap: wrap;
       gap: 2rem;
+      margin-top: 3rem;
+      justify-content: center;
     }
 
     .feature-card {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.03);
       padding: 2rem;
       border-radius: 1rem;
       border: 1px solid rgba(0, 255, 136, 0.2);
       transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      flex: 0 0 280px;
+      max-width: 100%;
     }
 
     .feature-card:hover {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.08);
       border-color: var(--color-primary);
       transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 1.5rem;
+      color: var(--color-primary);
+    }
+
+    .feature-icon svg {
+      width: 100%;
+      height: 100%;
     }
 
     .feature-card h3 {
       font-size: 1.5rem;
       margin-bottom: 1rem;
-      color: var(--color-primary);
+      color: var(--color-text);
     }
 
     .feature-card p {
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+    }
+
+    /* Factions Section */
+    .factions {
+      padding: 6rem 0;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .faction-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      justify-content: center;
+    }
+
+    .faction-cta {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 6rem 0;
+      background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(255, 0, 85, 0.1) 100%);
+      text-align: center;
+    }
+
+    .cta-title {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .cta-description {
+      max-width: 700px;
+      margin: 0 auto 2.5rem;
+      font-size: 1.25rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .release-info {
+      margin-top: 2rem;
+      font-size: 1rem;
       color: var(--color-gray);
+      font-family: var(--font-heading);
+      letter-spacing: 0.05em;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero {
+        min-height: 100vh;
+        padding: 1rem;
+      }
+
+      .feature-grid,
+      .faction-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .overview,
+      .factions,
+      .cta-section {
+        padding: 4rem 0;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+
+    /* Performance optimizations */
+    .hero-bg,
+    .feature-card,
+    .btn {
+      will-change: transform;
+    }
+
+    /* Reduce motion for accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 </BaseLayout>

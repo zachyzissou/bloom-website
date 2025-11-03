@@ -89,12 +89,22 @@ const Component = isLink ? 'a' : 'article';
   /* CSS containment for performance */
   .faction-card {
     contain: layout style paint;
-    display: block;
-    width: 100%;
+    display: flex;
+    width: 280px;
+    max-width: 100%;
+  }
+
+  @media (min-width: 640px) {
+    .faction-card {
+      width: 300px;
+    }
   }
 
   .card-inner {
     position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     background: linear-gradient(135deg, var(--faction-primary), var(--faction-secondary));
     border-radius: 0.5rem;
     padding: 1.5rem;
@@ -114,6 +124,7 @@ const Component = isLink ? 'a' : 'article';
     display: flex;
     justify-content: center;
     margin-bottom: 1rem;
+    flex-shrink: 0;
   }
 
   .emblem {
@@ -132,6 +143,10 @@ const Component = isLink ? 'a' : 'article';
   /* Content */
   .content {
     text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .faction-name {

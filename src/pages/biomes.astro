@@ -1,0 +1,826 @@
+---
+/**
+ * Biomes Page - Bloom Marketing Website
+ * Displays all game biomes with threat levels and faction presence
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import biomesData from '@/data/biomes.json';
+import factionsData from '@/data/factions.json';
+
+const { biomes } = biomesData;
+const { factions } = factionsData;
+
+// Create a map of faction names to faction data for quick lookup
+const factionMap = new Map(
+  factions.map(f => [f.shortName, f])
+);
+
+// Group biomes by launch status
+const eaLaunchBiomes = biomes.filter(b => b.launchStatus === 'ea-launch');
+const expansionBiomes = biomes.filter(b => b.launchStatus === 'expansion');
+
+// Threat level color mapping
+const getThreatColor = (level: string) => {
+  switch (level) {
+    case 'Safe': return 'var(--color-primary)';
+    case 'Medium': return '#ffaa00';
+    case 'Hardcore': return 'var(--color-secondary)';
+    default: return 'var(--color-gray)';
+  }
+};
+---
+
+<BaseLayout
+  title="Biomes - Bloom Game World"
+  description="Explore the diverse and dangerous biomes of Bloom. From frozen peaks to toxic wetlands, each region offers unique challenges, resources, and faction encounters."
+  type="game"
+>
+  <!-- Hero Section -->
+  <section class="biomes-hero">
+    <div class="hero-content">
+      <h1>Explore the Wasteland</h1>
+      <p class="tagline">Twelve distinct biomes, each with unique threats and opportunities</p>
+      <p class="description">
+        Navigate a world transformed by cataclysm. From the arctic tundra of the far north
+        to the toxic wetlands of the southeast, each biome presents unique environmental
+        hazards, valuable resources, and competing factions vying for control.
+      </p>
+    </div>
+  </section>
+
+  <!-- Legend -->
+  <section class="legend-section">
+    <div class="container">
+      <h2 class="sr-only">Threat Level Legend</h2>
+      <div class="legend">
+        <div class="legend-item">
+          <span class="threat-badge" style={`background: ${getThreatColor('Safe')};`}>H1</span>
+          <span>Safe Zone</span>
+        </div>
+        <div class="legend-item">
+          <span class="threat-badge" style={`background: ${getThreatColor('Medium')};`}>H2</span>
+          <span>Medium Threat</span>
+        </div>
+        <div class="legend-item">
+          <span class="threat-badge" style={`background: ${getThreatColor('Hardcore')};`}>H3</span>
+          <span>Hardcore Zone</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EA Launch Biomes -->
+  <section class="biomes-section">
+    <div class="container">
+      <h2 class="section-title">Early Access Launch (6 Biomes)</h2>
+      <div class="biomes-grid">
+        {eaLaunchBiomes.map((biome) => (
+          <article class="biome-card" data-threat={biome.threatLevel.toLowerCase()}>
+            <!-- Header with threat level -->
+            <div class="biome-header">
+              <div class="biome-title-group">
+                <h3 class="biome-name">{biome.displayName}</h3>
+                <p class="biome-location">{biome.location}</p>
+              </div>
+              <div class="threat-indicator" style={`background: ${getThreatColor(biome.threatLevel)};`}>
+                <span class="threat-tier">{biome.threatTier}</span>
+                <span class="threat-level">{biome.threatLevel}</span>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <p class="biome-description">{biome.description}</p>
+
+            <!-- Geography & Climate -->
+            <div class="biome-details">
+              <div class="detail-group">
+                <h4>Geography</h4>
+                <p>{biome.geography}</p>
+              </div>
+              <div class="detail-group">
+                <h4>Climate</h4>
+                <p>{biome.visualCharacteristics.climate} • {biome.visualCharacteristics.temperature}</p>
+              </div>
+            </div>
+
+            <!-- Environmental Conditions -->
+            <div class="environmental-conditions">
+              <div class="condition-row">
+                <span class="condition-label">Weather:</span>
+                <span class="condition-value">{biome.visualCharacteristics.weather.join(', ')}</span>
+              </div>
+              <div class="condition-row">
+                <span class="condition-label">Visibility:</span>
+                <span class="condition-value">{biome.visualCharacteristics.visibility}</span>
+              </div>
+              <div class="condition-row">
+                <span class="condition-label">Terrain:</span>
+                <span class="condition-value">{biome.visualCharacteristics.terrain}</span>
+              </div>
+            </div>
+
+            <!-- Macro Features & Key Locations -->
+            <div class="features-section">
+              <div class="features-group">
+                <h4>Macro Features</h4>
+                <div class="feature-tags">
+                  {biome.macroFeatures.map((feature) => (
+                    <span class="feature-tag">{feature}</span>
+                  ))}
+                </div>
+              </div>
+              <div class="features-group">
+                <h4>Key Locations</h4>
+                <ul class="features-list">
+                  {biome.keyFeatures.slice(0, 4).map((feature) => (
+                    <li>{feature}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <!-- Faction Presence -->
+            <div class="faction-presence">
+              <h4>Faction Presence</h4>
+              <div class="faction-indicators">
+                {biome.factionPresence.map((factionName) => {
+                  const faction = factionMap.get(factionName);
+                  return faction ? (
+                    <a
+                      href={`/factions/${faction.id}`}
+                      class="faction-badge"
+                      style={`border-color: ${faction.colors.primary}; color: ${faction.colors.primary};`}
+                      title={`View ${faction.shortName} details`}
+                    >
+                      {faction.shortName}
+                    </a>
+                  ) : (
+                    <span class="faction-badge" style="border-color: #a0a0a0; color: #a0a0a0;">
+                      {factionName}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+
+            <!-- Hazards & Resources -->
+            <div class="bottom-details">
+              <div class="detail-column">
+                <h4>Primary Hazards</h4>
+                <ul class="compact-list">
+                  {biome.hazards.map((hazard) => (
+                    <li>{hazard}</li>
+                  ))}
+                </ul>
+              </div>
+              <div class="detail-column">
+                <h4>Available Resources</h4>
+                <ul class="compact-list">
+                  {biome.resources.map((resource) => (
+                    <li>{resource}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Expansion Biomes -->
+  <section class="biomes-section expansion-section">
+    <div class="container">
+      <h2 class="section-title">Post-Launch Expansions (6 Biomes)</h2>
+      <p class="expansion-note">
+        These biomes will be added during the Month 6-9 expansion window, introducing new environments,
+        challenges, and faction headquarters.
+      </p>
+      <div class="biomes-grid">
+        {expansionBiomes.map((biome) => (
+          <article class="biome-card expansion-card" data-threat={biome.threatLevel.toLowerCase()}>
+            <!-- Expansion badge -->
+            <div class="expansion-badge">Coming Post-Launch</div>
+
+            <!-- Header with threat level -->
+            <div class="biome-header">
+              <div class="biome-title-group">
+                <h3 class="biome-name">{biome.displayName}</h3>
+                <p class="biome-location">{biome.location}</p>
+              </div>
+              <div class="threat-indicator" style={`background: ${getThreatColor(biome.threatLevel)};`}>
+                <span class="threat-tier">{biome.threatTier}</span>
+                <span class="threat-level">{biome.threatLevel}</span>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <p class="biome-description">{biome.description}</p>
+
+            <!-- Geography & Climate -->
+            <div class="biome-details">
+              <div class="detail-group">
+                <h4>Geography</h4>
+                <p>{biome.geography}</p>
+              </div>
+              <div class="detail-group">
+                <h4>Climate</h4>
+                <p>{biome.visualCharacteristics.climate} • {biome.visualCharacteristics.temperature}</p>
+              </div>
+            </div>
+
+            <!-- Environmental Conditions -->
+            <div class="environmental-conditions">
+              <div class="condition-row">
+                <span class="condition-label">Weather:</span>
+                <span class="condition-value">{biome.visualCharacteristics.weather.join(', ')}</span>
+              </div>
+              <div class="condition-row">
+                <span class="condition-label">Visibility:</span>
+                <span class="condition-value">{biome.visualCharacteristics.visibility}</span>
+              </div>
+              <div class="condition-row">
+                <span class="condition-label">Terrain:</span>
+                <span class="condition-value">{biome.visualCharacteristics.terrain}</span>
+              </div>
+            </div>
+
+            <!-- Macro Features & Key Locations -->
+            <div class="features-section">
+              <div class="features-group">
+                <h4>Macro Features</h4>
+                <div class="feature-tags">
+                  {biome.macroFeatures.map((feature) => (
+                    <span class="feature-tag">{feature}</span>
+                  ))}
+                </div>
+              </div>
+              <div class="features-group">
+                <h4>Key Locations</h4>
+                <ul class="features-list">
+                  {biome.keyFeatures.slice(0, 4).map((feature) => (
+                    <li>{feature}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <!-- Faction Presence -->
+            <div class="faction-presence">
+              <h4>Faction Presence</h4>
+              <div class="faction-indicators">
+                {biome.factionPresence.map((factionName) => {
+                  const faction = factionMap.get(factionName);
+                  return faction ? (
+                    <a
+                      href={`/factions/${faction.id}`}
+                      class="faction-badge"
+                      style={`border-color: ${faction.colors.primary}; color: ${faction.colors.primary};`}
+                      title={`View ${faction.shortName} details`}
+                    >
+                      {faction.shortName}
+                    </a>
+                  ) : (
+                    <span class="faction-badge" style="border-color: #a0a0a0; color: #a0a0a0;">
+                      {factionName}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+
+            <!-- Hazards & Resources -->
+            <div class="bottom-details">
+              <div class="detail-column">
+                <h4>Primary Hazards</h4>
+                <ul class="compact-list">
+                  {biome.hazards.map((hazard) => (
+                    <li>{hazard}</li>
+                  ))}
+                </ul>
+              </div>
+              <div class="detail-column">
+                <h4>Available Resources</h4>
+                <ul class="compact-list">
+                  {biome.resources.map((resource) => (
+                    <li>{resource}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero Section */
+  .biomes-hero {
+    background: linear-gradient(180deg, rgba(0, 31, 63, 0.3) 0%, rgba(0, 0, 0, 0) 100%);
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+  }
+
+  .hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--color-primary), #00aaff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+  }
+
+  .tagline {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    color: var(--color-gray);
+    margin-bottom: 1.5rem;
+    font-family: var(--font-heading);
+  }
+
+  .description {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  /* Legend Section */
+  .legend-section {
+    padding: 2rem 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .threat-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.375rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: #000;
+  }
+
+  /* Container */
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Sections */
+  .biomes-section {
+    padding: 4rem 0;
+  }
+
+  .expansion-section {
+    background: rgba(255, 170, 0, 0.03);
+    border-top: 2px solid rgba(255, 170, 0, 0.2);
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+  }
+
+  .expansion-note {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 1rem;
+    background: rgba(255, 170, 0, 0.1);
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 170, 0, 0.3);
+  }
+
+  /* Biomes Grid */
+  .biomes-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .biome-card {
+    flex: 0 0 450px;
+    max-width: 100%;
+  }
+
+  /* Biome Card */
+  .biomes-grid .biome-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    contain: layout style paint;
+  }
+
+  .biome-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--color-primary);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .biome-card:hover {
+    border-color: rgba(0, 255, 136, 0.3);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 255, 136, 0.1);
+  }
+
+  .biome-card:hover::before {
+    opacity: 1;
+  }
+
+  /* Threat-specific accents */
+  .biome-card[data-threat="safe"]::before {
+    background: var(--color-primary);
+  }
+
+  .biome-card[data-threat="medium"]::before {
+    background: #ffaa00;
+  }
+
+  .biome-card[data-threat="hardcore"]::before {
+    background: var(--color-secondary);
+  }
+
+  /* Expansion Card */
+  .expansion-card {
+    border-color: rgba(255, 170, 0, 0.2);
+    position: relative;
+  }
+
+  .expansion-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 170, 0, 0.2);
+    color: #ffaa00;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 1px solid rgba(255, 170, 0, 0.4);
+  }
+
+  /* Biome Header */
+  .biome-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .biome-title-group {
+    flex: 1;
+  }
+
+  .biome-name {
+    font-size: 1.75rem;
+    font-family: var(--font-heading);
+    color: #fff;
+    margin-bottom: 0.25rem;
+    line-height: 1.2;
+  }
+
+  .biome-location {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .threat-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    min-width: 4rem;
+  }
+
+  .threat-tier {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #000;
+    line-height: 1;
+  }
+
+  .threat-level {
+    font-size: 0.7rem;
+    color: #000;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.125rem;
+  }
+
+  /* Description */
+  .biome-description {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 1.75rem;
+    border-left: 3px solid rgba(0, 255, 136, 0.3);
+    padding-left: 1rem;
+  }
+
+  /* Details */
+  .biome-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 1.25rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+  }
+
+  .detail-group h4 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-primary);
+    margin-bottom: 0.375rem;
+    font-weight: 600;
+  }
+
+  .detail-group p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+  }
+
+  /* Environmental Conditions */
+  .environmental-conditions {
+    margin-bottom: 1.5rem;
+    padding: 1.25rem;
+    background: rgba(0, 255, 136, 0.05);
+    border-left: 3px solid rgba(0, 255, 136, 0.4);
+    border-radius: 0.5rem;
+  }
+
+  .condition-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .condition-row:last-child {
+    margin-bottom: 0;
+  }
+
+  .condition-label {
+    color: var(--color-primary);
+    font-weight: 600;
+    min-width: 80px;
+    flex-shrink: 0;
+  }
+
+  .condition-value {
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.5;
+  }
+
+  /* Features */
+  .features-section {
+    margin-bottom: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .features-group h4 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-primary);
+    margin-bottom: 0.625rem;
+    font-weight: 600;
+  }
+
+  .feature-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .feature-tag {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    border-radius: 0.25rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.9);
+    white-space: nowrap;
+  }
+
+  .features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .features-list li {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    padding-left: 1.25rem;
+    position: relative;
+    line-height: 1.4;
+  }
+
+  .features-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+  }
+
+  /* Faction Presence */
+  .faction-presence {
+    margin-bottom: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .faction-presence h4 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-primary);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .faction-indicators {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.875rem;
+  }
+
+  .faction-badge {
+    display: inline-block;
+    padding: 0.375rem 0.875rem;
+    border: 2px solid;
+    border-radius: 0.375rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  a.faction-badge:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Bottom Details */
+  .bottom-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .detail-column h4 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-primary);
+    margin-bottom: 0.625rem;
+    font-weight: 600;
+  }
+
+  .compact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .compact-list li {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .compact-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* Accessibility */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .biomes-hero {
+      padding: 3rem 1.5rem 2rem;
+    }
+
+    .legend {
+      gap: 1.5rem;
+    }
+
+    .biome-header {
+      flex-direction: column;
+    }
+
+    .threat-indicator {
+      align-self: flex-start;
+    }
+
+    .biome-details,
+    .bottom-details,
+    .features-section {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .expansion-badge {
+      position: static;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .biome-card {
+      padding: 1.25rem;
+    }
+
+    .biome-name {
+      font-size: 1.5rem;
+    }
+  }
+</style>

@@ -1,0 +1,708 @@
+---
+/**
+ * Faction Detail Page - Dynamic route for individual factions
+ *
+ * Generates static pages for all 10 factions using getStaticPaths()
+ * Displays full faction details with themed styling based on faction colors
+ */
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import factionsData from '@/data/factions.json';
+
+export const getStaticPaths = (() => {
+  const { factions } = factionsData;
+  return factions.map(faction => ({
+    params: { id: faction.id },
+    props: { faction }
+  }));
+}) satisfies GetStaticPaths;
+
+const { faction } = Astro.props;
+
+// Role display names
+const roleDisplayNames: Record<string, string> = {
+  'tank': 'Tank',
+  'scavenger': 'Scavenger',
+  'medic': 'Medic',
+  'all-rounder': 'All-Rounder',
+  'tech': 'Tech Specialist',
+  'scout': 'Scout',
+  'stealth': 'Stealth Operative',
+  'defender': 'Defender',
+  'food-provider': 'Food Provider',
+  'elite-hunter': 'Elite Hunter'
+};
+
+const pageTitle = `${faction.name} - Factions - Bloom`;
+const pageDescription = `${faction.name}: ${faction.philosophy}. ${faction.lore}`;
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} type="website">
+  <div
+    class="faction-detail-page"
+    style={`
+      --faction-primary: ${faction.colors.primary};
+      --faction-secondary: ${faction.colors.secondary};
+      --faction-accent: ${faction.colors.accent};
+    `}
+  >
+    <!-- Back Navigation -->
+    <div class="back-nav">
+      <div class="container">
+        <a href="/factions" class="back-link">
+          <svg xmlns="http://www.w3.org/2000/svg" class="back-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Back to All Factions
+        </a>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-background"></div>
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-left">
+            <div class="faction-badge">{roleDisplayNames[faction.role]}</div>
+            <h1 class="faction-name">{faction.name}</h1>
+            <p class="faction-short-name">{faction.shortName}</p>
+            <p class="faction-philosophy">{faction.philosophy}</p>
+
+            <div class="hero-stats">
+              <div class="stat">
+                <span class="stat-label">Home Biome</span>
+                <span class="stat-value">{faction.homeBiome}</span>
+              </div>
+              <div class="stat">
+                <span class="stat-label">Launch</span>
+                <span class="stat-value">{faction.launchWindow}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-right">
+            <div class="emblem-container">
+              <img
+                src={`/images/factions/${faction.id.toLowerCase()}-emblem.svg`}
+                alt={`${faction.name} emblem`}
+                width="300"
+                height="300"
+                loading="eager"
+                class="faction-emblem"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lore Section -->
+    <section class="lore-section">
+      <div class="container">
+        <h2 class="section-title">Lore</h2>
+        <p class="lore-text">{faction.lore}</p>
+      </div>
+    </section>
+
+    <!-- Playstyle & Abilities Section -->
+    <section class="abilities-section">
+      <div class="container">
+        <div class="abilities-grid">
+          <!-- Playstyle -->
+          <div class="playstyle-card">
+            <h2 class="section-title">Playstyle</h2>
+            <p class="playstyle-text">{faction.playstyle}</p>
+            <div class="specialty">
+              <span class="specialty-label">Specialty:</span>
+              <span class="specialty-value">{faction.specialty}</span>
+            </div>
+          </div>
+
+          <!-- Unique Abilities -->
+          <div class="abilities-card">
+            <h2 class="section-title">Unique Abilities</h2>
+            <div class="abilities-list">
+              {faction.uniqueAbilities.map(ability => (
+                <div class="ability">
+                  <div class="ability-header">
+                    <h3 class="ability-name">{ability.name}</h3>
+                    <span class={`cooldown-badge cooldown-${ability.cooldown}`}>
+                      {ability.cooldown}
+                    </span>
+                  </div>
+                  <p class="ability-description">{ability.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Strengths & Weaknesses Section -->
+    <section class="strengths-weaknesses-section">
+      <div class="container">
+        <div class="sw-grid">
+          <!-- Strengths -->
+          <div class="sw-card strengths-card">
+            <h2 class="section-title">Strengths</h2>
+            <ul class="sw-list">
+              {faction.strengths.map(strength => (
+                <li class="sw-item strength-item">
+                  <svg class="sw-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  {strength}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Weaknesses -->
+          <div class="sw-card weaknesses-card">
+            <h2 class="section-title">Weaknesses</h2>
+            <ul class="sw-list">
+              {faction.weaknesses.map(weakness => (
+                <li class="sw-item weakness-item">
+                  <svg class="sw-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  {weakness}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Co-op Ability -->
+          <div class="sw-card coop-card">
+            <h2 class="section-title">Team Synergy</h2>
+            <p class="coop-ability">{faction.coopAbility}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Color Palette Section -->
+    <section class="colors-section">
+      <div class="container">
+        <h2 class="section-title">Faction Colors</h2>
+        <div class="color-swatches">
+          <div class="color-swatch">
+            <div class="swatch" style={`background-color: ${faction.colors.primary};`}></div>
+            <span class="color-label">Primary</span>
+            <span class="color-hex">{faction.colors.primary}</span>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch" style={`background-color: ${faction.colors.secondary};`}></div>
+            <span class="color-label">Secondary</span>
+            <span class="color-hex">{faction.colors.secondary}</span>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch" style={`background-color: ${faction.colors.accent};`}></div>
+            <span class="color-label">Accent</span>
+            <span class="color-hex">{faction.colors.accent}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-content">
+          <h2 class="cta-title">Join {faction.shortName}</h2>
+          <p class="cta-description">
+            Ready to master {faction.shortName}'s unique abilities and playstyle?
+          </p>
+          <a href="https://store.steampowered.com" class="cta-button">
+            Wishlist on Steam
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .faction-detail-page {
+    min-height: 100vh;
+    background: #000000;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Back Navigation */
+  .back-nav {
+    padding: 1.5rem 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: var(--faction-accent, #00ff88);
+  }
+
+  .back-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  /* Hero Section */
+  .hero {
+    position: relative;
+    padding: 4rem 0;
+    overflow: hidden;
+  }
+
+  .hero-background {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--faction-primary), var(--faction-secondary));
+    opacity: 0.1;
+  }
+
+  .hero-content {
+    position: relative;
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .hero-content {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .hero-left {
+    z-index: 1;
+  }
+
+  .faction-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--faction-accent);
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--faction-accent);
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .faction-name {
+    font-family: var(--font-heading, 'Orbitron', sans-serif);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .faction-short-name {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 600;
+    color: var(--faction-accent);
+    margin-bottom: 1rem;
+  }
+
+  .faction-philosophy {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .stat-value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  .hero-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .emblem-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+  }
+
+  .faction-emblem {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 40px var(--faction-accent));
+  }
+
+  /* Section Title */
+  .section-title {
+    font-family: var(--font-heading, 'Orbitron', sans-serif);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  /* Lore Section */
+  .lore-section {
+    padding: 4rem 0;
+    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.02), transparent);
+  }
+
+  .lore-text {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 800px;
+  }
+
+  /* Abilities Section */
+  .abilities-section {
+    padding: 4rem 0;
+  }
+
+  .abilities-grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .abilities-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .playstyle-card,
+  .abilities-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    padding: 2rem;
+  }
+
+  .playstyle-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 1.5rem;
+  }
+
+  .specialty {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid var(--faction-accent);
+    border-radius: 0.25rem;
+  }
+
+  .specialty-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .specialty-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--faction-accent);
+  }
+
+  .abilities-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .ability {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 0.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .ability-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    gap: 1rem;
+  }
+
+  .ability-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  .cooldown-badge {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 1rem;
+    white-space: nowrap;
+  }
+
+  .cooldown-passive {
+    background: rgba(0, 255, 136, 0.2);
+    color: #00ff88;
+    border: 1px solid #00ff88;
+  }
+
+  .cooldown-short {
+    background: rgba(100, 200, 255, 0.2);
+    color: #64c8ff;
+    border: 1px solid #64c8ff;
+  }
+
+  .cooldown-medium {
+    background: rgba(255, 200, 0, 0.2);
+    color: #ffc800;
+    border: 1px solid #ffc800;
+  }
+
+  .cooldown-long {
+    background: rgba(255, 69, 0, 0.2);
+    color: #ff4500;
+    border: 1px solid #ff4500;
+  }
+
+  .ability-description {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  /* Strengths & Weaknesses Section */
+  .strengths-weaknesses-section {
+    padding: 4rem 0;
+    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.02), transparent);
+  }
+
+  .sw-grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .sw-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .sw-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  .sw-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    padding: 2rem;
+  }
+
+  .coop-card {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 204, 255, 0.1));
+    border: 1px solid rgba(0, 255, 136, 0.3);
+  }
+
+  .sw-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .sw-item {
+    display: flex;
+    align-items: start;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .sw-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+  }
+
+  .strength-item {
+    color: #00ff88;
+  }
+
+  .weakness-item {
+    color: #ff4500;
+  }
+
+  .coop-ability {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+  }
+
+  /* Colors Section */
+  .colors-section {
+    padding: 4rem 0;
+  }
+
+  .color-swatches {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 600px;
+  }
+
+  .color-swatch {
+    flex: 0 0 170px;
+    max-width: 100%;
+  }
+
+  .color-swatches .color-swatch {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .swatch {
+    width: 100%;
+    height: 120px;
+    border-radius: 0.5rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  .color-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .color-hex {
+    font-family: monospace;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  /* CTA Section */
+  .cta-section {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.05), rgba(0, 204, 255, 0.05));
+  }
+
+  .cta-content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cta-title {
+    font-family: var(--font-heading, 'Orbitron', sans-serif);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1rem;
+  }
+
+  .cta-description {
+    font-size: clamp(0.875rem, 2vw, 1.125rem);
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #000000;
+    background: linear-gradient(135deg, #00ff88, #00ccff);
+    border-radius: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 255, 136, 0.3);
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 255, 136, 0.4);
+    color: #000000;
+  }
+
+  .cta-button:focus {
+    outline: 2px solid #00ff88;
+    outline-offset: 4px;
+  }
+
+  /* Performance optimizations */
+  @media (prefers-reduced-motion: reduce) {
+    .cta-button,
+    .back-link,
+    .faction-emblem {
+      transition: none;
+    }
+  }
+</style>

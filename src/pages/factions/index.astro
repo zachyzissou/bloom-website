@@ -1,0 +1,262 @@
+---
+/**
+ * Factions Listing Page
+ *
+ * Displays all 10 factions grouped by launch status:
+ * - EA Launch: 4 factions available at Early Access
+ * - Expansion: 6 factions coming in post-launch expansions
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Button from '@/components/Button.astro';
+import FactionCard from '@/components/FactionCard.astro';
+import factionsData from '@/data/factions.json';
+
+const { factions } = factionsData;
+
+// Group factions by launch status
+const eaLaunchFactions = factions.filter(f => f.launchStatus === 'ea-launch');
+const expansionFactions = factions.filter(f => f.launchStatus === 'expansion');
+
+// Sort expansion factions by launch window
+const expansionFactionsSorted = expansionFactions.sort((a, b) => {
+  const windowOrder: Record<string, number> = {
+    'Month 3-6': 1,
+    'Month 6-9': 2
+  };
+  return (windowOrder[a.launchWindow] || 99) - (windowOrder[b.launchWindow] || 99);
+});
+
+const pageTitle = 'Factions - Bloom';
+const pageDescription = 'Explore the 10 unique factions of Bloom. Each faction offers distinct abilities, playstyles, and philosophies in the post-apocalyptic wasteland.';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} type="website">
+  <div class="factions-page">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1 class="hero-title">Choose Your Faction</h1>
+        <p class="hero-description">
+          Ten unique factions. Ten distinct playstyles. Each with their own philosophy,
+          abilities, and role in the wasteland. Who will you fight for?
+        </p>
+      </div>
+    </section>
+
+    <!-- EA Launch Factions -->
+    <section class="factions-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Early Access Launch</h2>
+          <p class="section-description">
+            Available at launch - Master these core factions and their unique abilities
+          </p>
+        </div>
+
+        <div class="factions-grid">
+          {eaLaunchFactions.map(faction => (
+            <FactionCard
+              name={faction.name}
+              tagline={faction.philosophy}
+              emblem={`/images/factions/${faction.id.toLowerCase()}-emblem.svg`}
+              colors={{
+                primary: faction.colors.primary,
+                secondary: faction.colors.secondary
+              }}
+              href={`/factions/${faction.id}`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Expansion Factions -->
+    <section class="factions-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Post-Launch Expansions</h2>
+          <p class="section-description">
+            Coming in the months following Early Access - New factions, new strategies, new challenges
+          </p>
+        </div>
+
+        <div class="factions-grid">
+          {expansionFactionsSorted.map(faction => (
+            <div class="faction-wrapper">
+              <FactionCard
+                name={faction.name}
+                tagline={faction.philosophy}
+                emblem={`/images/factions/${faction.id.toLowerCase()}-emblem.svg`}
+                colors={{
+                  primary: faction.colors.primary,
+                  secondary: faction.colors.secondary
+                }}
+                href={`/factions/${faction.id}`}
+              />
+              <div class="launch-badge">
+                {faction.launchWindow}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-content">
+          <h2 class="cta-title">Ready to Join the Fight?</h2>
+          <p class="cta-description">
+            Wishlist Bloom on Steam and be ready when Early Access launches
+          </p>
+          <Button href="https://store.steampowered.com" variant="primary" size="large">
+            Wishlist on Steam
+          </Button>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .factions-page {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%);
+  }
+
+  /* Hero Section */
+  .hero {
+    padding: 4rem 1.5rem 2rem;
+    text-align: center;
+    background: linear-gradient(180deg, rgba(0, 255, 136, 0.1) 0%, transparent 100%);
+  }
+
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    font-family: var(--font-heading, 'Orbitron', sans-serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: linear-gradient(135deg, var(--color-primary), #00ccff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-description {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Factions Section */
+  .factions-section {
+    padding: 3rem 1.5rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-title {
+    font-family: var(--font-heading, 'Orbitron', sans-serif);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .section-description {
+    font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Factions Grid */
+  .factions-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+  }
+
+  @media (min-width: 1024px) {
+    .factions-grid {
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  /* Faction Wrapper (for launch badges) */
+  .faction-wrapper {
+    position: relative;
+  }
+
+  .launch-badge {
+    margin-top: 0.5rem;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.5rem;
+    background: rgba(0, 255, 136, 0.1);
+    border-radius: 0.25rem;
+    border: 1px solid rgba(0, 255, 136, 0.3);
+  }
+
+  /* CTA Section */
+  .cta-section {
+    padding: 4rem 1.5rem;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 255, 136, 0.05) 100%);
+  }
+
+  .cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .cta-title {
+    font-family: var(--font-heading, 'Orbitron', sans-serif);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1rem;
+  }
+
+  .cta-description {
+    font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+  }
+
+  /* Performance optimizations */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-title {
+      transition: none;
+    }
+  }
+</style>
