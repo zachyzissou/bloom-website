@@ -152,7 +152,6 @@
     // Also initialize on first click for browsers that block autoplay
     const initOnClick = () => {
       initMusic()
-      document.removeEventListener('click', initOnClick)
     }
     document.addEventListener('click', initOnClick, { once: true })
   }
