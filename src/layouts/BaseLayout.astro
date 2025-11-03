@@ -3,6 +3,7 @@
  * Base Layout - Main layout wrapper for all pages
  * Includes SEO, Analytics, Navigation, and global styles
  */
+import { ViewTransitions } from 'astro:transitions';
 import SEO from '@/components/SEO.astro';
 import Analytics from '@/components/Analytics.astro';
 import Navigation from '@/components/Navigation.astro';
@@ -25,6 +26,9 @@ const { title, description, image, type = 'website', noindex = false } = Astro.p
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- View Transitions for smooth page navigation -->
+    <ViewTransitions />
 
     <!-- SEO Component -->
     <SEO

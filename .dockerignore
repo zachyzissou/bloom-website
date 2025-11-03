@@ -1,0 +1,56 @@
+# Dependencies
+node_modules
+npm-debug.log
+
+# Build cache
+.astro
+
+# Development files
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Git
+.git
+.gitignore
+.github
+
+# Documentation
+*.md
+!README.md
+ARCHITECTURE_*.md
+IMPLEMENTATION_*.md
+DESIGN_*.md
+PERFORMANCE_*.md
+DEPLOYMENT*.md
+Context.md
+*.html
+audit-report.*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Testing
+.playwright-mcp
+.lighthouserc.json
+playwright.config.js
+
+# Temporary files
+temp
+tmp
+*.log
+.cache
+
+# IDE
+.claude
+.mcp.json
+
+# Other
+bloom-game-repo
+budget.json
+performance-budget.json
+plausible-setup.md

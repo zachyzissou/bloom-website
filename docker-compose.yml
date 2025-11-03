@@ -1,0 +1,23 @@
+services:
+  bloom-website:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bloom-website
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      - NODE_ENV=production
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    networks:
+      - bloom-network
+
+networks:
+  bloom-network:
+    driver: bridge
