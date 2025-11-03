@@ -127,11 +127,11 @@
           this.updateDOMReferences(audio, toggleBtn)
           
           // Restore playback state if it was saved
-          if (this.savedPlaybackState && audio) {
+          if (this.savedPlaybackState) {
             audio.currentTime = this.savedPlaybackState.currentTime
             if (!this.savedPlaybackState.paused && !this.isMuted) {
-              audio.play().catch(() => {
-                console.log('Failed to resume audio after navigation')
+              audio.play().catch((error) => {
+                console.log('Failed to resume audio after navigation:', error)
               })
             }
           }
