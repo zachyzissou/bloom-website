@@ -1,8 +1,13 @@
 services:
   bloom-website:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    # Option 1: Use pre-built image from GitHub Container Registry
+    image: ghcr.io/zachyzissou/terminal-grounds-website:latest
+    
+    # Option 2: Build locally (comment out 'image' above and uncomment below)
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    
     container_name: bloom-website
     restart: unless-stopped
     ports:

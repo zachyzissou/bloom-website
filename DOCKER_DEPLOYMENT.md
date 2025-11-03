@@ -2,7 +2,28 @@
 
 This guide explains how to deploy the Bloom Marketing Website using Docker on Unraid or any other Docker-compatible platform.
 
-## Quick Start
+## Automated Builds
+
+Docker images are automatically built and published to GitHub Container Registry on every push to the main branch.
+
+**Pre-built Image**: `ghcr.io/zachyzissou/terminal-grounds-website:latest`
+
+### Using Pre-built Image (Easiest)
+
+```bash
+# Pull and run the latest image
+docker pull ghcr.io/zachyzissou/terminal-grounds-website:latest
+docker run -d -p 8080:80 --name bloom-website ghcr.io/zachyzissou/terminal-grounds-website:latest
+
+# Access the website at http://localhost:8080
+```
+
+**Available Tags:**
+- `latest` - Latest build from main branch
+- `main-{sha}` - Specific commit from main branch
+- `v{version}` - Specific version releases (e.g., v1.0.0)
+
+## Manual Build Options
 
 ### Prerequisites
 - Docker installed

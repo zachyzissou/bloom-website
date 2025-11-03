@@ -21,6 +21,23 @@ Built with Astro 4.x, Tailwind CSS, and optimized for Core Web Vitals excellence
 
 ## Quick Start
 
+### Using Docker (Recommended for Production)
+
+Pre-built Docker images are automatically published to GitHub Container Registry:
+
+```bash
+# Pull and run the latest image
+docker run -d -p 8080:80 ghcr.io/zachyzissou/terminal-grounds-website:latest
+
+# Or use docker-compose
+docker pull ghcr.io/zachyzissou/terminal-grounds-website:latest
+docker-compose up -d
+
+# Access the website at http://localhost:8080
+```
+
+### Local Development
+
 ```bash
 # Install dependencies
 npm install
