@@ -5,7 +5,7 @@ import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://bloom-game.com',
+  site: 'https://bloom.slurpgg.net',
 
   // Static site generation
   output: 'static',
@@ -91,9 +91,9 @@ export default defineConfig({
 
       // Custom entries
       customPages: [
-        'https://bloom-game.com/',
-        'https://bloom-game.com/gameplay/',
-        'https://bloom-game.com/early-access/',
+        'https://bloom.slurpgg.net/',
+        'https://bloom.slurpgg.net/gameplay/',
+        'https://bloom.slurpgg.net/early-access/',
       ],
 
       // Filter pages

@@ -34,383 +34,156 @@ const isActive = (href: string) => {
 };
 ---
 
-<nav class="navbar" role="navigation" aria-label="Main navigation">
-  <div class="navbar-container">
-    <!-- Logo/Brand -->
-    <a href="/" class="navbar-brand" aria-label="Bloom home">
-      <span class="brand-text">Bloom</span>
-      <span class="brand-tagline">Survive the Harvest</span>
+<nav
+  class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/80 backdrop-blur-lg transition-all duration-300"
+  role="navigation"
+  aria-label="Primary navigation"
+>
+  <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:h-20 lg:px-8">
+    <a href="/" class="group flex flex-col leading-tight" aria-label="Bloom home">
+      <span class="text-lg font-semibold uppercase tracking-[0.35em] text-white transition-colors group-hover:text-bloom-emerald sm:text-xl">
+        Bloom
+      </span>
+      <span class="text-[0.55rem] font-mono uppercase tracking-[0.4em] text-white/60">
+        Survive the Harvest
+      </span>
     </a>
 
-    <!-- Mobile menu toggle (checkbox hack for CSS-only solution) -->
-    <input
-      type="checkbox"
-      id="menu-toggle"
-      class="menu-toggle"
-      aria-label="Toggle menu"
-      aria-expanded="false"
-    />
-    <label for="menu-toggle" class="menu-icon" aria-label="Menu">
-      <span class="menu-icon-bar"></span>
-      <span class="menu-icon-bar"></span>
-      <span class="menu-icon-bar"></span>
-    </label>
-
-    <!-- Navigation links -->
-    <ul class="nav-links" aria-hidden="true">
+    <ul class="hidden items-center gap-4 text-[0.75rem] font-semibold uppercase tracking-[0.25em] text-white/70 lg:flex">
       {
         navLinks.map((link) => (
-          <li class="nav-item">
+          <li>
             <a
               href={link.href}
-              class={`nav-link ${isActive(link.href) ? 'active' : ''}`}
+              class={`relative inline-flex items-center gap-2 rounded-full px-3 py-2 transition-colors duration-200 ${
+                isActive(link.href)
+                  ? 'text-bloom-emerald'
+                  : 'text-white/70 hover:text-white'
+              }`}
               aria-current={isActive(link.href) ? 'page' : undefined}
+              data-active={isActive(link.href)}
             >
-              {link.label}
+              <span class="relative z-10">{link.label}</span>
+              <span
+                class={`absolute inset-0 rounded-full border border-white/10 transition-opacity ${
+                  isActive(link.href) ? 'border-bloom-emerald/60 opacity-100' : 'opacity-0 group-hover:opacity-100'
+                }`}
+              />
             </a>
           </li>
         ))
       }
     </ul>
+
+    <button
+      id="nav-toggle"
+      class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-white transition hover:border-bloom-emerald hover:text-bloom-emerald focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bloom-emerald lg:hidden"
+      type="button"
+      aria-label="Open navigation menu"
+      aria-controls="mobile-nav"
+      aria-expanded="false"
+    >
+      <svg id="nav-toggle-icon" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <div
+    id="mobile-nav"
+    class="lg:hidden"
+    data-open="false"
+  >
+    <div class="fixed inset-0 top-16 bg-black/70 backdrop-blur-sm transition-opacity data-[open='false']:pointer-events-none data-[open='false']:opacity-0"></div>
+    <div
+      class="fixed inset-x-0 top-16 origin-top rounded-b-3xl border-b border-white/10 bg-black/95 px-4 pb-8 pt-6 shadow-2xl transition duration-300 data-[open='false']:-translate-y-4 data-[open='false']:scale-y-95 data-[open='false']:opacity-0"
+      data-mobile-panel
+    >
+      <div class="mb-4 flex items-center justify-between px-1">
+        <span class="text-xs font-semibold uppercase tracking-[0.35em] text-white/70">
+          Navigate
+        </span>
+        <button
+          id="nav-close"
+          class="rounded-full bg-white/5 p-2 text-white transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bloom-emerald"
+          type="button"
+          aria-label="Close navigation menu"
+        >
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path stroke-linecap="round" d="M6 6l12 12M6 18L18 6" />
+          </svg>
+        </button>
+      </div>
+      <ul class="flex flex-col divide-y divide-white/5 rounded-2xl border border-white/5 bg-white/5">
+        {
+          navLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class={`flex items-center justify-between px-4 py-4 text-sm font-semibold uppercase tracking-[0.2em] transition ${
+                  isActive(link.href)
+                    ? 'text-bloom-emerald'
+                    : 'text-white/80 hover:bg-white/5 hover:text-white'
+                }`}
+                aria-current={isActive(link.href) ? 'page' : undefined}
+                data-mobile-link
+              >
+                {link.label}
+                <span class="text-[0.7rem] font-mono text-white/40">↗</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
   </div>
 </nav>
 
-<style>
-  /* Navbar container */
-  .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(0, 255, 136, 0.2);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  }
+<script is:inline>
+  const navToggle = document.getElementById('nav-toggle')
+  const navClose = document.getElementById('nav-close')
+  const mobileNav = document.getElementById('mobile-nav')
+  const mobilePanel = mobileNav?.querySelector('[data-mobile-panel]')
+  const mobileLinks = mobileNav?.querySelectorAll('[data-mobile-link]')
 
-  .navbar-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 1rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-  }
+  const setMenuState = (isOpen) => {
+    if (!mobileNav || !navToggle || !mobilePanel) return
+    mobileNav.dataset.open = isOpen.toString()
+    navToggle.setAttribute('aria-expanded', isOpen.toString())
+    navToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu')
+    document.documentElement.classList.toggle('overflow-hidden', isOpen)
 
-  /* Logo/Brand */
-  .navbar-brand {
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    z-index: 1001;
-  }
-
-  .brand-text {
-    font-family: var(--font-heading);
-    font-size: 1.75rem;
-    font-weight: 700;
-    background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    line-height: 1;
-    transition: opacity 0.2s ease;
-  }
-
-  .navbar-brand:hover .brand-text {
-    opacity: 0.8;
-  }
-
-  .brand-tagline {
-    font-size: 0.625rem;
-    color: var(--color-gray);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-top: 0.25rem;
-  }
-
-  /* Mobile menu toggle (hidden checkbox) */
-  .menu-toggle {
-    display: none;
-  }
-
-  /* Hamburger icon */
-  .menu-icon {
-    display: none;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 2rem;
-    height: 2rem;
-    cursor: pointer;
-    z-index: 1001;
-    padding: 0.25rem;
-  }
-
-  .menu-icon-bar {
-    width: 100%;
-    height: 3px;
-    background: var(--color-primary);
-    border-radius: 2px;
-    transition: all 0.3s ease;
-    transform-origin: center;
-  }
-
-  /* Hamburger animation when checked */
-  .menu-toggle:checked ~ .menu-icon .menu-icon-bar:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-  }
-
-  .menu-toggle:checked ~ .menu-icon .menu-icon-bar:nth-child(2) {
-    opacity: 0;
-  }
-
-  .menu-toggle:checked ~ .menu-icon .menu-icon-bar:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
-  }
-
-  /* Navigation links */
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .nav-item {
-    margin: 0;
-  }
-
-  .nav-link {
-    font-family: var(--font-heading);
-    font-size: 0.875rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--color-text);
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border: 2px solid transparent;
-    border-radius: 0.25rem;
-    transition: all 0.3s ease;
-    position: relative;
-  }
-
-  /* Underline effect on hover */
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: var(--color-primary);
-    transition: all 0.3s ease;
-    transform: translateX(-50%);
-  }
-
-  .nav-link:hover {
-    color: var(--color-primary);
-  }
-
-  .nav-link:hover::after {
-    width: 80%;
-  }
-
-  /* Active link styling */
-  .nav-link.active {
-    color: var(--color-primary);
-    border-color: var(--color-primary);
-    background: rgba(0, 255, 136, 0.1);
-  }
-
-  .nav-link.active::after {
-    width: 0;
-  }
-
-  /* Focus styles for accessibility */
-  .nav-link:focus-visible,
-  .menu-icon:focus-visible,
-  .navbar-brand:focus-visible {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 4px;
-    border-radius: 0.25rem;
-  }
-
-  .menu-toggle:focus-visible ~ .menu-icon {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 4px;
-    border-radius: 0.25rem;
-  }
-
-  /* Mobile responsive styles */
-  @media (max-width: 768px) {
-    .navbar-container {
-      padding: 1rem 1.5rem;
+    const icon = document.getElementById('nav-toggle-icon')
+    if (icon) {
+      icon.innerHTML = isOpen
+        ? '<path stroke-linecap="round" d="M6 6l12 12M6 18L18 6" />'
+        : '<path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16" />'
     }
 
-    /* Show hamburger icon on mobile */
-    .menu-icon {
-      display: flex;
-    }
-
-    /* Mobile menu */
-    .nav-links {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 2rem;
-      background: rgba(0, 0, 0, 0.98);
-      backdrop-filter: blur(10px);
-      padding: 4rem 2rem;
-      transform: translateX(100%);
-      transition: transform 0.3s ease;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    /* Show menu when checkbox is checked */
-    .menu-toggle:checked ~ .nav-links {
-      transform: translateX(0);
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .nav-item {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.3s ease;
-    }
-
-    /* Staggered animation for menu items */
-    .menu-toggle:checked ~ .nav-links .nav-item {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .menu-toggle:checked ~ .nav-links .nav-item:nth-child(1) {
-      transition-delay: 0.1s;
-    }
-
-    .menu-toggle:checked ~ .nav-links .nav-item:nth-child(2) {
-      transition-delay: 0.2s;
-    }
-
-    .menu-toggle:checked ~ .nav-links .nav-item:nth-child(3) {
-      transition-delay: 0.3s;
-    }
-
-    .menu-toggle:checked ~ .nav-links .nav-item:nth-child(4) {
-      transition-delay: 0.4s;
-    }
-
-    .menu-toggle:checked ~ .nav-links .nav-item:nth-child(5) {
-      transition-delay: 0.5s;
-    }
-
-    .menu-toggle:checked ~ .nav-links .nav-item:nth-child(6) {
-      transition-delay: 0.6s;
-    }
-
-    .nav-link {
-      font-size: 1.5rem;
-      padding: 1rem 2rem;
-    }
-
-    .brand-text {
-      font-size: 1.5rem;
-    }
-
-    .brand-tagline {
-      font-size: 0.5rem;
+    if (isOpen) {
+      const firstLink = mobilePanel.querySelector('a')
+      firstLink && setTimeout(() => firstLink.focus(), 200)
+    } else {
+      navToggle.focus()
     }
   }
 
-  /* Tablet styles */
-  @media (min-width: 769px) and (max-width: 1024px) {
-    .nav-links {
-      gap: 1.5rem;
+  navToggle?.addEventListener('click', () => {
+    const isOpen = mobileNav?.dataset.open === 'true'
+    setMenuState(!isOpen)
+  })
+
+  navClose?.addEventListener('click', () => setMenuState(false))
+
+  mobileLinks?.forEach((link) =>
+    link.addEventListener('click', () => {
+      setMenuState(false)
+    })
+  )
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && mobileNav?.dataset.open === 'true') {
+      setMenuState(false)
     }
-
-    .nav-link {
-      font-size: 0.8rem;
-      padding: 0.5rem 0.75rem;
-    }
-  }
-
-  /* Large desktop styles */
-  @media (min-width: 1400px) {
-    .navbar-container {
-      padding: 1.25rem 3rem;
-    }
-
-    .nav-links {
-      gap: 2.5rem;
-    }
-
-    .nav-link {
-      font-size: 1rem;
-    }
-  }
-
-  /* Prevent body scroll when mobile menu is open */
-  :root:has(.menu-toggle:checked) {
-    overflow: hidden;
-  }
-
-  /* Smooth scroll behavior */
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
-  }
-</style>
-
-<script>
-  // Enhance mobile menu with proper ARIA states and keyboard support
-  const menuToggle = document.getElementById('menu-toggle') as HTMLInputElement;
-  const navLinks = document.querySelector('.nav-links') as HTMLElement;
-
-  if (menuToggle && navLinks) {
-    // Update ARIA states when menu toggles
-    menuToggle.addEventListener('change', () => {
-      const isOpen = menuToggle.checked;
-      menuToggle.setAttribute('aria-expanded', isOpen.toString());
-      navLinks.setAttribute('aria-hidden', (!isOpen).toString());
-
-      // Focus trap: focus first nav link when menu opens
-      if (isOpen) {
-        const firstLink = navLinks.querySelector('.nav-link') as HTMLElement;
-        if (firstLink) {
-          setTimeout(() => firstLink.focus(), 350); // After animation
-        }
-      }
-    });
-
-    // Close menu on Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && menuToggle.checked) {
-        menuToggle.checked = false;
-        menuToggle.setAttribute('aria-expanded', 'false');
-        navLinks.setAttribute('aria-hidden', 'true');
-        menuToggle.focus(); // Return focus to toggle
-      }
-    });
-
-    // Close menu when navigating to a new page
-    navLinks.querySelectorAll('.nav-link').forEach((link) => {
-      link.addEventListener('click', () => {
-        menuToggle.checked = false;
-        menuToggle.setAttribute('aria-expanded', 'false');
-        navLinks.setAttribute('aria-hidden', 'true');
-      });
-    });
-  }
+  })
 </script>

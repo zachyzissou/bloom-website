@@ -110,9 +110,22 @@ test.describe('Visual Review - Interactive Elements', () => {
   test('Navigation menu works', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
     await page.goto('http://localhost:3000/', { waitUntil: 'networkidle' });
+    await page.waitForTimeout(500);
+
+    // Dismiss audio consent modal if it appears on load
+    const audioModal = page.locator('#audio-consent-modal');
+    if (await audioModal.isVisible()) {
+      const denyButton = page.locator('#audio-consent-deny');
+      if (await denyButton.isVisible()) {
+        await denyButton.click();
+      } else {
+        await page.keyboard.press('Escape');
+      }
+      await page.waitForTimeout(300);
+    }
 
     // Find and click mobile menu toggle
-    const menuToggle = page.locator('[aria-label*="menu"], [aria-label*="Menu"], button:has-text("Menu")').first();
+    const menuToggle = page.locator('#nav-toggle');
     if (await menuToggle.isVisible()) {
       await menuToggle.click();
       await page.waitForTimeout(500);
@@ -120,6 +133,10 @@ test.describe('Visual Review - Interactive Elements', () => {
         path: 'tests/screenshots/mobile_menu_open.png',
         fullPage: true,
       });
+
+       // Close the menu to verify toggle behavior
+       await page.locator('#nav-close').click();
+       await page.waitForTimeout(200);
     }
   });
 
@@ -128,6 +145,19 @@ test.describe('Visual Review - Interactive Elements', () => {
       waitUntil: 'networkidle',
     });
     await page.waitForTimeout(1000);
+
+    // Dismiss audio consent modal if it is blocking interactions
+    const audioModal = page.locator('#audio-consent-modal');
+    if (await audioModal.isVisible()) {
+      const denyButton = page.locator('#audio-consent-deny');
+      if (await denyButton.isVisible()) {
+        await denyButton.click();
+      } else {
+        // Fallback: close with Escape if button is not found for any reason
+        await page.keyboard.press('Escape');
+      }
+      await page.waitForTimeout(300);
+    }
 
     // Hover over first faction card
     const firstCard = page.locator('.faction-card, [class*="faction"]').first();
