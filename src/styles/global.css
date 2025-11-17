@@ -40,6 +40,17 @@
     font-family: var(--font-heading);
   }
 
+  /* Font loading optimization - prevent FOIT */
+  @font-face {
+    font-family: 'Inter';
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Orbitron';
+    font-display: swap;
+  }
+
   /* Links */
   a {
     @apply transition-colors;

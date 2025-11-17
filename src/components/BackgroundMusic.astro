@@ -9,24 +9,38 @@
     class="bg-[#0a0f0a]/90 backdrop-blur-sm border border-primary-green/30 rounded-full p-3 hover:bg-[#0a0f0a] hover:border-primary-green transition-all duration-300 group"
     aria-label="Toggle background music"
   >
-    <svg id="music-icon-playing" class="w-6 h-6 text-primary-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M9 18V5l12-2v13" />
-      <circle cx="6" cy="18" r="3" />
-      <circle cx="18" cy="16" r="3" />
+    <svg
+      id="music-icon-playing"
+      class="w-6 h-6 text-primary-green"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+    >
+      <path d="M9 18V5l12-2v13"></path>
+      <circle cx="6" cy="18" r="3"></circle>
+      <circle cx="18" cy="16" r="3"></circle>
     </svg>
-    <svg id="music-icon-muted" class="w-6 h-6 text-gray-500 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M9 18V5l12-2v13" />
-      <circle cx="6" cy="18" r="3" />
-      <circle cx="18" cy="16" r="3" />
-      <line x1="1" y1="1" x2="23" y2="23" />
+    <svg
+      id="music-icon-muted"
+      class="w-6 h-6 text-gray-500 hidden"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+    >
+      <path d="M9 18V5l12-2v13"></path>
+      <circle cx="6" cy="18" r="3"></circle>
+      <circle cx="18" cy="16" r="3"></circle>
+      <line x1="1" y1="1" x2="23" y2="23"></line>
     </svg>
   </button>
 </div>
 
-<!-- eslint-disable-next-line jsx-a11y/media-has-caption -->
+<!-- eslint-disable jsx-a11y/media-has-caption -->
+<!-- Background music does not require captions as it contains no spoken content -->
 <audio id="background-music" loop preload="auto" transition:persist="background-audio">
-  <source src="/audio/main-menu-theme.wav" type="audio/wav">
-  <!-- No caption track needed as this is background music without spoken content -->
+  <source src="/audio/main-menu-theme.wav" type="audio/wav" />
   Your browser does not support the audio element.
 </audio>
 
@@ -58,125 +72,125 @@
 <script>
   // Background Music Controller with View Transitions support and consent handling
   class BackgroundMusicController {
-    private audio: HTMLAudioElement | null
-    private toggleBtn: HTMLElement | null
-    private playingIcon: HTMLElement | null
-    private mutedIcon: HTMLElement | null
-    private isMuted: boolean
-    private resumePosition: number
-    private consentKey = 'audioConsentGiven'
-    private toggleHandler: (() => void) | null = null
-    private visibilityHandler: (() => void) | null = null
-    private consentHandler: (() => void) | null = null
+    private audio: HTMLAudioElement | null;
+    private toggleBtn: HTMLElement | null;
+    private playingIcon: HTMLElement | null;
+    private mutedIcon: HTMLElement | null;
+    private isMuted: boolean;
+    private resumePosition: number;
+    private consentKey = 'audioConsentGiven';
+    private toggleHandler: (() => void) | null = null;
+    private visibilityHandler: (() => void) | null = null;
+    private consentHandler: (() => void) | null = null;
 
     constructor() {
-      this.audio = document.getElementById('background-music') as HTMLAudioElement
-      this.toggleBtn = document.getElementById('music-toggle')
-      this.playingIcon = document.getElementById('music-icon-playing')
-      this.mutedIcon = document.getElementById('music-icon-muted')
+      this.audio = document.getElementById('background-music') as HTMLAudioElement;
+      this.toggleBtn = document.getElementById('music-toggle');
+      this.playingIcon = document.getElementById('music-icon-playing');
+      this.mutedIcon = document.getElementById('music-icon-muted');
 
       // Get saved preference from localStorage
-      this.isMuted = localStorage.getItem('bgMusicMuted') === 'true'
+      this.isMuted = localStorage.getItem('bgMusicMuted') === 'true';
 
       // Last known playback position in seconds (for full page reloads / non-transition nav)
-      this.resumePosition = parseFloat(localStorage.getItem('bgMusicPosition') || '0') || 0
+      this.resumePosition = parseFloat(localStorage.getItem('bgMusicPosition') || '0') || 0;
 
-      this.init()
+      this.init();
     }
 
     init() {
-      if (!this.audio || !this.toggleBtn) return
+      if (!this.audio || !this.toggleBtn) return;
 
       // Set initial state
-      this.audio.volume = 0.3 // 30% volume
+      this.audio.volume = 0.3; // 30% volume
 
       // If we have a saved position, seek to it once metadata is available
       if (this.resumePosition > 0) {
         if (this.audio.readyState >= 1) {
-          this.audio.currentTime = this.resumePosition
+          this.audio.currentTime = this.resumePosition;
         } else {
           this.audio.addEventListener(
             'loadedmetadata',
             () => {
-              this.audio && (this.audio.currentTime = this.resumePosition)
+              this.audio && (this.audio.currentTime = this.resumePosition);
             },
-            { once: true },
-          )
+            { once: true }
+          );
         }
       }
-      this.updateUI()
+      this.updateUI();
 
       // Set up event handlers (stored to allow removal)
-      this.consentHandler = () => this.handleConsentGranted()
-      this.toggleHandler = () => this.toggle()
+      this.consentHandler = () => this.handleConsentGranted();
+      this.toggleHandler = () => this.toggle();
       this.visibilityHandler = () => {
-        if (!this.audio) return
-        
+        if (!this.audio) return;
+
         if (document.hidden) {
           // Persist current position when tab is hidden
-          localStorage.setItem('bgMusicPosition', this.audio.currentTime.toString())
+          localStorage.setItem('bgMusicPosition', this.audio.currentTime.toString());
         } else if (!this.isMuted && this.audio.paused) {
           // Resume if returning to tab and audio was supposed to be playing
           this.audio.play().catch(() => {
             // Autoplay prevented, user needs to interact
-          })
+          });
         }
-      }
+      };
 
       // Add event listeners (only once per controller instance)
-      window.addEventListener('audioConsentGranted', this.consentHandler)
-      this.toggleBtn.addEventListener('click', this.toggleHandler)
-      document.addEventListener('visibilitychange', this.visibilityHandler)
+      window.addEventListener('audioConsentGranted', this.consentHandler);
+      this.toggleBtn.addEventListener('click', this.toggleHandler);
+      document.addEventListener('visibilitychange', this.visibilityHandler);
 
       // Save playback position before navigating away (for full page reloads)
       window.addEventListener('beforeunload', () => {
         if (this.audio) {
-          localStorage.setItem('bgMusicPosition', this.audio.currentTime.toString())
+          localStorage.setItem('bgMusicPosition', this.audio.currentTime.toString());
         }
-      })
+      });
 
       // Check if consent was already given and audio should auto-play
-      const consent = localStorage.getItem(this.consentKey)
+      const consent = localStorage.getItem(this.consentKey);
       if (consent === 'true' && !this.isMuted) {
-        this.tryAutoplay()
+        this.tryAutoplay();
       }
     }
 
     updateDOMReferences(audio: HTMLAudioElement, toggleBtn: HTMLElement) {
       // Check if toggle button is a different DOM element (defensive check)
       // With transition:persist, this should rarely happen, but we handle it anyway
-      const isNewButton = this.toggleBtn !== toggleBtn
-      
+      const isNewButton = this.toggleBtn !== toggleBtn;
+
       if (isNewButton && this.toggleBtn && this.toggleHandler) {
         // Remove listener from old button
-        this.toggleBtn.removeEventListener('click', this.toggleHandler)
+        this.toggleBtn.removeEventListener('click', this.toggleHandler);
       }
 
       // Update DOM references
-      this.audio = audio
-      this.toggleBtn = toggleBtn
-      this.playingIcon = document.getElementById('music-icon-playing')
-      this.mutedIcon = document.getElementById('music-icon-muted')
+      this.audio = audio;
+      this.toggleBtn = toggleBtn;
+      this.playingIcon = document.getElementById('music-icon-playing');
+      this.mutedIcon = document.getElementById('music-icon-muted');
 
       if (isNewButton && this.toggleBtn && this.toggleHandler) {
         // Attach listener to new button
-        this.toggleBtn.addEventListener('click', this.toggleHandler)
+        this.toggleBtn.addEventListener('click', this.toggleHandler);
       }
 
       // Update UI to reflect current state
-      this.updateUI()
+      this.updateUI();
     }
 
     cleanup() {
       // Remove all event listeners to prevent memory leaks
       if (this.consentHandler) {
-        window.removeEventListener('audioConsentGranted', this.consentHandler)
+        window.removeEventListener('audioConsentGranted', this.consentHandler);
       }
       if (this.toggleHandler && this.toggleBtn) {
-        this.toggleBtn.removeEventListener('click', this.toggleHandler)
+        this.toggleBtn.removeEventListener('click', this.toggleHandler);
       }
       if (this.visibilityHandler) {
-        document.removeEventListener('visibilitychange', this.visibilityHandler)
+        document.removeEventListener('visibilitychange', this.visibilityHandler);
       }
     }
 
@@ -184,52 +198,55 @@
       // User granted consent via modal, start playing
       if (!this.isMuted && this.audio) {
         try {
-          await this.audio.play()
-          console.log('Audio playback started after consent')
+          await this.audio.play();
+          // eslint-disable-next-line no-console
+          console.log('Audio playback started after consent');
         } catch (error) {
-          console.log('Failed to start audio after consent:', error)
+          // eslint-disable-next-line no-console
+          console.log('Failed to start audio after consent:', error);
         }
       }
     }
 
     async tryAutoplay() {
       if (this.isMuted || !this.audio) {
-        return
+        return;
       }
 
       try {
-        await this.audio.play()
+        await this.audio.play();
       } catch (error) {
         // Autoplay prevented by browser policy
         // Music will start when user grants consent via modal or clicks the toggle
-        console.log('Autoplay prevented. Waiting for user consent.')
+        // eslint-disable-next-line no-console
+        console.log('Autoplay prevented. Waiting for user consent.');
       }
     }
 
     toggle() {
-      if (!this.audio) return
+      if (!this.audio) return;
 
-      this.isMuted = !this.isMuted
-      localStorage.setItem('bgMusicMuted', this.isMuted.toString())
+      this.isMuted = !this.isMuted;
+      localStorage.setItem('bgMusicMuted', this.isMuted.toString());
 
       if (this.isMuted) {
-        this.audio.pause()
+        this.audio.pause();
       } else {
         this.audio.play().catch(() => {
-          console.error('Failed to play audio')
-        })
+          console.error('Failed to play audio');
+        });
       }
 
-      this.updateUI()
+      this.updateUI();
     }
 
     updateUI() {
       if (this.isMuted) {
-        this.playingIcon?.classList.add('hidden')
-        this.mutedIcon?.classList.remove('hidden')
+        this.playingIcon?.classList.add('hidden');
+        this.mutedIcon?.classList.remove('hidden');
       } else {
-        this.playingIcon?.classList.remove('hidden')
-        this.mutedIcon?.classList.add('hidden')
+        this.playingIcon?.classList.remove('hidden');
+        this.mutedIcon?.classList.add('hidden');
       }
     }
   }
@@ -237,8 +254,8 @@
   // Global controller instance - stored on window to persist across View Transitions
   declare global {
     interface Window {
-      __backgroundMusicController?: BackgroundMusicController
-      __backgroundMusicInitialized?: boolean
+      __backgroundMusicController?: BackgroundMusicController;
+      __backgroundMusicInitialized?: boolean;
     }
   }
 
@@ -252,33 +269,52 @@
      * Creates controller on first call, updates DOM references on subsequent calls
      */
     const initController = () => {
-      const audio = document.getElementById('background-music') as HTMLAudioElement
-      const toggleBtn = document.getElementById('music-toggle')
-      
-      if (!audio || !toggleBtn) return
+      const audio = document.getElementById('background-music') as HTMLAudioElement;
+      const toggleBtn = document.getElementById('music-toggle');
+
+      if (!audio || !toggleBtn) return;
 
       if (!window.__backgroundMusicController) {
         // First time initialization - create controller
-        window.__backgroundMusicController = new BackgroundMusicController()
+        window.__backgroundMusicController = new BackgroundMusicController();
       } else {
         // Controller exists - just update DOM references in case they changed
         // With transition:persist this is mostly defensive, but doesn't hurt
-        window.__backgroundMusicController.updateDOMReferences(audio, toggleBtn)
+        window.__backgroundMusicController.updateDOMReferences(audio, toggleBtn);
       }
-    }
+    };
 
     // Run on initial page load
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initController)
+      document.addEventListener('DOMContentLoaded', initController);
     } else {
-      initController()
+      initController();
     }
 
     // Run after view transitions complete
     // Only attach the listener once to prevent duplicates across page navigations
     if (!window.__backgroundMusicInitialized) {
-      window.__backgroundMusicInitialized = true
-      document.addEventListener('astro:page-load', initController)
+      window.__backgroundMusicInitialized = true;
+
+      // Ensure audio continues playing during view transitions
+      document.addEventListener('astro:before-swap', () => {
+        const audio = document.getElementById('background-music') as HTMLAudioElement;
+        const isMuted = localStorage.getItem('bgMusicMuted') === 'true';
+        if (audio && !audio.paused && !isMuted) {
+          // Force audio to continue playing - prevent any pause during transition
+          audio.play().catch(() => {});
+        }
+      });
+
+      document.addEventListener('astro:page-load', () => {
+        initController();
+        // Immediately resume audio if it should be playing
+        const audio = document.getElementById('background-music') as HTMLAudioElement;
+        const isMuted = localStorage.getItem('bgMusicMuted') === 'true';
+        if (audio && !isMuted && audio.paused) {
+          audio.play().catch(() => {});
+        }
+      });
     }
   }
 </script>
