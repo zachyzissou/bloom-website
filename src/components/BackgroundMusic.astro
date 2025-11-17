@@ -63,6 +63,7 @@
     private playingIcon: HTMLElement | null
     private mutedIcon: HTMLElement | null
     private isMuted: boolean
+    private resumePosition: number
     private consentKey = 'audioConsentGiven'
     private toggleHandler: (() => void) | null = null
     private visibilityHandler: (() => void) | null = null
@@ -77,6 +78,9 @@
       // Get saved preference from localStorage
       this.isMuted = localStorage.getItem('bgMusicMuted') === 'true'
 
+      // Last known playback position in seconds (for full page reloads / non-transition nav)
+      this.resumePosition = parseFloat(localStorage.getItem('bgMusicPosition') || '0') || 0
+
       this.init()
     }
 
@@ -85,6 +89,21 @@
 
       // Set initial state
       this.audio.volume = 0.3 // 30% volume
+
+      // If we have a saved position, seek to it once metadata is available
+      if (this.resumePosition > 0) {
+        if (this.audio.readyState >= 1) {
+          this.audio.currentTime = this.resumePosition
+        } else {
+          this.audio.addEventListener(
+            'loadedmetadata',
+            () => {
+              this.audio && (this.audio.currentTime = this.resumePosition)
+            },
+            { once: true },
+          )
+        }
+      }
       this.updateUI()
 
       // Set up event handlers (stored to allow removal)
@@ -94,8 +113,8 @@
         if (!this.audio) return
         
         if (document.hidden) {
-          // Don't pause - let audio continue in background
-          // Modern browsers handle this automatically
+          // Persist current position when tab is hidden
+          localStorage.setItem('bgMusicPosition', this.audio.currentTime.toString())
         } else if (!this.isMuted && this.audio.paused) {
           // Resume if returning to tab and audio was supposed to be playing
           this.audio.play().catch(() => {
@@ -108,6 +127,13 @@
       window.addEventListener('audioConsentGranted', this.consentHandler)
       this.toggleBtn.addEventListener('click', this.toggleHandler)
       document.addEventListener('visibilitychange', this.visibilityHandler)
+
+      // Save playback position before navigating away (for full page reloads)
+      window.addEventListener('beforeunload', () => {
+        if (this.audio) {
+          localStorage.setItem('bgMusicPosition', this.audio.currentTime.toString())
+        }
+      })
 
       // Check if consent was already given and audio should auto-play
       const consent = localStorage.getItem(this.consentKey)

@@ -92,8 +92,8 @@ export default defineConfig({
       // Custom entries
       customPages: [
         'https://bloom-game.com/',
-        'https://bloom-game.com/factions/',
-        'https://bloom-game.com/about/',
+        'https://bloom-game.com/gameplay/',
+        'https://bloom-game.com/early-access/',
       ],
 
       // Filter pages
@@ -133,6 +133,9 @@ export default defineConfig({
     port: 4321,
     host: true,
   },
+
+  // Enable View Transitions for smoother, SPA-like navigation and persistent UI elements
+  viewTransitions: true,
 
   // Prefetch configuration for faster navigation
   prefetch: {

@@ -137,7 +137,7 @@ const { title, description, image, type = 'website', noindex = false } = Astro.p
     <!-- Audio Consent Modal -->
     <AudioConsentModal />
 
-    <!-- Background Music Component -->
-    <BackgroundMusic />
+    <!-- Background Music Component (persistent across page transitions) -->
+    <BackgroundMusic transition:persist="bg-music" />
   </body>
 </html>

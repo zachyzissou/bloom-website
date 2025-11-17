@@ -1,81 +1,145 @@
 ---
 interface CurrentSprint {
-  name: string
-  week: string
-  status: string
-  progress?: number
-  goal?: string
-  highlights?: string[]
+  name: string;
+  week: string;
+  status: string;
+  progress?: number;
+  goal?: string;
+  highlights?: string[];
 }
 
 interface Props {
-  currentSprint: CurrentSprint
-  variant?: 'strip' | 'card'
-  linkHref?: string
-  linkLabel?: string
+  currentSprint: CurrentSprint;
+  variant?: 'strip' | 'card';
+  linkHref?: string;
+  linkLabel?: string;
 }
 
-const { currentSprint, variant = 'strip', linkHref = '/roadmap', linkLabel = 'View the development roadmap' } = Astro.props
+const {
+  currentSprint,
+  variant = 'strip',
+  linkHref = '/roadmap',
+  linkLabel = 'View the development roadmap',
+} = Astro.props;
 ---
 
-{variant === 'strip' && (
-  <section class="milestone-strip" aria-label="Current development milestone">
-    <div class="container">
-      <div class="milestone-inner">
-        <div class="milestone-header">
+<style>
+  .milestone-strip {
+    padding: 0.75rem 0;
+    background:
+      radial-gradient(circle at 0% 0%, rgba(0, 255, 136, 0.15), transparent 55%),
+      radial-gradient(circle at 100% 100%, rgba(255, 0, 85, 0.12), transparent 55%);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .milestone-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .milestone-pill {
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    background: rgba(0, 255, 136, 0.18);
+    border: 1px solid rgba(0, 255, 136, 0.5);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-family: var(--font-heading);
+    color: var(--color-primary);
+  }
+
+  .milestone-name {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .milestone-week {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .milestone-status {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .milestone-link {
+    margin-left: auto;
+    font-size: 0.85rem;
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .milestone-link:hover {
+    color: var(--color-secondary);
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    .milestone-inline {
+      gap: 0.35rem 0.75rem;
+    }
+
+    .milestone-link {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+</style>
+
+{
+  variant === 'strip' && (
+    <section class="milestone-strip" aria-label="Current development milestone">
+      <div class="container">
+        <div class="milestone-inline">
           <span class="milestone-pill">Current Milestone</span>
-          <h2 class="milestone-name">{currentSprint.name}</h2>
+          <span class="milestone-name">{currentSprint.name}</span>
           <span class="milestone-week">Week {currentSprint.week}</span>
+          <span class="milestone-status">{currentSprint.status}</span>
+          {linkHref && linkLabel && (
+            <a class="milestone-link" href={linkHref}>
+              {linkLabel} →
+            </a>
+          )}
         </div>
-        <p class="milestone-status">{currentSprint.status}</p>
-        {currentSprint.goal && (
-          <p class="milestone-goal">
-            <strong>Goal:</strong> {currentSprint.goal}
-          </p>
-        )}
-        {Array.isArray(currentSprint.highlights) && currentSprint.highlights.length > 0 && (
-          <ul class="milestone-highlights">
-            {currentSprint.highlights.slice(0, 3).map((item) => (
-              <li>{item}</li>
-            ))}
-          </ul>
-        )}
-        {linkHref && linkLabel && (
-          <p class="milestone-link">
-            Want the full picture? <a href={linkHref}>{linkLabel}</a>.
-          </p>
-        )}
       </div>
-    </div>
-  </section>
-)}
+    </section>
+  )
+}
 
-{variant === 'card' && (
-  <div class="sprint-status-card" aria-label="Current sprint status">
-    <div class="sprint-header">
-      <h3>Current Sprint: {currentSprint.name}</h3>
-      <span class="sprint-week">Week {currentSprint.week}</span>
-    </div>
-    {typeof currentSprint.progress === 'number' && (
-      <div class="progress-bar">
-        <div class="progress-fill" style={`width: ${currentSprint.progress}%`}></div>
-        <span class="progress-label">{currentSprint.progress}% Complete</span>
+{
+  variant === 'card' && (
+    <div class="sprint-status-card" aria-label="Current sprint status">
+      <div class="sprint-header">
+        <h3>Current Sprint: {currentSprint.name}</h3>
+        <span class="sprint-week">Week {currentSprint.week}</span>
       </div>
-    )}
-    <p class="sprint-status">{currentSprint.status}</p>
-    {currentSprint.goal && (
-      <p class="sprint-goal">
-        <strong>Goal:</strong> {currentSprint.goal}
-      </p>
-    )}
-    {Array.isArray(currentSprint.highlights) && currentSprint.highlights.length > 0 && (
-      <ul class="sprint-highlights">
-        {currentSprint.highlights.map((item) => (
-          <li>{item}</li>
-        ))}
-      </ul>
-    )}
-  </div>
-)
-
-
+      {typeof currentSprint.progress === 'number' && (
+        <div class="progress-bar">
+          <div class="progress-fill" style={`width: ${currentSprint.progress}%`} />
+          <span class="progress-label">{currentSprint.progress}% Complete</span>
+        </div>
+      )}
+      <p class="sprint-status">{currentSprint.status}</p>
+      {currentSprint.goal && (
+        <p class="sprint-goal">
+          <strong>Goal:</strong> {currentSprint.goal}
+        </p>
+      )}
+      {Array.isArray(currentSprint.highlights) && currentSprint.highlights.length > 0 && (
+        <ul class="sprint-highlights">
+          {currentSprint.highlights.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )
+}
