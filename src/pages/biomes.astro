@@ -30,20 +30,21 @@ const getThreatColor = (level: string) => {
 };
 ---
 
+<!-- Canon: World/IEZ framing. Keep aligned with BLOOM_GAME_BIBLE.md (Dead Sky radius, hardness rings, faction logistics). -->
 <BaseLayout
   title="Biomes - Bloom Game World"
-  description="Explore the diverse and dangerous biomes of Bloom. From frozen peaks to toxic wetlands, each region offers unique challenges, resources, and faction encounters."
+  description="Explore the biomes of the Inner Exclusion Zone. From frozen peaks to toxic wetlands, each region of the Dead Sky offers unique hazards, salvage, and faction routes."
   type="game"
 >
   <!-- Hero Section -->
   <section class="biomes-hero">
     <div class="hero-content">
       <h1>Explore the Wasteland</h1>
-      <p class="tagline">Twelve distinct biomes, each with unique threats and opportunities</p>
+      <p class="tagline">Twelve distinct biomes inside the Dead Sky, each with unique threats and opportunities</p>
       <p class="description">
-        Navigate a world transformed by cataclysm. From the arctic tundra of the far north
-        to the toxic wetlands of the southeast, each biome presents unique environmental
-        hazards, valuable resources, and competing factions vying for control.
+        Navigate a world transformed by the Cascade. From the arctic tundra at the IEZ rim
+        to the toxic wetlands near Harvester scars, each biome layers environmental hazards
+        on top of scarce resources and competing factions vying for control.
       </p>
     </div>
   </section>
@@ -72,7 +73,7 @@ const getThreatColor = (level: string) => {
   <!-- EA Launch Biomes -->
   <section class="biomes-section">
     <div class="container">
-      <h2 class="section-title">Early Access Launch (6 Biomes)</h2>
+      <h2 class="section-title">Early Access Launch (3 Biomes)</h2>
       <div class="biomes-grid">
         {eaLaunchBiomes.map((biome) => (
           <article class="biome-card" data-threat={biome.threatLevel.toLowerCase()}>
@@ -387,13 +388,6 @@ const getThreatColor = (level: string) => {
     font-weight: 700;
     font-size: 0.875rem;
     color: #000;
-  }
-
-  /* Container */
-  .container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
   }
 
   /* Sections */

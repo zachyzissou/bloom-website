@@ -18,16 +18,8 @@
         "accent": "#FFFFFF"
       },
       "playstyle": "Assault and hold tactics with heavy weapons and armor",
-      "strengths": [
-        "Heavy weapons",
-        "Superior armor",
-        "Artillery support",
-        "Command network"
-      ],
-      "weaknesses": [
-        "Slow mobility",
-        "High resource consumption"
-      ],
+      "strengths": ["Heavy weapons", "Superior armor", "Artillery support", "Command network"],
+      "weaknesses": ["Slow mobility", "High resource consumption"],
       "uniqueAbilities": [
         {
           "name": "Artillery Support",
@@ -65,16 +57,8 @@
         "accent": "#F0C27B"
       },
       "playstyle": "Hit-and-run tactics with stolen and modified equipment",
-      "strengths": [
-        "Loot detection",
-        "Equipment theft",
-        "Adaptive engineering",
-        "Crafting"
-      ],
-      "weaknesses": [
-        "Light armor",
-        "Disorganized tactics"
-      ],
+      "strengths": ["Loot detection", "Equipment theft", "Adaptive engineering", "Crafting"],
+      "weaknesses": ["Light armor", "Disorganized tactics"],
       "uniqueAbilities": [
         {
           "name": "Scavenger",
@@ -95,51 +79,48 @@
       "lastSynced": "2025-11-02T21:45:02.187Z"
     },
     {
-      "id": "FCT_AEG",
-      "name": "Aegis Collective",
-      "shortName": "Aegis",
-      "role": "medic",
-      "coopAbility": "Faster revives, healing stations",
-      "homeBiome": "CentralGrasslands",
+      "id": "FCT_CWD",
+      "name": "Truce Wardens",
+      "shortName": "Wardens",
+      "role": "defender",
+      "coopAbility": "+10% team health, protection zones",
+      "homeBiome": "ForestHills",
       "launchStatus": "ea-launch",
       "launchWindow": "EA Launch",
-      "philosophy": "Community through aid",
-      "specialty": "Healing, support role",
-      "lore": "Community protectors and emergency responders who emerged from civilian emergency services. They focus on defensive operations, civilian protection, and disaster response.",
+      "philosophy": "Defend humanity",
+      "specialty": "Defensive responder, stability",
+      "lore": "Defensive responders who prioritize stability, suppression, and protection of lanes and zones around Gates and civilian hubs. They maintain humanitarian routes and protect the Monolith perimeter.",
       "colors": {
-        "primary": "#0080FF",
-        "secondary": "#FFFFFF",
-        "accent": "#FF4500"
+        "primary": "#2E7D32",
+        "secondary": "#66BB6A",
+        "accent": "#FFFFFF"
       },
-      "playstyle": "Defensive support with healing and fortification focus",
+      "playstyle": "Defensive tactics with protection zones and suppression",
       "strengths": [
-        "Medical expertise",
         "Defensive fortifications",
-        "Team support",
-        "Safe zones"
+        "Gate protection",
+        "Stability and suppression",
+        "Humanitarian routes"
       ],
-      "weaknesses": [
-        "Limited offensive capability",
-        "Dependent on team"
-      ],
+      "weaknesses": ["Limited mobility", "Reactive playstyle"],
       "uniqueAbilities": [
         {
-          "name": "Medical Drone",
-          "description": "Automated healing support for team",
+          "name": "Protection Zone",
+          "description": "+10% health and stamina regen near Gates and Metro nodes",
+          "cooldown": "passive"
+        },
+        {
+          "name": "Suppression Fire",
+          "description": "Area suppression to control lanes",
           "cooldown": "medium"
         },
         {
-          "name": "Deployable Shields",
-          "description": "Energy barriers for cover",
-          "cooldown": "short"
-        },
-        {
-          "name": "Overwatch",
-          "description": "Enhanced threat detection for squad",
+          "name": "Warden's Watch",
+          "description": "Enhanced threat detection around civilian zones",
           "cooldown": "passive"
         }
       ],
-      "lastSynced": "2025-11-02T21:45:02.187Z"
+      "lastSynced": "2025-11-15T00:00:00.000Z"
     },
     {
       "id": "FCT_F77",
@@ -159,16 +140,8 @@
         "accent": "#2F2F2F"
       },
       "playstyle": "Professional combat with versatile equipment options",
-      "strengths": [
-        "Versatility",
-        "Professional equipment",
-        "XP boost",
-        "Adaptability"
-      ],
-      "weaknesses": [
-        "No specialized bonuses",
-        "Higher equipment costs"
-      ],
+      "strengths": ["Versatility", "Professional equipment", "XP boost", "Adaptability"],
+      "weaknesses": ["No specialized bonuses", "Higher equipment costs"],
       "uniqueAbilities": [
         {
           "name": "Cross-Training",
@@ -206,16 +179,8 @@
         "accent": "#C0F3FF"
       },
       "playstyle": "Technology warfare with automated defenses",
-      "strengths": [
-        "Hacking",
-        "Automated defenses",
-        "Tech manipulation",
-        "Intelligence"
-      ],
-      "weaknesses": [
-        "Direct combat",
-        "Equipment dependent"
-      ],
+      "strengths": ["Hacking", "Automated defenses", "Tech manipulation", "Intelligence"],
+      "weaknesses": ["Direct combat", "Equipment dependent"],
       "uniqueAbilities": [
         {
           "name": "System Hack",
@@ -253,16 +218,8 @@
         "accent": "#FFD700"
       },
       "playstyle": "Hit-and-run with superior mobility and intelligence",
-      "strengths": [
-        "Speed",
-        "Reconnaissance",
-        "Route knowledge",
-        "Mobility buffs"
-      ],
-      "weaknesses": [
-        "Light armor",
-        "Limited firepower"
-      ],
+      "strengths": ["Speed", "Reconnaissance", "Route knowledge", "Mobility buffs"],
+      "weaknesses": ["Light armor", "Limited firepower"],
       "uniqueAbilities": [
         {
           "name": "Scout's Eye",
@@ -306,10 +263,7 @@
         "Hidden loot detection",
         "Hacking"
       ],
-      "weaknesses": [
-        "Direct combat",
-        "Low health pool"
-      ],
+      "weaknesses": ["Direct combat", "Low health pool"],
       "uniqueAbilities": [
         {
           "name": "Cloaking Field",
@@ -347,16 +301,8 @@
         "accent": "#87CEEB"
       },
       "playstyle": "Defensive specialists against AI enemies",
-      "strengths": [
-        "Anti-Forged weapons",
-        "Heavy armor",
-        "Defensive positions",
-        "Area denial"
-      ],
-      "weaknesses": [
-        "Mobility",
-        "PvP combat"
-      ],
+      "strengths": ["Anti-Forged weapons", "Heavy armor", "Defensive positions", "Area denial"],
+      "weaknesses": ["Mobility", "PvP combat"],
       "uniqueAbilities": [
         {
           "name": "Forged Hunter",
@@ -394,16 +340,8 @@
         "accent": "#F4A460"
       },
       "playstyle": "Support role with food and supply bonuses",
-      "strengths": [
-        "Resource management",
-        "Convoy protection",
-        "Team buffs",
-        "Sustainability"
-      ],
-      "weaknesses": [
-        "Combat power",
-        "Equipment quality"
-      ],
+      "strengths": ["Resource management", "Convoy protection", "Team buffs", "Sustainability"],
+      "weaknesses": ["Combat power", "Equipment quality"],
       "uniqueAbilities": [
         {
           "name": "Field Rations",
@@ -441,16 +379,8 @@
         "accent": "#000000"
       },
       "playstyle": "High-risk, high-reward hunting gameplay",
-      "strengths": [
-        "Rare loot bonus",
-        "Tracking",
-        "Single-target damage",
-        "Trophy system"
-      ],
-      "weaknesses": [
-        "Team support",
-        "Group combat"
-      ],
+      "strengths": ["Rare loot bonus", "Tracking", "Single-target damage", "Trophy system"],
+      "weaknesses": ["Team support", "Group combat"],
       "uniqueAbilities": [
         {
           "name": "Trophy Hunter",

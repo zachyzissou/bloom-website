@@ -54,6 +54,11 @@ tmp/
 temp/
 *.tmp
 
+# Playwright / test artifacts
+playwright-report/
+test-results/
+tests/screenshots/
+
 # OS
 Thumbs.db
 .DS_Store

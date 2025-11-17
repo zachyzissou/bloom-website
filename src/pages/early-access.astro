@@ -9,11 +9,13 @@ import FactionCard from '@/components/FactionCard.astro'
 import factionsData from '@/data/factions.json'
 import biomesData from '@/data/biomes.json'
 
+// Canon: EA Launch factions (4 factions available at Early Access). Keep in sync with ROADMAP.md (M3) and factions.json.
 // Get EA Launch factions (4 factions available at Early Access)
 const eaLaunchFactions = factionsData.factions
   .filter(faction => faction.launchStatus === 'ea-launch')
 
-// Get EA Launch biomes (6 biomes)
+// Canon: EA Launch biomes (3 biomes at EA scope). Keep in sync with ROADMAP.md (M3) and biomes.json.
+// Get EA Launch biomes (3 biomes)
 const eaLaunchBiomes = biomesData.biomes
   .filter(biome => biome.launchStatus === 'ea-launch')
 
@@ -37,7 +39,7 @@ const faqs = [
   },
   {
     question: 'How much will it cost?',
-    answer: 'Early Access pricing will be announced closer to launch. Early Access players will receive a discount compared to the full release price.'
+    answer: 'Early Access pricing is $24.99 USD. The full release (1.0) will be priced at $39.99 USD. Early Access purchasers will receive the full game at no additional cost, plus exclusive cosmetic rewards for supporting development early.'
   },
   {
     question: 'Will my progress carry over to full release?',
@@ -60,7 +62,7 @@ const faqs = [
 
 <BaseLayout
   title="Early Access Launch - Bloom Extraction FPS | Q1 2026"
-  description="Join Bloom's Early Access in Q1 2026. 4 factions, 6 biomes, extraction gameplay. Wishlist now and be among the first to enter the wasteland!"
+  description="Join Bloom's Early Access in Q1 2026. 4 factions, 3 biomes, and 8–10 player co-op extraction runs in the Inner Exclusion Zone. Wishlist now and be among the first salvage crews on the frontier."
   type="game"
 >
   <!-- Hero Section with Countdown/Urgency -->
@@ -75,9 +77,9 @@ const faqs = [
       <p class="hero-tagline">Be Among the First to Enter the Wasteland</p>
 
       <p class="hero-description">
-        Experience the brutal extraction shooter where every raid counts.
-        Shape the game with your feedback, unlock exclusive rewards, and
-        dominate the wasteland before everyone else.
+        Bloom is a grounded extraction shooter about desperate salvage runs on a dying Earth.
+        Squad up with 8–10 players, haul warped tech out of the Inner Exclusion Zone, and
+        use Early Access to help stabilize the systems that will carry the game through 1.0.
       </p>
 
       <div class="cta-buttons">
@@ -125,8 +127,9 @@ const faqs = [
     <div class="container">
       <h2 class="section-title">What's Included in Early Access</h2>
       <p class="section-description">
-        Launch with essential content and core gameplay systems.
-        Everything you need for the full extraction shooter experience.
+        Early Access focuses on one thing: making the core extraction loop feel incredible.
+        You get the essential factions, biomes, and systems we need to tune balance, performance,
+        and the long-term salvage economy.
       </p>
 
       <div class="content-grid">
@@ -156,7 +159,7 @@ const faqs = [
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h3>6 Diverse Biomes</h3>
+            <h3>3 Diverse Biomes</h3>
           </div>
           <ul class="feature-list">
             {eaLaunchBiomes.map(biome => (
@@ -181,7 +184,7 @@ const faqs = [
             <li>8-10 Player Co-op</li>
             <li>Extraction Shooter Mechanics</li>
             <li>Faction Co-op Abilities</li>
-            <li>Full Progression System</li>
+            <li>Foundational Progression Systems</li>
           </ul>
         </div>
 
@@ -236,12 +239,12 @@ const faqs = [
           <p>Loot detection and equipment theft specialists</p>
         </div>
         <div class="detail-card">
-          <h4>Medic</h4>
-          <p>Healing and defensive support for team survival</p>
+          <h4>Defender</h4>
+          <p>Protection zones, shields, and squad sustain under heavy fire</p>
         </div>
         <div class="detail-card">
           <h4>All-Rounder</h4>
-          <p>Versatile combat with cross-faction equipment access</p>
+          <p>Versatile combat with flexible loadouts across multiple roles</p>
         </div>
       </div>
     </div>
@@ -263,8 +266,8 @@ const faqs = [
             <h3>EA Launch - Q1 2026</h3>
             <p class="timeline-date">Starting Point</p>
             <ul>
-              <li>4 Factions: Directorate, Vultures, Aegis, Seventy-Seven</li>
-              <li>6 Biomes: Snow Peaks, Mountains, Grasslands, Plateaus, Forest, Plains</li>
+              <li>4 Factions: Directorate, Vultures, Wardens, Seventy-Seven</li>
+              <li>3 Biomes: Snow Peaks, Forest Hills, Central Grasslands</li>
               <li>Core extraction shooter gameplay</li>
               <li>8-10 player co-op</li>
             </ul>
@@ -331,58 +334,52 @@ const faqs = [
     </div>
   </section>
 
-  <!-- Why Early Access -->
+  <!-- Why Early Access - EA vs 1.0 -->
   <section class="why-ea">
     <div class="container">
       <h2 class="section-title">Why Early Access?</h2>
       <p class="section-description">
-        Join us on the journey from Early Access to full release.
-        Your feedback shapes the future of Bloom.
+        Early Access lets us prove the core extraction loop, stabilize 8–10 player co-op, and build Bloom
+        with you before we lock in the full 1.0 feature set.
       </p>
 
-      <div class="benefits-grid">
-        <div class="benefit-card">
-          <div class="benefit-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
-            </svg>
-          </div>
-          <h3>Shape the Game</h3>
-          <p>Direct influence on development through feedback, bug reports, and feature suggestions. Your voice matters.</p>
+      <div class="why-grid">
+        <div class="why-column">
+          <h3>What You Get in EA</h3>
+          <ul class="why-list">
+            <li>4 launch factions with distinct roles and co-op abilities.</li>
+            <li>3 EA biomes tuned for learning the IEZ hardness rings (H1–H3).</li>
+            <li>Core extraction loop: deploy, salvage, extract, and upgrade your convoy.</li>
+            <li>60+ FPS performance target on RTX 2060 with 8–10 players.</li>
+            <li>Foundational progression, economy, and trust systems.</li>
+          </ul>
         </div>
 
-        <div class="benefit-card">
-          <div class="benefit-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-            </svg>
-          </div>
-          <h3>Exclusive EA Cosmetics</h3>
-          <p>Unique skins, badges, and items only available to Early Access supporters. Stand out as a founder.</p>
+        <div class="why-column">
+          <h3>Where We’re Going for 1.0</h3>
+          <ul class="why-list">
+            <li>All 10 factions and 12 biomes available by the Year 2 1.0 window.</li>
+            <li>Deeper systems like Memory, Collectors, Black Auction, and advanced POIs.</li>
+            <li>Seasonal arcs and events built on top of a stable core game.</li>
+            <li>Console versions and broader cross-play once performance is proven.</li>
+            <li>Long-term live ops with balance, new content, and world events.</li>
+          </ul>
         </div>
 
-        <div class="benefit-card">
-          <div class="benefit-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
-          <h3>Discounted Price</h3>
-          <p>Get Bloom at a lower price than full release. Support development and save money.</p>
-        </div>
-
-        <div class="benefit-card">
-          <div class="benefit-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-            </svg>
-          </div>
-          <h3>Join the Community</h3>
-          <p>Be part of the founding community. Connect with developers and players from day one.</p>
+        <div class="why-column">
+          <h3>How You Shape It</h3>
+          <ul class="why-list">
+            <li>Feedback on raid pacing, faction balance, and biome difficulty.</li>
+            <li>Reporting performance, stability, and network issues across setups.</li>
+            <li>Voting with your time and interest on which systems we deepen first.</li>
+            <li>Helping us tune grind vs. reward so Bloom stays tense, not tedious.</li>
+            <li>Locking in a lower EA price ($24.99, $39.99 at 1.0) as a founder.</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
+
 
   <!-- FAQ Section -->
   <section class="faq">
@@ -425,19 +422,12 @@ const faqs = [
       </div>
 
       <p class="release-info">
-        Early Access: Q1 2026 | 4 Factions | 6 Biomes | 8-10 Player Co-op
+        Early Access: Q1 2026 | 4 Factions | 3 Biomes | 8-10 Player Co-op
       </p>
     </div>
   </section>
 
   <style>
-    /* Container */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
     /* Hero Section */
     .hero {
       position: relative;
@@ -1088,6 +1078,72 @@ const faqs = [
         width: 100%;
       }
     }
+
+  /* Why Early Access */
+  .why-ea {
+    padding: 5rem 0 4rem;
+    background: radial-gradient(circle at 0% 0%, rgba(0, 255, 136, 0.12), transparent 55%),
+      radial-gradient(circle at 100% 100%, rgba(255, 0, 85, 0.12), transparent 55%);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+  }
+
+  .why-column {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 1.75rem 1.75rem 1.5rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.25s ease;
+  }
+
+  .why-column h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    color: rgba(255, 255, 255, 0.96);
+  }
+
+  .why-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0.25rem 0 0;
+  }
+
+  .why-list li {
+    position: relative;
+    padding-left: 1.25rem;
+    margin-bottom: 0.4rem;
+    font-size: 0.96rem;
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .why-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    top: 0.1rem;
+    color: var(--color-primary);
+    font-size: 0.85rem;
+  }
+
+  .why-column:hover {
+    border-color: rgba(0, 255, 136, 0.4);
+    box-shadow: 0 12px 30px rgba(0, 255, 136, 0.18);
+    transform: translateY(-4px);
+  }
+
+  @media (max-width: 1024px) {
+    .why-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 
     /* Performance optimizations */
     .hero-bg,

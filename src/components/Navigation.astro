@@ -11,25 +11,27 @@
  */
 
 // Get current pathname for active link highlighting
-const currentPath = Astro.url.pathname
+const currentPath = Astro.url.pathname;
 
-// Navigation links
+// Navigation links (high-level funnel)
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/features', label: 'Features' },
+  { href: '/gameplay', label: 'Gameplay' },
+  { href: '/early-access', label: 'Early Access' },
   { href: '/factions', label: 'Factions' },
   { href: '/biomes', label: 'Biomes' },
+  { href: '/roadmap', label: 'Roadmap' },
   { href: '/media', label: 'Media' },
-  { href: '/system-requirements', label: 'System Requirements' },
-]
+  { href: '/faq', label: 'FAQ' },
+];
 
 // Helper function to check if link is active
 const isActive = (href: string) => {
   if (href === '/') {
-    return currentPath === '/'
+    return currentPath === '/';
   }
-  return currentPath.startsWith(href)
-}
+  return currentPath.startsWith(href);
+};
 ---
 
 <nav class="navbar" role="navigation" aria-label="Main navigation">
@@ -41,7 +43,13 @@ const isActive = (href: string) => {
     </a>
 
     <!-- Mobile menu toggle (checkbox hack for CSS-only solution) -->
-    <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" />
+    <input
+      type="checkbox"
+      id="menu-toggle"
+      class="menu-toggle"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+    />
     <label for="menu-toggle" class="menu-icon" aria-label="Menu">
       <span class="menu-icon-bar"></span>
       <span class="menu-icon-bar"></span>
@@ -397,7 +405,7 @@ const isActive = (href: string) => {
     });
 
     // Close menu when navigating to a new page
-    navLinks.querySelectorAll('.nav-link').forEach(link => {
+    navLinks.querySelectorAll('.nav-link').forEach((link) => {
       link.addEventListener('click', () => {
         menuToggle.checked = false;
         menuToggle.setAttribute('aria-expanded', 'false');

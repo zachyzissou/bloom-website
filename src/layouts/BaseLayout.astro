@@ -22,7 +22,7 @@ export interface Props {
 const { title, description, image, type = 'website', noindex = false } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -32,13 +32,7 @@ const { title, description, image, type = 'website', noindex = false } = Astro.p
     <ViewTransitions />
 
     <!-- SEO Component -->
-    <SEO
-      title={title}
-      description={description}
-      image={image}
-      type={type}
-      noindex={noindex}
-    />
+    <SEO title={title} description={description} image={image} type={type} noindex={noindex} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -70,98 +64,58 @@ const { title, description, image, type = 'website', noindex = false } = Astro.p
     -->
 
     <!-- Option 2: Google Fonts CDN (uncomment to use) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Analytics Component -->
     <Analytics />
 
-    <!-- Critical CSS inlined by Astro -->
+    <!-- VideoGame Structured Data (JSON-LD) -->
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'VideoGame',
+        name: 'Bloom',
+        description,
+        url: 'https://bloom-game.com',
+        applicationCategory: 'Game',
+        operatingSystem: 'Windows',
+        genre: ['Shooter', 'Action', 'Co-op', 'Multiplayer'],
+        gamePlatform: ['PC (Steam)'],
+        playMode: 'CoOp',
+        numberOfPlayers: {
+          '@type': 'QuantitativeValue',
+          minValue: 1,
+          maxValue: 10,
+        },
+        creator: {
+          '@type': 'Organization',
+          name: 'Bloom Team',
+        },
+        offers: {
+          '@type': 'AggregateOffer',
+          lowPrice: '24.99',
+          highPrice: '39.99',
+          priceCurrency: 'USD',
+          availability: 'https://schema.org/PreOrder',
+          url: 'https://store.steampowered.com',
+        },
+      })}
+    />
+
+    <!-- Global Styles (Tailwind + Custom) -->
     <style is:global>
-      /* CSS Reset */
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-
-      /* Root Variables */
-      :root {
-        --font-heading: 'Orbitron', sans-serif;
-        --font-body: 'Inter', sans-serif;
-        --color-primary: #00ff88;
-        --color-secondary: #ff0055;
-        --color-bg: #000000;
-        --color-text: #ffffff;
-        --color-gray: #a0a0a0;
-      }
-
-      /* Base Styles */
-      html {
-        font-family: var(--font-body);
-        background-color: var(--color-bg);
-        color: var(--color-text);
-        line-height: 1.6;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-
-      body {
-        min-height: 100vh;
-        overflow-x: hidden;
-      }
+      @import '../styles/global.css';
 
       /* Main content padding for fixed navbar */
       main {
         padding-top: 5rem;
-      }
-
-      /* Typography */
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        font-family: var(--font-heading);
-        line-height: 1.2;
-        font-weight: 700;
-      }
-
-      /* Links */
-      a {
-        color: var(--color-primary);
-        text-decoration: none;
-        transition: color 0.2s ease;
-      }
-
-      a:hover {
-        color: var(--color-secondary);
-      }
-
-      /* Images */
-      img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-      }
-
-      /* Skip to content link for accessibility */
-      .skip-to-content {
-        position: absolute;
-        top: -100%;
-        left: 0;
-        background: var(--color-primary);
-        color: var(--color-bg);
-        padding: 0.5rem 1rem;
-        z-index: 9999;
-      }
-
-      .skip-to-content:focus {
-        top: 0;
       }
     </style>
   </head>

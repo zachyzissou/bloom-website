@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import robotsTxt from 'astro-robots-txt';
+import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
@@ -76,6 +77,12 @@ export default defineConfig({
 
   // Integrations
   integrations: [
+    // Tailwind CSS
+    tailwind({
+      // Apply Tailwind to all files
+      applyBaseStyles: false, // We'll handle base styles in global.css
+    }),
+
     // Generate sitemap
     sitemap({
       changefreq: 'weekly',

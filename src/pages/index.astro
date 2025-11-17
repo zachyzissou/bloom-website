@@ -3,32 +3,37 @@
  * Homepage - Bloom Marketing Website
  * Main landing page showcasing the post-apocalyptic extraction FPS
  */
-import BaseLayout from '@/layouts/BaseLayout.astro'
-import Button from '@/components/Button.astro'
-import FactionCard from '@/components/FactionCard.astro'
-import factionsData from '@/data/factions.json'
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Button from '@/components/Button.astro';
+import FactionCard from '@/components/FactionCard.astro';
+import MilestoneStrip from '@/components/MilestoneStrip.astro';
+import factionsData from '@/data/factions.json';
+import roadmapData from '@/data/roadmap.json';
 
 // Get EA Launch factions (4 factions available at Early Access)
 const eaLaunchFactions = factionsData.factions
-  .filter(faction => faction.launchStatus === 'ea-launch')
-  .slice(0, 4)
+  .filter((faction) => faction.launchStatus === 'ea-launch')
+  .slice(0, 4);
 
 // Prepare faction data for FactionCard component
-const featuredFactions = eaLaunchFactions.map(faction => ({
+const featuredFactions = eaLaunchFactions.map((faction) => ({
   name: faction.name,
   tagline: faction.philosophy,
   emblem: `/images/factions/${faction.id.toLowerCase()}-emblem.svg`,
   colors: {
     primary: faction.colors.primary,
-    secondary: faction.colors.secondary
+    secondary: faction.colors.secondary,
   },
-  href: `/factions#${faction.id}`
-}))
+  href: `/factions#${faction.id}`,
+}));
+
+const currentSprint = roadmapData.developmentPhases.currentSprint;
 ---
 
+<!-- Canon: High-level game pitch. Keep in sync with BLOOM_GAME_BIBLE.md themes (grounded military desperation, salvage economy, cosmic dread) and ROADMAP.md high-level scope. -->
 <BaseLayout
   title="Bloom - Survive the Harvest"
-  description="An 8-10 player PvE co-op extraction shooter where your faction role matters as much as your loadout. Deploy into a quarantined city-zone reshaped by Harvester phenomena, extract artifacts, and survive dynamic weather across a 32km world."
+  description="An 8–10 player PvE co-op extraction shooter where your faction role matters as much as your loadout. Deploy into the Inner Exclusion Zone (Dead Sky), extract Harvester-warped artifacts, and survive dynamic weather across a 32km world."
   type="game"
 >
   <!-- Hero Section -->
@@ -37,9 +42,9 @@ const featuredFactions = eaLaunchFactions.map(faction => ({
       <h1 class="hero-title">Bloom</h1>
       <p class="hero-tagline">Survive the Harvest</p>
       <p class="hero-description">
-        An 8-10 player PvE co-op extraction shooter where your faction role matters as much as your loadout.
-        Deploy into a quarantined city-zone reshaped by Harvester phenomena, extract artifacts, and survive
-        dynamic weather and faction warfare across a 32km world.
+        An 8-10 player PvE co-op extraction shooter where your faction role matters as much as your
+        loadout. Deploy into a quarantined city-zone reshaped by Harvester phenomena, extract
+        artifacts, and survive dynamic weather and faction warfare across a 32km world.
       </p>
       <div class="cta-buttons">
         <Button href="#early-access" variant="primary">Join Early Access</Button>
@@ -51,55 +56,158 @@ const featuredFactions = eaLaunchFactions.map(faction => ({
     <div class="hero-bg" aria-hidden="true"></div>
   </section>
 
+  <MilestoneStrip
+    currentSprint={currentSprint}
+    variant="strip"
+    linkHref="/roadmap"
+    linkLabel="View the development roadmap"
+  />
+
+  <!-- What is Bloom Section -->
+  <section class="pillars">
+    <div class="container">
+      <h2 class="section-title">What Is Bloom?</h2>
+      <p class="section-description">
+        Bloom is a grounded extraction shooter set inside the Inner Exclusion Zone (the Dead Sky) –
+        a collapsed slice of Earth where alien Harvesters, broken infrastructure, and desperate
+        factions collide.
+      </p>
+
+      <div class="pillars-grid">
+        <div class="pillar-card card-surface">
+          <h3>Grounded Military Desperation</h3>
+          <p>
+            You are not a superhero. Ammunition, fuel, medkits, and morale are your real resources.
+            Convoys live and die on logistics, not just headshots.
+          </p>
+        </div>
+        <div class="pillar-card card-surface">
+          <h3>Salvage Economy</h3>
+          <p>
+            Every raid is a salvage run. You tear Harvester-warped tech out of wrecks and ruins,
+            trade at Gates and auctions, and decide what your convoy can afford to risk next.
+          </p>
+        </div>
+        <div class="pillar-card card-surface">
+          <h3>Cosmic Dread, Human Scale</h3>
+          <p>
+            The real monsters are automated Harvester systems and the people they’ve broken. Phase
+            anomalies, Monolith echoes, and Quietus marks haunt the IEZ without turning it into pulp
+            sci-fi.
+          </p>
+        </div>
+        <div class="pillar-card card-surface">
+          <h3>Mutual Dependence</h3>
+          <p>
+            No faction survives the Dead Sky alone. Food, routes, medicine, and knowledge are split
+            across crews, forcing uneasy truces, co-op runs, and hard choices about who you leave
+            behind.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Game Overview Section -->
   <section class="overview">
     <div class="container">
       <h2 class="section-title">A World in Decay</h2>
       <p class="section-description">
-        In the aftermath of the Harvest, humanity has fractured into competing factions.
-        Each raid is a desperate gamble: extract valuable resources before time runs out,
-        or lose everything to rival factions and the ever-present threat of the Harvesters.
+        In the aftermath of the Harvest, humanity has fractured into competing factions. Each raid
+        is a desperate gamble: extract valuable resources before time runs out, or lose everything
+        to rival factions and the ever-present threat of the Harvesters.
       </p>
 
       <div class="feature-grid">
         <div class="feature-card">
           <div class="feature-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+              ></path>
             </svg>
           </div>
           <h3>10 Unique Factions</h3>
-          <p>Choose from diverse factions, each with unique abilities, playstyles, and squad bonuses. From military precision to stealth operations.</p>
+          <p>
+            Choose from diverse factions, each with unique abilities, playstyles, and squad bonuses.
+            From military precision to stealth operations.
+          </p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
             </svg>
           </div>
           <h3>Extraction Gameplay</h3>
-          <p>High-stakes raids where every decision matters. Extract your loot or risk losing it all. Death means losing your gear.</p>
+          <p>
+            High-stakes raids where every decision matters. Extract your loot or risk losing it all.
+            Death means losing your gear.
+          </p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+              ></path>
             </svg>
           </div>
           <h3>Tactical Squad Play</h3>
-          <p>Coordinate with teammates to leverage faction synergies. Team composition and cooperation are key to survival.</p>
+          <p>
+            Coordinate with teammates to leverage faction synergies. Team composition and
+            cooperation are key to survival.
+          </p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
             </svg>
           </div>
           <h3>Diverse Biomes</h3>
-          <p>Battle across snow-capped peaks, scorching deserts, toxic wetlands, and crumbling urban ruins. Each biome favors different tactics.</p>
+          <p>
+            Battle across snow-capped peaks, scorching deserts, toxic wetlands, and crumbling urban
+            ruins. Each biome favors different tactics.
+          </p>
         </div>
       </div>
     </div>
@@ -110,20 +218,23 @@ const featuredFactions = eaLaunchFactions.map(faction => ({
     <div class="container">
       <h2 class="section-title">Choose Your Faction</h2>
       <p class="section-description">
-        Four factions available at Early Access launch, with six more coming in post-launch expansions.
-        Each faction offers distinct abilities, playstyles, and roles in squad composition.
+        Four factions available at Early Access launch, with six more coming in post-launch
+        expansions. Each faction offers distinct abilities, playstyles, and roles in squad
+        composition.
       </p>
 
       <div class="faction-grid">
-        {featuredFactions.map(faction => (
-          <FactionCard
-            name={faction.name}
-            tagline={faction.tagline}
-            emblem={faction.emblem}
-            colors={faction.colors}
-            href={faction.href}
-          />
-        ))}
+        {
+          featuredFactions.map((faction) => (
+            <FactionCard
+              name={faction.name}
+              tagline={faction.tagline}
+              emblem={faction.emblem}
+              colors={faction.colors}
+              href={faction.href}
+            />
+          ))
+        }
       </div>
 
       <div class="faction-cta">
@@ -137,27 +248,18 @@ const featuredFactions = eaLaunchFactions.map(faction => ({
     <div class="container">
       <h2 class="cta-title">Join the Fight</h2>
       <p class="cta-description">
-        Early Access launches with 4 factions, multiple biomes, and intense extraction gameplay.
-        Be among the first to stake your claim in the wasteland.
+        Early Access launches with 4 factions, 3 biomes, and intense extraction gameplay. Be among
+        the first to stake your claim in the wasteland.
       </p>
       <div class="cta-buttons">
         <Button href="#wishlist" variant="primary" size="large">Wishlist on Steam</Button>
         <Button href="/biomes" variant="secondary" size="large">Explore Biomes</Button>
       </div>
-      <p class="release-info">
-        Early Access: Q2 2025 | Full Release: Q4 2025
-      </p>
+      <p class="release-info">Early Access: Q1 2026 | Full Release: Year 2 Q1 (after EA)</p>
     </div>
   </section>
 
   <style>
-    /* Container */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
     /* Hero Section */
     .hero {
       position: relative;
@@ -215,14 +317,123 @@ const featuredFactions = eaLaunchFactions.map(faction => ({
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 0.8; }
+      0%,
+      100% {
+        opacity: 0.5;
+      }
+      50% {
+        opacity: 0.8;
+      }
     }
 
     @keyframes fadeInUp {
       from {
         opacity: 0;
         transform: translateY(30px);
+      }
+
+      /* Current Milestone Strip */
+      .milestone-strip {
+        padding: 1.75rem 0;
+        background:
+          radial-gradient(circle at 0% 0%, rgba(0, 255, 136, 0.12), transparent 55%),
+          radial-gradient(circle at 100% 100%, rgba(255, 0, 85, 0.12), transparent 55%);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .milestone-inner {
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .milestone-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.75rem 1.25rem;
+      }
+
+      .milestone-pill {
+        padding: 0.25rem 0.75rem;
+        border-radius: 999px;
+        background: rgba(0, 255, 136, 0.18);
+        border: 1px solid rgba(0, 255, 136, 0.5);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-family: var(--font-heading);
+        color: var(--color-primary);
+      }
+
+      .milestone-name {
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.95);
+      }
+
+      .milestone-week {
+        margin-left: auto;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.85);
+        font-family: var(--font-heading);
+      }
+
+      .milestone-status {
+        margin: 0.15rem 0 0;
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      .milestone-goal {
+        margin: 0.15rem 0 0;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      .milestone-goal strong {
+        color: var(--color-primary);
+      }
+
+      .milestone-highlights {
+        list-style: none;
+        padding: 0;
+        margin: 0.25rem 0 0;
+        display: grid;
+        gap: 0.25rem;
+      }
+
+      .milestone-highlights li {
+        position: relative;
+        padding-left: 1.1rem;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .milestone-highlights li::before {
+        content: '▸';
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: var(--color-primary);
+        font-size: 0.8rem;
+      }
+
+      .milestone-link {
+        margin-top: 0.35rem;
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .milestone-link a {
+        color: var(--color-primary);
+        text-decoration: underline;
+      }
+
+      .milestone-link a:hover {
+        color: var(--color-secondary);
       }
       to {
         opacity: 1;
@@ -240,6 +451,45 @@ const featuredFactions = eaLaunchFactions.map(faction => ({
     }
 
     /* Overview Section */
+    .pillars {
+      padding: 4rem 0 1rem;
+      background: radial-gradient(circle at 50% 0%, rgba(0, 255, 136, 0.08), transparent 60%);
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.75rem;
+      margin-top: 2.5rem;
+    }
+
+    .pillar-card {
+      padding: 1.75rem 1.75rem 1.5rem;
+      transition: all 0.25s ease;
+    }
+
+    .pillar-card.card-surface {
+      /* card-surface styles come from global Tailwind layer; keep hover accent here */
+    }
+
+    .pillar-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      color: rgba(255, 255, 255, 0.96);
+    }
+
+    .pillar-card p {
+      font-size: 0.98rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .pillar-card:hover {
+      border-color: rgba(0, 255, 136, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 255, 136, 0.18);
+      transform: translateY(-4px);
+    }
+
     .overview {
       padding: 6rem 0;
       background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.8) 100%);
@@ -364,6 +614,10 @@ const featuredFactions = eaLaunchFactions.map(faction => ({
 
     /* Responsive Design */
     @media (max-width: 768px) {
+      .pillars-grid {
+        grid-template-columns: 1fr;
+      }
+
       .hero {
         min-height: 100vh;
         padding: 1rem;

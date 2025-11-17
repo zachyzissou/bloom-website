@@ -2,20 +2,50 @@
 
 **High-performance marketing website for Bloom extraction FPS game**
 
-Built with Astro 4.x, Tailwind CSS, and optimized for Core Web Vitals excellence.
+Built with Astro 4.x, Tailwind CSS 3.x, and optimized for Core Web Vitals excellence.
+
+## 🚀 Quick Start
+
+```bash
+# Install dependencies
+npm install
+
+# Development
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+## 🐳 Docker Deployment
+
+This site is designed for Docker deployment on Unraid via reverse proxy.
+
+```bash
+# Build Docker image
+docker build -t bloom-website:latest .
+
+# Run container
+docker run -d -p 8080:80 --name bloom-website bloom-website:latest
+```
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for full deployment guide.
 
 ---
 
 ## Performance Targets
 
-| Metric | Target | Status |
-|--------|--------|--------|
-| Lighthouse Score | ≥90 | 🟡 Pending |
-| LCP (Largest Contentful Paint) | <2.5s | 🟡 Pending |
-| FID/INP | <100ms/<200ms | 🟡 Pending |
-| CLS (Cumulative Layout Shift) | <0.1 | 🟡 Pending |
-| Total Page Weight | <1MB | 🟡 Pending |
-| Initial Load Time | <3s | 🟡 Pending |
+| Metric                         | Target        | Status     |
+| ------------------------------ | ------------- | ---------- |
+| Lighthouse Score               | ≥90           | 🟡 Pending |
+| LCP (Largest Contentful Paint) | <2.5s         | 🟡 Pending |
+| FID/INP                        | <100ms/<200ms | 🟡 Pending |
+| CLS (Cumulative Layout Shift)  | <0.1          | 🟡 Pending |
+| Total Page Weight              | <1MB          | 🟡 Pending |
+| Initial Load Time              | <3s           | 🟡 Pending |
 
 ---
 
@@ -100,6 +130,7 @@ bloom-website/
 ## Key Features
 
 ### Image Optimization
+
 - Automated pipeline converts Unity HDRP screenshots to WebP/AVIF
 - 80%+ size reduction from original PNGs
 - Responsive images with srcset and sizes
@@ -107,6 +138,7 @@ bloom-website/
 - Blur-up placeholders for smooth loading
 
 ### Font Optimization
+
 - Self-hosted fonts (Inter + Orbitron)
 - 60-70% size reduction via subsetting
 - WOFF2 format with optimal compression
@@ -114,12 +146,14 @@ bloom-website/
 - Total weight <40KB for all fonts
 
 ### JavaScript Optimization
+
 - Zero JavaScript by default (Astro Islands)
 - Partial hydration only for interactive components
 - Code splitting for better caching
 - Total bundle <50KB (critical path)
 
 ### CSS Optimization
+
 - Tailwind CSS purging removes 95%+ unused styles
 - Critical CSS inlined in HTML
 - Non-critical CSS deferred for faster FCP
@@ -130,6 +164,7 @@ bloom-website/
 ## Available Scripts
 
 ### Development
+
 ```bash
 npm run dev          # Start dev server (http://localhost:4321)
 npm run build        # Build for production
@@ -137,12 +172,14 @@ npm run preview      # Preview production build
 ```
 
 ### Optimization
+
 ```bash
 npm run optimize:images    # Process all images
 npm run optimize:fonts     # Subset fonts and generate CSS
 ```
 
 ### Testing
+
 ```bash
 npm run lighthouse         # Run Lighthouse CI audit
 npm run perf:audit        # Full performance audit
@@ -153,29 +190,32 @@ npm test                  # Run all tests
 
 ## Performance Budgets
 
-| Resource | Budget | Per Asset |
-|----------|--------|-----------|
-| Total Page | 1MB | - |
-| JavaScript | 50KB | - |
-| CSS | 30KB | - |
-| Fonts | 40KB | - |
-| Images (above fold) | 150KB | 100KB |
+| Resource            | Budget | Per Asset |
+| ------------------- | ------ | --------- |
+| Total Page          | 1MB    | -         |
+| JavaScript          | 50KB   | -         |
+| CSS                 | 30KB   | -         |
+| Fonts               | 40KB   | -         |
+| Images (above fold) | 150KB  | 100KB     |
 
 ---
 
 ## Documentation
 
 ### Strategy & Planning
+
 - **[PERFORMANCE_STRATEGY.md](./PERFORMANCE_STRATEGY.md)** - Comprehensive performance strategy (18 sections, 200KB)
 - **[PERFORMANCE_CHECKLIST.md](./PERFORMANCE_CHECKLIST.md)** - Pre-launch checklist
 - **[IMPLEMENTATION_GUIDE.md](./IMPLEMENTATION_GUIDE.md)** - Step-by-step implementation
 
 ### Configuration
+
 - **[astro.config.example.mjs](./astro.config.example.mjs)** - Astro configuration
 - **[tailwind.config.example.mjs](./tailwind.config.example.mjs)** - Tailwind configuration
 - **[netlify.toml](./netlify.toml)** - Netlify deployment settings
 
 ### Components
+
 - **[OptimizedImage.astro](./src/components/OptimizedImage.astro)** - Responsive images
 - **[VideoEmbed.astro](./src/components/VideoEmbed.astro)** - Click-to-load videos
 - **[FactionCard.astro](./src/components/FactionCard.astro)** - Faction cards
@@ -185,10 +225,12 @@ npm test                  # Run all tests
 ## Deployment
 
 ### Netlify Auto-Deploy
+
 - **Production**: Push to `main` → https://bloom.slurpgg.net
 - **Preview**: Open PR → https://deploy-preview-[NUMBER]--bloom.netlify.app
 
 ### Performance Gates
+
 - Lighthouse CI runs on every PR
 - Build fails if score <90
 - Performance budget enforced
@@ -197,14 +239,14 @@ npm test                  # Run all tests
 
 ## Browser Support
 
-| Browser | Version | Status |
-|---------|---------|--------|
-| Chrome | Latest | ✅ Full support |
-| Firefox | Latest | ✅ Full support |
-| Safari | Latest | ✅ Full support |
-| Edge | Latest | ✅ Full support |
-| Mobile Safari | Latest | ✅ Full support |
-| Chrome Mobile | Latest | ✅ Full support |
+| Browser       | Version | Status          |
+| ------------- | ------- | --------------- |
+| Chrome        | Latest  | ✅ Full support |
+| Firefox       | Latest  | ✅ Full support |
+| Safari        | Latest  | ✅ Full support |
+| Edge          | Latest  | ✅ Full support |
+| Mobile Safari | Latest  | ✅ Full support |
+| Chrome Mobile | Latest  | ✅ Full support |
 
 ---
 
@@ -217,8 +259,9 @@ UNLICENSED - Proprietary
 ## Contact
 
 **Development Team**
-- GitHub: https://github.com/your-org/bloom-website
-- Issues: https://github.com/your-org/bloom-website/issues
+
+- GitHub: https://github.com/zachyzissou/bloom-website
+- Issues: https://github.com/zachyzissou/bloom-website/issues
 
 ---
 

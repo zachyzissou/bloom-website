@@ -27,7 +27,8 @@ const expansionFactionsSorted = expansionFactions.sort((a, b) => {
 });
 
 const pageTitle = 'Factions - Bloom';
-const pageDescription = 'Explore the 10 unique factions of Bloom. Each faction offers distinct abilities, playstyles, and philosophies in the post-apocalyptic wasteland.';
+// Canon: Faction identities. Keep aligned with BLOOM_GAME_BIBLE.md (faction roles, ideology, logistics).
+const pageDescription = 'Explore the 10 factions that keep the Dead Sky alive: tanks, scavengers, defenders, and all‑rounders bound together by convoys, contracts, and uneasy truces in the Inner Exclusion Zone.';
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription} type="website">
@@ -37,8 +38,9 @@ const pageDescription = 'Explore the 10 unique factions of Bloom. Each faction o
       <div class="hero-content">
         <h1 class="hero-title">Choose Your Faction</h1>
         <p class="hero-description">
-          Ten unique factions. Ten distinct playstyles. Each with their own philosophy,
-          abilities, and role in the wasteland. Who will you fight for?
+          Ten factions share the Dead Sky: military holdouts, scavenger crews, convoy guards, and contract soldiers.
+          Each brings its own doctrine, economy, and risks into the Inner Exclusion Zone. Who will you feed, and who
+          will you leave behind?
         </p>
       </div>
     </section>
@@ -161,12 +163,7 @@ const pageDescription = 'Explore the 10 unique factions of Bloom. Each faction o
 
   /* Factions Section */
   .factions-section {
-    padding: 3rem 1.5rem;
-  }
-
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 3rem 0;
   }
 
   .section-header {

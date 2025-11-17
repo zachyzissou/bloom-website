@@ -45,19 +45,11 @@
     "node": ">=18.0.0",
     "npm": ">=9.0.0"
   },
-  "keywords": [
-    "bloom",
-    "game",
-    "marketing",
-    "astro",
-    "performance",
-    "fps",
-    "extraction"
-  ],
+  "keywords": ["bloom", "game", "marketing", "astro", "performance", "fps", "extraction"],
   "author": "Bloom Development Team",
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-org/bloom-website.git"
+    "url": "https://github.com/zachyzissou/bloom-website.git"
   }
 }

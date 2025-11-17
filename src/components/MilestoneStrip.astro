@@ -1,0 +1,81 @@
+---
+interface CurrentSprint {
+  name: string
+  week: string
+  status: string
+  progress?: number
+  goal?: string
+  highlights?: string[]
+}
+
+interface Props {
+  currentSprint: CurrentSprint
+  variant?: 'strip' | 'card'
+  linkHref?: string
+  linkLabel?: string
+}
+
+const { currentSprint, variant = 'strip', linkHref = '/roadmap', linkLabel = 'View the development roadmap' } = Astro.props
+---
+
+{variant === 'strip' && (
+  <section class="milestone-strip" aria-label="Current development milestone">
+    <div class="container">
+      <div class="milestone-inner">
+        <div class="milestone-header">
+          <span class="milestone-pill">Current Milestone</span>
+          <h2 class="milestone-name">{currentSprint.name}</h2>
+          <span class="milestone-week">Week {currentSprint.week}</span>
+        </div>
+        <p class="milestone-status">{currentSprint.status}</p>
+        {currentSprint.goal && (
+          <p class="milestone-goal">
+            <strong>Goal:</strong> {currentSprint.goal}
+          </p>
+        )}
+        {Array.isArray(currentSprint.highlights) && currentSprint.highlights.length > 0 && (
+          <ul class="milestone-highlights">
+            {currentSprint.highlights.slice(0, 3).map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        )}
+        {linkHref && linkLabel && (
+          <p class="milestone-link">
+            Want the full picture? <a href={linkHref}>{linkLabel}</a>.
+          </p>
+        )}
+      </div>
+    </div>
+  </section>
+)}
+
+{variant === 'card' && (
+  <div class="sprint-status-card" aria-label="Current sprint status">
+    <div class="sprint-header">
+      <h3>Current Sprint: {currentSprint.name}</h3>
+      <span class="sprint-week">Week {currentSprint.week}</span>
+    </div>
+    {typeof currentSprint.progress === 'number' && (
+      <div class="progress-bar">
+        <div class="progress-fill" style={`width: ${currentSprint.progress}%`}></div>
+        <span class="progress-label">{currentSprint.progress}% Complete</span>
+      </div>
+    )}
+    <p class="sprint-status">{currentSprint.status}</p>
+    {currentSprint.goal && (
+      <p class="sprint-goal">
+        <strong>Goal:</strong> {currentSprint.goal}
+      </p>
+    )}
+    {Array.isArray(currentSprint.highlights) && currentSprint.highlights.length > 0 && (
+      <ul class="sprint-highlights">
+        {currentSprint.highlights.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    )}
+  </div>
+)
+
+

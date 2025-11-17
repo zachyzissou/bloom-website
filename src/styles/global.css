@@ -1,0 +1,109 @@
+/**
+ * Global Styles - Bloom Marketing Website
+ * 
+ * This file imports Tailwind CSS and provides global base styles.
+ * Component-specific styles should remain in component <style> blocks.
+ */
+
+/* Tailwind CSS Directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base Styles */
+@layer base {
+  :root {
+    /* CSS Custom Properties (for compatibility with existing code) */
+    --color-primary: #00ff88;
+    --color-secondary: #ff0055;
+    --color-bg: #000000;
+    --color-text: #ffffff;
+    --color-gray: #808080;
+    
+    /* Font Variables */
+    --font-heading: 'Orbitron', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-black text-white font-sans antialiased;
+    font-family: var(--font-body);
+  }
+
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+    font-family: var(--font-heading);
+  }
+
+  /* Links */
+  a {
+    @apply transition-colors;
+  }
+
+  /* Focus styles for accessibility */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Component Utilities */
+@layer components {
+  /* Skip to content link (accessibility) */
+  .skip-to-content {
+    @apply sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-black focus:font-semibold focus:rounded;
+  }
+
+  /* Standard page container */
+  .container {
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Standard vertical section padding */
+  .section-shell {
+    @apply py-12 sm:py-16 lg:py-20;
+  }
+
+  /* Reusable card surfaces */
+  .card-surface {
+    @apply rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md;
+  }
+
+  .card-surface-soft {
+    @apply rounded-xl border border-white/5 bg-white/5;
+  }
+
+  .card-surface-strong {
+    @apply rounded-2xl border border-primary/40 bg-primary/10 shadow-lg;
+  }
+
+  /* Reusable pill/badge */
+  .badge-pill {
+    @apply inline-flex items-center rounded-full border border-white/20 px-3 py-1 text-xs font-semibold uppercase tracking-widest;
+  }
+}
+
+/* Utility Classes */
+@layer utilities {
+  /* Text balance for better typography */
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+

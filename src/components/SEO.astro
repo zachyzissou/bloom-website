@@ -41,7 +41,9 @@ const siteName = 'Bloom';
 const twitterHandle = '@bloomgame'; // Update with actual handle
 
 // Construct full URLs
-const canonicalURL = canonical ? new URL(canonical, siteUrl).href : new URL(Astro.url.pathname, siteUrl).href;
+const canonicalURL = canonical
+  ? new URL(canonical, siteUrl).href
+  : new URL(Astro.url.pathname, siteUrl).href;
 const imageURL = new URL(image, siteUrl).href;
 
 // Structured Data (JSON-LD) for Game/Software
@@ -111,7 +113,7 @@ const structuredData = {
 <meta name="theme-color" content="#000000" />
 
 <!-- Structured Data (JSON-LD) -->
-<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
 <!-- Preconnect to critical domains -->
 <link rel="preconnect" href="https://plausible.io" crossorigin />

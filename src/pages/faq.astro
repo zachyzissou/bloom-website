@@ -4,7 +4,7 @@
  * Addresses common questions about Bloom to drive conversions
  * Features accordion UI, FAQ structured data for SEO
  */
-import BaseLayout from '@/layouts/BaseLayout.astro'
+import BaseLayout from '@/layouts/BaseLayout.astro';
 
 // FAQ data structure organized by category
 const faqCategories = [
@@ -15,39 +15,52 @@ const faqCategories = [
       {
         id: 'what-is-bloom',
         question: 'What is Bloom?',
-        answer: 'Bloom is a post-apocalyptic extraction first-person shooter featuring 10 unique factions, each with distinct abilities and playstyles. Set in a world ravaged by mysterious Harvesters, players must deploy into dangerous biomes, loot valuable resources, and extract before time runs out or rival factions eliminate them.'
+        answer:
+          'Bloom is a post-apocalyptic extraction first-person shooter featuring 10 unique factions, each with distinct abilities and playstyles. Set in a world ravaged by mysterious Harvesters, players must deploy into dangerous biomes, loot valuable resources, and extract before time runs out or rival factions eliminate them.',
       },
       {
         id: 'what-is-extraction',
         question: 'What is an extraction shooter?',
-        answer: 'An extraction shooter is a high-stakes FPS genre where you deploy into a map with limited gear, scavenge for loot and resources, and must reach an extraction point to keep everything you found. If you die before extracting, you lose all equipped gear and items. Think Escape from Tarkov or Hunt: Showdown - every raid is a risk vs. reward decision.'
+        answer:
+          'An extraction shooter is a high-stakes FPS genre where you deploy into a map with limited gear, scavenge for loot and resources, and must reach an extraction point to keep everything you found. If you die before extracting, you lose all equipped gear and items. Think Escape from Tarkov or Hunt: Showdown - every raid is a risk vs. reward decision.',
       },
       {
         id: 'death-penalty',
         question: 'How does the death penalty work?',
-        answer: 'If you die before extracting, you lose all equipped gear, weapons, and items in your inventory. This creates intense, high-stakes gameplay where every decision matters. However, certain faction abilities can reduce losses or provide insurance mechanics. Your character progression (levels, unlocks) is never lost.'
+        answer:
+          'If you die before extracting, you lose all equipped gear, weapons, and items in your inventory. This creates intense, high-stakes gameplay where every decision matters. However, certain faction abilities can reduce losses or provide insurance mechanics. Your character progression (levels, unlocks) is never lost.',
       },
       {
         id: 'solo-or-squad',
         question: 'Can I play solo or do I need a squad?',
-        answer: 'Both! Solo mode is available for lone wolf playstyles, but squads of up to 4 players unlock powerful synergy bonuses. Each faction has a unique Cooperative Ability that activates when squadding with teammates. Solo players face higher risk but keep all loot for themselves.'
+        answer:
+          'Both! Solo mode is available for lone wolf playstyles, but squads of up to 4 players unlock powerful synergy bonuses. Each faction has a unique Cooperative Ability that activates when squadding with teammates. Solo players face higher risk but keep all loot for themselves.',
       },
       {
         id: 'player-count',
         question: 'How many players per match?',
-        answer: 'Each biome instance supports up to 20-30 players, dynamically matched based on server load and region. You will also encounter AI-controlled enemies and environmental threats. Matches are not battle royale - players can continuously spawn, deploy, and extract throughout the match window.'
+        answer:
+          'Each biome instance supports up to 20-30 players, dynamically matched based on server load and region. You will also encounter AI-controlled enemies and environmental threats. Matches are not battle royale - players can continuously spawn, deploy, and extract throughout the match window.',
       },
       {
         id: 'pvp-or-pve',
         question: 'Is there PvP, PvE, or both?',
-        answer: 'PvPvE - Player vs. Player vs. Environment. You will fight other players for resources and control of extraction points, while also dealing with AI enemies, environmental hazards, and the ever-present threat of Harvester incursions. Different biomes have varying PvE difficulty.'
+        answer:
+          'PvPvE - Player vs. Player vs. Environment. You will fight other players for resources and control of extraction points, while also dealing with AI enemies, environmental hazards, and the ever-present threat of Harvester incursions. Different biomes have varying PvE difficulty.',
+      },
+      {
+        id: 'hardcore-vs-accessible',
+        question: 'Is Bloom as hardcore as Escape from Tarkov?',
+        answer:
+          'Bloom uses a full-loot extraction model inspired by games like Tarkov, but it is tuned around squad play, readable threats, and a salvage economy instead of pure punishment. Death hurts – you lose equipped gear – but we focus on clear risk decisions, co-op rescues, and long-term convoy growth rather than forcing you to restart from nothing every few matches.',
       },
       {
         id: 'successful-extract',
         question: 'What happens if I extract successfully?',
-        answer: 'You keep all loot, resources, and equipment you collected during the raid. Extracted items can be sold for currency, used to craft better gear, or equipped for your next deployment. You also gain experience points toward faction progression and unlock new abilities and loadout options.'
-      }
-    ]
+        answer:
+          'You keep all loot, resources, and equipment you collected during the raid. Extracted items can be sold for currency, used to craft better gear, or equipped for your next deployment. You also gain experience points toward faction progression and unlock new abilities and loadout options.',
+      },
+    ],
   },
   {
     title: 'Factions',
@@ -56,29 +69,34 @@ const faqCategories = [
       {
         id: 'faction-count',
         question: 'How many factions are there?',
-        answer: '10 total factions - 4 available at Early Access launch, with 6 additional factions releasing in post-launch expansions. The EA launch factions are: Aegis Collective (medic), Directorate (tank), Seventy-Seven (all-rounder), and Exodus Corps (scavenger). Expansion factions will introduce tech specialists, stealth operatives, defenders, food providers, and elite hunters.'
+        answer:
+          '10 total factions - 4 available at Early Access launch, with 6 additional factions releasing in post-launch expansions. The EA launch factions are: Sky Bastion Directorate (tank), Iron Vultures (scavenger), Truce Wardens (defender), and The Seventy-Seven (all-rounder). Expansion factions will introduce tech specialists, stealth operatives, defenders, food providers, and elite hunters.',
       },
       {
         id: 'switch-factions',
         question: 'Can I switch factions?',
-        answer: 'Yes, you can play any faction you have unlocked. Your progression with each faction is tracked separately, encouraging you to master multiple playstyles. However, switching factions mid-match is not allowed - you commit to a faction when you deploy into a biome.'
+        answer:
+          'Yes, you can play any faction you have unlocked. Your progression with each faction is tracked separately, encouraging you to master multiple playstyles. However, switching factions mid-match is not allowed - you commit to a faction when you deploy into a biome.',
       },
       {
         id: 'unlock-factions',
         question: 'Do I need to unlock factions?',
-        answer: 'The 4 Early Access launch factions (Aegis Collective, Directorate, Seventy-Seven, Exodus Corps) are available immediately to all players. The 6 expansion factions can be unlocked through gameplay progression, in-game challenges, or via optional DLC purchase. Exact unlock mechanics will be detailed closer to expansion releases.'
+        answer:
+          'The 4 Early Access launch factions (Sky Bastion Directorate, Iron Vultures, Truce Wardens, The Seventy-Seven) are available immediately to all players. The 6 expansion factions can be unlocked through gameplay progression, in-game challenges, or via optional DLC purchase. Exact unlock mechanics will be detailed closer to expansion releases.',
       },
       {
         id: 'best-beginner-faction',
         question: 'What is the best faction for beginners?',
-        answer: 'Aegis Collective (medic role) or Seventy-Seven (all-rounder) are ideal for learning the game. Aegis provides team healing and support abilities, teaching you positioning and squad dynamics. Seventy-Seven offers balanced stats with no major weaknesses, letting you explore different playstyles without being punished for mistakes.'
+        answer:
+          'Truce Wardens (defender role) or The Seventy-Seven (all-rounder) are ideal for learning the game. Wardens provide defensive bonuses and protection zones, teaching you positioning and squad dynamics. Seventy-Seven offers balanced stats with no major weaknesses, letting you explore different playstyles without being punished for mistakes.',
       },
       {
         id: 'faction-balance',
         question: 'Are factions balanced?',
-        answer: 'Each faction has unique strengths and weaknesses - there is no objectively "best" faction. Balance is role-based: tanks are tanky but slow, stealth factions are fragile but evasive, medics support but lack damage. Success depends on team composition, map knowledge, and player skill. We continuously monitor faction win rates and adjust balance in patches.'
-      }
-    ]
+        answer:
+          'Each faction has unique strengths and weaknesses - there is no objectively "best" faction. Balance is role-based: tanks are tanky but slow, stealth factions are fragile but evasive, medics support but lack damage. Success depends on team composition, map knowledge, and player skill. We continuously monitor faction win rates and adjust balance in patches.',
+      },
+    ],
   },
   {
     title: 'Technical',
@@ -87,34 +105,40 @@ const faqCategories = [
       {
         id: 'platforms',
         question: 'What platforms is Bloom available on?',
-        answer: 'PC (Steam) for Early Access launch. Console versions (PlayStation 5, Xbox Series X/S) are planned for full release in Q4 2025, pending development progress. We will announce console launch dates once we are confident in performance targets.'
+        answer:
+          'PC (Steam) for Early Access launch. Console versions (PlayStation 5, Xbox Series X/S) are planned for full release in Year 2 after EA. We will announce console launch dates once we are confident in performance targets and network stability.',
       },
       {
         id: 'system-requirements',
         question: 'What are the system requirements?',
-        answer: 'Minimum: NVIDIA GTX 1060 6GB / AMD RX 580, Intel i5-7600K / AMD Ryzen 5 1600, 8GB RAM, 50GB storage, Windows 10 64-bit. Recommended: NVIDIA RTX 3060 / AMD RX 6700 XT, Intel i7-9700K / AMD Ryzen 7 3700X, 16GB RAM, SSD storage, Windows 11 64-bit. These specs target 1080p60fps on medium settings (min) and 1440p60fps on high settings (rec).'
+        answer:
+          'Minimum: NVIDIA GTX 1060 6GB / AMD RX 580, Intel i5-7600K / AMD Ryzen 5 1600, 8GB RAM, 50GB storage, Windows 10 64-bit. Recommended: NVIDIA RTX 3060 / AMD RX 6700 XT, Intel i7-9700K / AMD Ryzen 7 3700X, 16GB RAM, SSD storage, Windows 11 64-bit. These specs target 1080p60fps on medium settings (min) and 1440p60fps on high settings (rec).',
       },
       {
         id: 'controller-support',
         question: 'Does it support controller?',
-        answer: 'Yes, full controller support on PC with customizable button mapping, aim assist options, and sensitivity curves. We recommend mouse and keyboard for competitive play due to the tactical nature of the game, but controller is fully viable. Console versions will have optimized control schemes.'
+        answer:
+          'Yes, full controller support on PC with customizable button mapping, aim assist options, and sensitivity curves. We recommend mouse and keyboard for competitive play due to the tactical nature of the game, but controller is fully viable. Console versions will have optimized control schemes.',
       },
       {
         id: 'crossplay',
         question: 'Is there crossplay?',
-        answer: 'Not at Early Access launch. Crossplay between PC and consoles is planned for a post-launch update, but we want to ensure balanced gameplay between input methods first. PC-only crossplay (Steam/Epic) may come sooner. We will test crossplay in limited beta windows before full rollout.'
+        answer:
+          'Not at Early Access launch. Crossplay between PC and consoles is planned for a post-launch update, but we want to ensure balanced gameplay between input methods first. PC-only crossplay (Steam/Epic) may come sooner. We will test crossplay in limited beta windows before full rollout.',
       },
       {
         id: 'game-engine',
         question: 'What engine is it built on?',
-        answer: 'Bloom is built on Unreal Engine 5, leveraging Nanite for detailed environments, Lumen for dynamic lighting, and Chaos for realistic destruction physics. This allows us to create visually stunning biomes while maintaining 60fps performance targets on recommended hardware.'
+        answer:
+          'Bloom is built on Unity (HDRP), targeting 60+ FPS on an RTX 2060 6GB with 8–10 players in shared tiles. We lean on custom world-generation, biome, and weather systems tuned specifically for the Inner Exclusion Zone rather than stock/demo content.',
       },
       {
         id: 'download-size',
         question: 'How large is the download?',
-        answer: 'Estimated 50GB for the base game at Early Access launch. This includes 4 factions, 6+ biomes, high-resolution textures, and audio. Expansion content will add approximately 5-10GB each. We recommend SSD storage for optimal loading times (HDD supported but may have longer load screens).'
-      }
-    ]
+        answer:
+          'Estimated 50GB for the base game at Early Access launch. This includes 4 factions, 6+ biomes, high-resolution textures, and audio. Expansion content will add approximately 5-10GB each. We recommend SSD storage for optimal loading times (HDD supported but may have longer load screens).',
+      },
+    ],
   },
   {
     title: 'Release & Pricing',
@@ -123,52 +147,64 @@ const faqCategories = [
       {
         id: 'ea-launch-date',
         question: 'When is Early Access launching?',
-        answer: 'Q2 2025 (April-June). Exact launch date will be announced 60 days prior via Steam store page, Discord, and social media. Wishlist on Steam to receive notifications the moment we set a firm date.'
+        answer:
+          'Q1 2026 (December 2025 - March 2026). Exact launch date will be announced 60 days prior via Steam store page, Discord, and social media. Wishlist on Steam to receive notifications the moment we set a firm date.',
       },
       {
         id: 'price',
         question: 'How much will it cost?',
-        answer: 'Estimated $29.99 USD for Early Access. This is subject to change based on content scope and regional pricing adjustments. Early Access purchasers will receive the full game at no additional cost, plus exclusive cosmetic rewards for supporting development early.'
+        answer:
+          'Early Access pricing is $24.99 USD. The full release (1.0) will be priced at $39.99 USD. Early Access purchasers will receive the full game at no additional cost, plus exclusive cosmetic rewards for supporting development early.',
       },
       {
         id: 'beta-access',
         question: 'Will there be a beta?',
-        answer: 'Yes, a Closed Beta for Steam wishlisters is planned 4-6 weeks before Early Access launch. Beta access will be granted via email to a limited number of players (prioritizing long-time wishlisters). This helps us stress test servers, balance factions, and gather feedback before the public launch.'
+        answer:
+          'Yes, a Closed Beta for Steam wishlisters is planned 4-6 weeks before Early Access launch. Beta access will be granted via email to a limited number of players (prioritizing long-time wishlisters). This helps us stress test servers, balance factions, and gather feedback before the public launch.',
       },
       {
         id: 'ea-duration',
         question: 'How long will Early Access last?',
-        answer: '6-9 months, targeting a Q4 2025 full release (October-December). During Early Access, we will add the 6 expansion factions, additional biomes, new game modes, and polish based on community feedback. Early Access is feature-complete but will receive significant content updates.'
+        answer:
+          'Early Access is planned to run for roughly 6–9 months. The current roadmap targets a 1.0 (full release) in Year 2 Q1 after EA begins, but this may shift based on testing and player feedback. During Early Access we will add 6 expansion factions, additional biomes, new game modes, and polish based on community feedback.',
+      },
+      {
+        id: 'seasons-and-wipes',
+        question: 'Will there be seasons or progression wipes?',
+        answer:
+          'Bloom is planned around seasonal arcs rather than hard character wipes. We may periodically rotate rewards, challenges, and seasonal goals, but our intent is that your core convoy progress, unlocked factions, and major accomplishments persist across seasons. Exact details are still in active design and may evolve during Early Access based on player feedback.',
       },
       {
         id: 'microtransactions',
         question: 'Will there be microtransactions?',
-        answer: 'Cosmetics only - weapon skins, character outfits, emotes, and faction emblems. Absolutely no pay-to-win mechanics, stat boosts, or loot boxes. All gameplay-affecting items (weapons, gear, faction abilities) can only be earned through gameplay. We are committed to fair, skill-based competition.'
+        answer:
+          'Cosmetics only - weapon skins, character outfits, emotes, and faction emblems. Absolutely no pay-to-win mechanics, stat boosts, or loot boxes. All gameplay-affecting items (weapons, gear, faction abilities) can only be earned through gameplay. We are committed to fair, skill-based competition.',
       },
       {
         id: 'season-pass',
         question: 'Is there a Season Pass?',
-        answer: 'We are evaluating monetization models for expansion factions. Options include: free for all players (funded by cosmetics), battle pass system (free + premium tracks), or small DLC packs ($5-10 per faction). Our priority is keeping the player base unified - we will not split matchmaking with paid-only content.'
-      }
-    ]
-  }
-]
+        answer:
+          'We are evaluating monetization models for expansion factions. Options include: free for all players (funded by cosmetics), battle pass system (free + premium tracks), or small DLC packs ($5-10 per faction). Our priority is keeping the player base unified - we will not split matchmaking with paid-only content.',
+      },
+    ],
+  },
+];
 
 // Generate structured data for FAQ rich results
 const faqStructuredData = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  'mainEntity': faqCategories.flatMap(category =>
-    category.questions.map(q => ({
+  mainEntity: faqCategories.flatMap((category) =>
+    category.questions.map((q) => ({
       '@type': 'Question',
-      'name': q.question,
-      'acceptedAnswer': {
+      name: q.question,
+      acceptedAnswer: {
         '@type': 'Answer',
-        'text': q.answer
-      }
+        text: q.answer,
+      },
     }))
-  )
-}
+  ),
+};
 ---
 
 <BaseLayout
@@ -177,15 +213,15 @@ const faqStructuredData = {
   type="website"
 >
   <!-- FAQ Structured Data for Rich Snippets -->
-  <script type="application/ld+json" set:html={JSON.stringify(faqStructuredData)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqStructuredData)} />
 
   <!-- Hero Section -->
   <section class="faq-hero">
     <div class="container">
       <h1 class="hero-title">Frequently Asked Questions</h1>
       <p class="hero-description">
-        Everything you need to know about Bloom before deploying into the wasteland.
-        Can't find your answer? Join our Discord community or contact support.
+        Everything you need to know about Bloom before deploying into the wasteland. Can't find your
+        answer? Join our Discord community or contact support.
       </p>
     </div>
   </section>
@@ -193,51 +229,104 @@ const faqStructuredData = {
   <!-- FAQ Categories -->
   <section class="faq-content">
     <div class="container">
-      {faqCategories.map((category) => (
-        <div class="faq-category">
-          <div class="category-header">
-            <div class="category-icon" aria-hidden="true">
-              {category.icon === 'gamepad' && (
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
-                </svg>
-              )}
-              {category.icon === 'shield' && (
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              )}
-              {category.icon === 'desktop' && (
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-              )}
-              {category.icon === 'calendar' && (
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-              )}
-            </div>
-            <h2 class="category-title">{category.title}</h2>
-          </div>
-
-          <div class="questions-list">
-            {category.questions.map((qa) => (
-              <details class="faq-item" id={qa.id}>
-                <summary class="faq-question">
-                  <span class="question-text">{qa.question}</span>
-                  <svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      {
+        faqCategories.map((category) => (
+          <div class="faq-category">
+            <div class="category-header">
+              <div class="category-icon" aria-hidden="true">
+                {category.icon === 'gamepad' && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"
+                    />
                   </svg>
-                </summary>
-                <div class="faq-answer">
-                  <p>{qa.answer}</p>
-                </div>
-              </details>
-            ))}
+                )}
+                {category.icon === 'shield' && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                    />
+                  </svg>
+                )}
+                {category.icon === 'desktop' && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    />
+                  </svg>
+                )}
+                {category.icon === 'calendar' && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
+                  </svg>
+                )}
+              </div>
+              <h2 class="category-title">{category.title}</h2>
+            </div>
+
+            <div class="questions-list">
+              {category.questions.map((qa) => (
+                <details class="faq-item" id={qa.id}>
+                  <summary class="faq-question">
+                    <span class="question-text">{qa.question}</span>
+                    <svg
+                      class="chevron"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </summary>
+                  <div class="faq-answer">
+                    <p>{qa.answer}</p>
+                  </div>
+                </details>
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
   </section>
 
@@ -252,8 +341,18 @@ const faqStructuredData = {
       <div class="help-grid">
         <div class="help-card">
           <div class="help-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+              ></path>
             </svg>
           </div>
           <h3>Join Discord</h3>
@@ -263,8 +362,18 @@ const faqStructuredData = {
 
         <div class="help-card">
           <div class="help-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              ></path>
             </svg>
           </div>
           <h3>Contact Support</h3>
@@ -274,8 +383,18 @@ const faqStructuredData = {
 
         <div class="help-card">
           <div class="help-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+              ></path>
             </svg>
           </div>
           <h3>Gameplay Guide</h3>
@@ -291,7 +410,8 @@ const faqStructuredData = {
     <div class="container">
       <h2 class="cta-title">Ready to Deploy?</h2>
       <p class="cta-description">
-        Get notified the moment Early Access launches. Wishlist on Steam to secure your spot in the closed beta.
+        Get notified the moment Early Access launches. Wishlist on Steam to secure your spot in the
+        closed beta.
       </p>
       <div class="cta-buttons">
         <a href="#wishlist" class="btn btn-primary btn-large">Wishlist on Steam</a>
@@ -301,13 +421,6 @@ const faqStructuredData = {
   </section>
 
   <style>
-    /* Container */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
     /* Hero Section */
     .faq-hero {
       padding: 8rem 0 4rem;
@@ -694,43 +807,44 @@ const faqStructuredData = {
   <script>
     // Scroll to FAQ item if URL hash matches
     if (window.location.hash) {
-      const targetId = window.location.hash.substring(1)
-      const targetElement = document.getElementById(targetId)
+      const targetId = window.location.hash.substring(1);
+      const targetElement = document.getElementById(targetId);
 
       if (targetElement && targetElement.classList.contains('faq-item')) {
         // Open the accordion
-        targetElement.setAttribute('open', '')
+        targetElement.setAttribute('open', '');
 
         // Scroll to element with offset for fixed navbar
         setTimeout(() => {
-          const offset = 100
-          const elementPosition = targetElement.getBoundingClientRect().top
-          const offsetPosition = elementPosition + window.pageYOffset - offset
+          const offset = 100;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
 
           window.scrollTo({
             top: offsetPosition,
-            behavior: 'smooth'
-          })
-        }, 100)
+            behavior: 'smooth',
+          });
+        }, 100);
       }
     }
 
     // Track accordion interactions for analytics
-    document.querySelectorAll('.faq-item').forEach(item => {
+    document.querySelectorAll('.faq-item').forEach((item) => {
       item.addEventListener('toggle', () => {
         if (item.hasAttribute('open')) {
-          const question = item.querySelector('.question-text')?.textContent
+          const question = item.querySelector('.question-text')?.textContent;
           // Analytics event (if analytics is configured)
           // @ts-ignore - gtag is globally defined by Analytics component
           if (typeof window.gtag === 'function') {
             // @ts-ignore - gtag is globally defined by Analytics component
             window.gtag('event', 'faq_expand', {
               question: question,
-              category: item.closest('.faq-category')?.querySelector('.category-title')?.textContent
-            })
+              category: item.closest('.faq-category')?.querySelector('.category-title')
+                ?.textContent,
+            });
           }
         }
-      })
-    })
+      });
+    });
   </script>
 </BaseLayout>

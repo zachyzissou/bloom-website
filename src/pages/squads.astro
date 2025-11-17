@@ -22,9 +22,9 @@ const squadCompositions = [
         contribution: 'Artillery support + supply drops',
       },
       {
-        faction: factions.find((f) => f.id === 'FCT_AEG'),
-        role: 'Medic',
-        contribution: 'Healing + deployable shields',
+        faction: factions.find((f) => f.id === 'FCT_CWD'),
+        role: 'Defender',
+        contribution: 'Protection zones + defensive bonuses',
       },
       {
         faction: factions.find((f) => f.id === 'FCT_F77'),
@@ -38,7 +38,7 @@ const squadCompositions = [
       },
     ],
     synergy:
-      "Directorate's +20% team damage resist combines with Aegis healing to create an unkillable frontline. Seventy-Seven provides flexibility while Vultures ensure maximum loot efficiency.",
+      "Directorate's +20% team damage resist combines with Wardens' protection zones to create an unkillable frontline. Seventy-Seven provides flexibility while Vultures ensure maximum loot efficiency.",
     bestFor: 'High-value extraction zones, PvP confrontations',
   },
   {
@@ -115,9 +115,9 @@ const squadCompositions = [
         contribution: 'Heavy armor + Forged tracking',
       },
       {
-        faction: factions.find((f) => f.id === 'FCT_AEG'),
-        role: 'Medic',
-        contribution: 'Healing stations + shields',
+        faction: factions.find((f) => f.id === 'FCT_CWD'),
+        role: 'Defender',
+        contribution: 'Protection zones + defensive bonuses',
       },
       {
         faction: factions.find((f) => f.id === 'FCT_HLX'),
@@ -131,7 +131,7 @@ const squadCompositions = [
       },
     ],
     synergy:
-      "North Guard's defensive power + Aegis healing + Helix turrets = impenetrable fortress. Pact of Ash provides sustain for long battles.",
+      "North Guard's defensive power + Wardens' protection zones + Helix turrets = impenetrable fortress. Pact of Ash provides sustain for long battles.",
     bestFor: 'Convoy escort missions, PvE defense, resource extraction',
   },
   {
@@ -214,8 +214,8 @@ const roleDescriptions = [
   },
   {
     role: 'Support/Medic',
-    factions: ['Aegis'],
-    description: 'Healing specialists who keep the team alive',
+    factions: ['Wardens'],
+    description: 'Defensive specialists who protect the team',
     icon: '❤️',
   },
   {
@@ -267,7 +267,7 @@ const tips = [
   {
     title: 'Always Bring Support',
     description:
-      'At least one support role (Aegis or Seventy-Seven) dramatically increases survival rates and mission success.',
+      'At least one support role (Wardens or Seventy-Seven) dramatically increases survival rates and mission success.',
   },
   {
     title: 'Balance Offense and Defense',
@@ -519,7 +519,7 @@ const tips = [
                   +20% team damage resist
                 </td>
                 <td class="px-6 py-4 text-green-400 text-sm">
-                  Aegis, Seventy-Seven
+                  Wardens, Seventy-Seven
                 </td>
               </tr>
               <tr class="hover:bg-gray-800/50 transition-colors">
@@ -547,7 +547,7 @@ const tips = [
                       class="w-3 h-3 rounded-full"
                       style="background-color: #0080FF"
                     />
-                    <span class="font-semibold text-white">Aegis</span>
+                    <span class="font-semibold text-white">Wardens</span>
                   </div>
                 </td>
                 <td class="px-6 py-4 text-gray-400">Medic</td>
@@ -642,7 +642,7 @@ const tips = [
                 <td class="px-6 py-4 text-gray-400 text-sm">
                   +50% Forged damage
                 </td>
-                <td class="px-6 py-4 text-green-400 text-sm">Aegis, Pact</td>
+                <td class="px-6 py-4 text-green-400 text-sm">Wardens, Pact</td>
               </tr>
               <tr class="hover:bg-gray-800/50 transition-colors">
                 <td class="px-6 py-4">
@@ -659,7 +659,7 @@ const tips = [
                   Food buffs, +20% convoy defense
                 </td>
                 <td class="px-6 py-4 text-green-400 text-sm">
-                  North Guard, Aegis
+                  North Guard, Wardens
                 </td>
               </tr>
               <tr class="hover:bg-gray-800/50 transition-colors">

@@ -1,10 +1,17 @@
 {
   "developmentPhases": {
     "currentSprint": {
-      "name": "Q1 2026 EA Sprint",
-      "week": "10/12",
-      "status": "Week 10 complete, multiplayer next",
-      "progress": 83
+      "name": "M2 — Week 12: EA Launch Prep",
+      "week": "12/12",
+      "status": "Active: performance validation, CI, and Steam EA launch prep",
+      "progress": 83,
+      "goal": "Validate 60+ FPS with 8–10 players, wire up builds, and prep the Steam page for Early Access.",
+      "highlights": [
+        "Hit a stable 60+ FPS target on RTX 2060 6GB with 8–10 player co-op sessions.",
+        "Have multiplayer and the core extraction loop running end-to-end on EA maps.",
+        "Set up CI builds for the Windows client and Linux headless server.",
+        "Prepare the Steam “Coming Soon” page with accurate EA scope and pricing ($24.99 at EA, $39.99 at 1.0)."
+      ]
     },
     "phases": [
       {
@@ -75,7 +82,7 @@
           {
             "name": "EA Launch",
             "status": "planned",
-            "description": "Public release with 4 factions, 6 biomes, and core extraction gameplay"
+            "description": "Public release with 4 factions, 3 biomes, and core extraction gameplay"
           }
         ]
       }
@@ -88,14 +95,11 @@
       "factions": [
         "Sky Bastion Directorate",
         "Iron Vultures",
-        "Aegis Collective",
+        "Truce Wardens",
         "The Seventy-Seven"
       ],
       "biomes": [
         "ForestHills (The Reach)",
-        "SouthwestPlains (Greyreach District)",
-        "WesternMountains",
-        "EasternPlateaus (Crimson Freeport)",
         "SnowPeaks",
         "CentralGrasslands (IEZ Core)"
       ],
@@ -316,7 +320,7 @@
       {
         "milestone": "Early Access Launch",
         "date": "Q1 2026",
-        "description": "Public release on Steam with 4 factions and 6 biomes"
+        "description": "Public release on Steam with 4 factions and 3 biomes"
       },
       {
         "milestone": "First Expansion Announcement",
@@ -336,7 +340,7 @@
     "content": {
       "factionsComplete": 4,
       "factionsPlanned": 6,
-      "biomesComplete": 6,
+      "biomesComplete": 3,
       "biomesPlanned": 6,
       "weatherTypes": 14,
       "macroFeatures": 38
@@ -366,7 +370,7 @@
     "scope": {
       "item": "Content Completion",
       "risk": "low",
-      "mitigation": "Clear EA scope with 4 factions and 6 biomes",
+      "mitigation": "Clear EA scope with 4 factions and 3 biomes",
       "impact": "Manageable with current team and timeline"
     }
   }

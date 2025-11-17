@@ -62,7 +62,7 @@ const embedUrl = getEmbedUrl();
 ---
 
 <div
-  class="video-embed-container relative cursor-pointer group"
+  class="video-embed-container"
   style={`aspect-ratio: ${aspectRatio};`}
   data-video-embed
   data-embed-url={embedUrl}
@@ -71,26 +71,27 @@ const embedUrl = getEmbedUrl();
   <img
     src={thumbnailUrl}
     alt={`${title} - Click to play`}
-    class="w-full h-full object-cover"
+    class="video-thumbnail"
     loading="lazy"
     decoding="async"
   />
 
   <!-- Overlay gradient -->
-  <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+  <div class="video-overlay"></div>
 
   <!-- Play button -->
-  <div class="absolute inset-0 flex items-center justify-center">
+  <div class="play-button-container">
     <button
       type="button"
-      class="play-button bg-red-600 hover:bg-red-700 text-white rounded-full p-6 shadow-2xl transform group-hover:scale-110 transition-transform duration-200"
+      class="play-button"
       aria-label={`Play video: ${title}`}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="w-12 h-12"
+        class="play-icon"
         viewBox="0 0 24 24"
         fill="currentColor"
+        aria-hidden="true"
       >
         <path d="M8 5v14l11-7z" />
       </svg>
@@ -98,8 +99,8 @@ const embedUrl = getEmbedUrl();
   </div>
 
   <!-- Video title -->
-  <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-    <h3 class="text-xl font-bold">{title}</h3>
+  <div class="video-title-container">
+    <h3 class="video-title">{title}</h3>
   </div>
 </div>
 
@@ -118,7 +119,7 @@ const embedUrl = getEmbedUrl();
         iframe.setAttribute('frameborder', '0');
         iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture');
         iframe.setAttribute('allowfullscreen', 'true');
-        iframe.className = 'w-full h-full absolute inset-0';
+        iframe.className = 'video-iframe';
 
         // Replace content with iframe
         container.innerHTML = '';
@@ -130,20 +131,103 @@ const embedUrl = getEmbedUrl();
 
 <style>
   .video-embed-container {
+    position: relative;
     background-color: #000;
     overflow: hidden;
+    cursor: pointer;
+  }
+
+  .video-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .video-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+  }
+
+  .video-embed-container:hover .video-overlay {
+    opacity: 0.9;
+  }
+
+  .play-button-container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .play-button {
+    background-color: #dc2626;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 1.5rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
     transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .play-button:hover {
+    background-color: #b91c1c;
+    transform: scale(1.1);
+  }
+
+  .play-button:focus-visible {
+    outline: 2px solid var(--color-primary, #00ff88);
+    outline-offset: 4px;
+  }
+
+  .play-icon {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .video-title-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+  }
+
+  .video-title {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    font-family: var(--font-heading, 'Orbitron', sans-serif);
   }
 
   /* Ensure aspect ratio is maintained */
-  iframe {
+  .video-iframe {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    border: none;
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .play-button,
+    .video-overlay {
+      transition: none;
+    }
+
+    .play-button:hover {
+      transform: none;
+    }
   }
 </style>

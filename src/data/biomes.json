@@ -36,8 +36,8 @@
       "threatTier": "H2",
       "threatLevel": "Medium",
       "location": "West",
-      "launchStatus": "ea-launch",
-      "launchWindow": "EA Launch",
+      "launchStatus": "expansion",
+      "launchWindow": "Month 3-6",
       "geography": "Rugged mountain ranges with the Machine Grave at its heart",
       "macroFeatures": ["Mountains", "Canyons", "Machine wreckage", "Harrower zones"],
       "visualCharacteristics": {
@@ -80,10 +80,10 @@
         "Monolith ground zero",
         "IEZ Core exclusion zone",
         "North Guard forward bases",
-        "Aegis medical camps",
+        "Warden protection zones",
         "Phase Pocket phenomena"
       ],
-      "factionPresence": ["North Guard", "Aegis Collective"],
+      "factionPresence": ["North Guard", "Truce Wardens"],
       "hazards": ["Extreme radiation", "Phase shears", "Temporal jitter", "Reality distortions", "Monolith anomalies"],
       "resources": ["Monolith-class technology", "Extreme high-value salvage", "Unique artifacts"],
       "description": "The most dangerous zone in the game world. The Monolith Cascade of 2161 created an exclusion zone where reality itself is unstable. Only the most experienced operators dare venture here."
@@ -95,8 +95,8 @@
       "threatTier": "H2",
       "threatLevel": "Medium",
       "location": "East",
-      "launchStatus": "ea-launch",
-      "launchWindow": "EA Launch",
+      "launchStatus": "expansion",
+      "launchWindow": "Month 3-6",
       "geography": "Elevated plateaus with the major trading hub of Crimson Freeport",
       "macroFeatures": ["Plateaus", "Trade routes", "Elevated terrain", "Commercial zones"],
       "visualCharacteristics": {
@@ -141,7 +141,7 @@
         "Warden fortifications",
         "Safe training areas"
       ],
-      "factionPresence": ["Aegis Collective", "Civic Wardens"],
+      "factionPresence": ["Truce Wardens"],
       "hazards": ["Wildlife", "Tunnel collapses", "Minor bandit activity"],
       "resources": ["Civilian supplies", "Basic equipment", "Medical supplies"],
       "description": "The safest zone for new operators. Protected by Civic Wardens, this area offers Metro tunnel access and civilian amenities. Perfect for learning game mechanics."
@@ -153,8 +153,8 @@
       "threatTier": "H1",
       "threatLevel": "Safe",
       "location": "Southwest",
-      "launchStatus": "ea-launch",
-      "launchWindow": "EA Launch",
+      "launchStatus": "expansion",
+      "launchWindow": "Month 3-6",
       "geography": "Agricultural plains dominated by Pact of Ash farmlands",
       "macroFeatures": ["Plains", "Farmland", "Convoy routes", "Agricultural zones"],
       "visualCharacteristics": {

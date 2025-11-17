@@ -4,6 +4,7 @@
  * Displays the development timeline from Early Access to Full Release
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import MilestoneStrip from '@/components/MilestoneStrip.astro';
 import factionsData from '@/data/factions.json';
 import biomesData from '@/data/biomes.json';
 import roadmapData from '@/data/roadmap.json';
@@ -13,24 +14,24 @@ const { biomes } = biomesData;
 const { developmentPhases, technicalRoadmap, keyMetrics } = roadmapData;
 
 // Calculate faction counts by launch window
-const eaLaunchFactions = factions.filter(f => f.launchStatus === 'ea-launch');
-const expansion1Factions = factions.filter(f => f.launchWindow === 'Month 3-6');
-const expansion2Factions = factions.filter(f => f.launchWindow === 'Month 6-9');
+const eaLaunchFactions = factions.filter((f) => f.launchStatus === 'ea-launch');
+const expansion1Factions = factions.filter((f) => f.launchWindow === 'Month 3-6');
+const expansion2Factions = factions.filter((f) => f.launchWindow === 'Month 6-9');
 
 // Calculate biome counts by launch window
-const eaLaunchBiomes = biomes.filter(b => b.launchStatus === 'ea-launch');
-const expansion2Biomes = biomes.filter(b => b.launchWindow === 'Month 6-9');
+const eaLaunchBiomes = biomes.filter((b) => b.launchStatus === 'ea-launch');
+const expansion2Biomes = biomes.filter((b) => b.launchWindow === 'Month 6-9');
 
 // Timeline phases
 const timeline = [
   {
     id: 'ea-launch',
-    phase: 'Q2 2025',
+    phase: 'Q1 2026',
     title: 'Early Access Launch',
     status: 'upcoming',
     highlights: [
-      `${eaLaunchFactions.length} Factions: ${eaLaunchFactions.map(f => f.shortName).join(', ')}`,
-      `${eaLaunchBiomes.length} Biomes: ${eaLaunchBiomes.map(b => b.displayName).join(', ')}`,
+      `${eaLaunchFactions.length} Factions: ${eaLaunchFactions.map((f) => f.shortName).join(', ')}`,
+      `${eaLaunchBiomes.length} Biomes: ${eaLaunchBiomes.map((b) => b.displayName).join(', ')}`,
       'Core extraction gameplay loop',
       'Squad matchmaking system',
       'Character progression and unlocks',
@@ -43,7 +44,7 @@ const timeline = [
     title: 'Expansion 1: New Factions',
     status: 'planned',
     highlights: [
-      `${expansion1Factions.length} New Factions: ${expansion1Factions.map(f => f.shortName).join(', ')}`,
+      `${expansion1Factions.length} New Factions: ${expansion1Factions.map((f) => f.shortName).join(', ')}`,
       'New faction abilities and playstyles',
       'Balance updates and refinements',
       'Community-driven events',
@@ -57,8 +58,8 @@ const timeline = [
     title: 'Expansion 2: World Expansion',
     status: 'planned',
     highlights: [
-      `${expansion2Factions.length} New Factions: ${expansion2Factions.map(f => f.shortName).join(', ')}`,
-      `${expansion2Biomes.length} New Biomes: ${expansion2Biomes.map(b => b.displayName).join(', ')}`,
+      `${expansion2Factions.length} New Factions: ${expansion2Factions.map((f) => f.shortName).join(', ')}`,
+      `${expansion2Biomes.length} New Biomes: ${expansion2Biomes.map((b) => b.displayName).join(', ')}`,
       'New game modes',
       'Seasonal content system',
       'Advanced progression paths',
@@ -67,8 +68,8 @@ const timeline = [
   },
   {
     id: 'full-release',
-    phase: 'Q4 2025',
-    title: 'Full Release',
+    phase: 'Year 2 Q1',
+    title: '1.0 Launch & Stabilization',
     status: 'planned',
     highlights: [
       `All ${factions.length} factions available`,
@@ -85,26 +86,47 @@ const timeline = [
 const plannedFeatures = [
   {
     category: 'Customization',
-    items: ['Weapon skins and attachments', 'Character cosmetics', 'Faction-themed gear sets', 'Victory animations'],
+    items: [
+      'Weapon skins and attachments',
+      'Character cosmetics',
+      'Faction-themed gear sets',
+      'Victory animations',
+    ],
   },
   {
     category: 'Competitive',
-    items: ['Ranked ladder system', 'Seasonal tournaments', 'Leaderboards and stats', 'Spectator mode'],
+    items: [
+      'Ranked ladder system',
+      'Seasonal tournaments',
+      'Leaderboards and stats',
+      'Spectator mode',
+    ],
   },
   {
     category: 'Social',
-    items: ['Guild/clan system', 'Voice chat integration', 'Friend referral rewards', 'Community hub'],
+    items: [
+      'Guild/clan system',
+      'Voice chat integration',
+      'Friend referral rewards',
+      'Community hub',
+    ],
   },
   {
     category: 'Content',
-    items: ['Limited-time events', 'Weekly challenges', 'Holiday themed content', 'Narrative campaigns'],
+    items: [
+      'Limited-time events',
+      'Weekly challenges',
+      'Holiday themed content',
+      'Narrative campaigns',
+    ],
   },
 ];
 ---
 
+<!-- Canon: High-level schedule. Keep in sync with ROADMAP.md (M2, M3, Year 1–3 Outlook) for EA and 1.0 timing. -->
 <BaseLayout
   title="Development Roadmap - Bloom Game Timeline"
-  description="Follow Bloom's development journey from Early Access launch through full release. See planned factions, biomes, features, and content updates throughout 2025."
+  description="Follow Bloom's development journey from Early Access launch through 1.0 and beyond. See planned factions, biomes, features, and content updates across EA and Year 2."
   type="game"
 >
   <!-- Hero Section -->
@@ -113,9 +135,10 @@ const plannedFeatures = [
       <h1>Development Roadmap</h1>
       <p class="tagline">Bloom's Journey from Early Access to Full Release</p>
       <p class="description">
-        Witness the evolution of Bloom throughout 2025. From our Early Access launch with 4 factions
-        and 6 biomes, to the full release featuring all 10 factions across 12 unique biomes. Every
-        milestone brings new content, features, and opportunities for the community.
+        Witness the evolution of Bloom from the M2 EA Launch Prep sprint through Early Access and
+        into 1.0. We start with 4 factions and 3 biomes at EA, then grow toward all 10 factions
+        across 12 biomes by the 1.0 launch window in Year 2 Q1. Every milestone brings new content,
+        features, and opportunities for the community.
       </p>
     </div>
   </section>
@@ -125,36 +148,74 @@ const plannedFeatures = [
     <div class="container">
       <h2 class="sr-only">Development Timeline</h2>
       <div class="timeline">
-        {timeline.map((phase, index) => (
-          <article class="timeline-phase" data-status={phase.status} id={phase.id}>
-            {/* Timeline connector */}
-            {index < timeline.length - 1 && (
-              <div class="timeline-connector" aria-hidden="true"></div>
-            )}
+        {
+          timeline.map((phase, index) => (
+            <article class="timeline-phase" data-status={phase.status} id={phase.id}>
+              {/* Timeline connector */}
+              {index < timeline.length - 1 && <div class="timeline-connector" aria-hidden="true" />}
 
-            {/* Phase marker */}
-            <div class="phase-marker">
-              <div class="marker-dot"></div>
-              <span class="phase-label">{phase.phase}</span>
-            </div>
-
-            {/* Phase content */}
-            <div class="phase-content">
-              <div class="phase-header">
-                <h3 class="phase-title">{phase.title}</h3>
-                <span class={`status-badge status-${phase.status}`}>
-                  {phase.status === 'upcoming' ? 'Upcoming' : 'Planned'}
-                </span>
+              {/* Phase marker */}
+              <div class="phase-marker">
+                <div class="marker-dot" />
+                <span class="phase-label">{phase.phase}</span>
               </div>
 
-              <ul class="highlights-list">
-                {phase.highlights.map((highlight) => (
-                  <li>{highlight}</li>
-                ))}
-              </ul>
-            </div>
-          </article>
-        ))}
+              {/* Phase content */}
+              <div class="phase-content">
+                <div class="phase-header">
+                  <h3 class="phase-title">{phase.title}</h3>
+                  <span class={`status-badge status-${phase.status}`}>
+                    {phase.status === 'upcoming' ? 'Upcoming' : 'Planned'}
+                  </span>
+                </div>
+
+                <ul class="highlights-list">
+                  {phase.highlights.map((highlight) => (
+                    <li>{highlight}</li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- High-Level Outlook Section -->
+  <section class="outlook-section">
+    <div class="container">
+      <h2 class="section-title">Year 1–3 Outlook (High Level)</h2>
+      <p class="section-description">
+        Bloom’s roadmap is split into three major phases: sprinting to Early Access, iterating
+        during EA, and growing into a stable 1.0 and beyond.
+      </p>
+
+      <div class="outlook-grid">
+        <div class="outlook-card">
+          <h3 class="outlook-title">Phase 1: Sprint to EA (Now → Q1 2026)</h3>
+          <ul>
+            <li>M2: Week 12 — EA Launch Prep (performance, CI, Steam “Coming Soon” page)</li>
+            <li>M3: Q1 2026 — Early Access Launch (4 factions, 3 biomes, core extraction loop)</li>
+          </ul>
+        </div>
+        <div class="outlook-card">
+          <h3 class="outlook-title">Phase 2: EA Iteration (Year 1)</h3>
+          <ul>
+            <li>M4: EA Month 1–3 — Stabilization & Content #1</li>
+            <li>M5: EA Month 4–6 — New biomes and systems</li>
+            <li>M6: EA Month 7–9 — More factions, endgame pilots</li>
+            <li>M7: EA Month 10–12 — 1.0 Prep</li>
+          </ul>
+        </div>
+        <div class="outlook-card">
+          <h3 class="outlook-title">Phase 3: Post‑1.0 Growth (Year 2+)</h3>
+          <ul>
+            <li>M8: Year 2 Q1 — 1.0 Launch & Stabilization</li>
+            <li>M9–M11: Seasonal content, factions 8–10, scaling toward 2,000+ CCU</li>
+            <li>M12–M13: Console ports, modding support, DLC</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -164,22 +225,12 @@ const plannedFeatures = [
     <div class="container">
       <h2 class="section-title">Technical Development Progress</h2>
       <p class="section-description">
-        Transparent development tracking: See our current sprint status, completed milestones,
-        and technical roadmap for Bloom's Early Access launch.
+        Transparent development tracking: See our current sprint status, completed milestones, and
+        technical roadmap for Bloom's Early Access launch.
       </p>
 
       <!-- Current Sprint Status -->
-      <div class="sprint-status-card">
-        <div class="sprint-header">
-          <h3>Current Sprint: {developmentPhases.currentSprint.name}</h3>
-          <span class="sprint-week">Week {developmentPhases.currentSprint.week}</span>
-        </div>
-        <div class="progress-bar">
-          <div class="progress-fill" style={`width: ${developmentPhases.currentSprint.progress}%`}></div>
-          <span class="progress-label">{developmentPhases.currentSprint.progress}% Complete</span>
-        </div>
-        <p class="sprint-status">{developmentPhases.currentSprint.status}</p>
-      </div>
+      <MilestoneStrip currentSprint={developmentPhases.currentSprint} variant="card" />
 
       <!-- Key Technical Metrics -->
       <div class="metrics-box">
@@ -221,15 +272,17 @@ const plannedFeatures = [
             Completed Milestones
           </h3>
           <ul class="milestone-list">
-            {technicalRoadmap.completed.map((item) => (
-              <li class="milestone-item completed">
-                <div class="milestone-header">
-                  <strong>{item.feature}</strong>
-                  {item.date && <span class="milestone-date">{item.date}</span>}
-                </div>
-                <p class="milestone-desc">{item.description}</p>
-              </li>
-            ))}
+            {
+              technicalRoadmap.completed.map((item) => (
+                <li class="milestone-item completed">
+                  <div class="milestone-header">
+                    <strong>{item.feature}</strong>
+                    {item.date && <span class="milestone-date">{item.date}</span>}
+                  </div>
+                  <p class="milestone-desc">{item.description}</p>
+                </li>
+              ))
+            }
           </ul>
         </div>
 
@@ -240,16 +293,20 @@ const plannedFeatures = [
             In Progress
           </h3>
           <ul class="milestone-list">
-            {technicalRoadmap.inProgress.map((item) => (
-              <li class="milestone-item in-progress">
-                <div class="milestone-header">
-                  <strong>{item.feature}</strong>
-                  {item.status && <span class="milestone-date">{item.status}</span>}
-                </div>
-                <p class="milestone-desc">{item.description}</p>
-                {item.priority && <span class={`priority-badge priority-${item.priority}`}>{item.priority}</span>}
-              </li>
-            ))}
+            {
+              technicalRoadmap.inProgress.map((item) => (
+                <li class="milestone-item in-progress">
+                  <div class="milestone-header">
+                    <strong>{item.feature}</strong>
+                    {item.status && <span class="milestone-date">{item.status}</span>}
+                  </div>
+                  <p class="milestone-desc">{item.description}</p>
+                  {item.priority && (
+                    <span class={`priority-badge priority-${item.priority}`}>{item.priority}</span>
+                  )}
+                </li>
+              ))
+            }
           </ul>
         </div>
 
@@ -260,16 +317,20 @@ const plannedFeatures = [
             Planned Technical Features
           </h3>
           <ul class="milestone-list">
-            {technicalRoadmap.planned.map((item) => (
-              <li class="milestone-item planned">
-                <div class="milestone-header">
-                  <strong>{item.feature}</strong>
-                  {item.status && <span class="milestone-date">{item.status}</span>}
-                </div>
-                <p class="milestone-desc">{item.description}</p>
-                {item.priority && <span class={`priority-badge priority-${item.priority}`}>{item.priority}</span>}
-              </li>
-            ))}
+            {
+              technicalRoadmap.planned.map((item) => (
+                <li class="milestone-item planned">
+                  <div class="milestone-header">
+                    <strong>{item.feature}</strong>
+                    {item.status && <span class="milestone-date">{item.status}</span>}
+                  </div>
+                  <p class="milestone-desc">{item.description}</p>
+                  {item.priority && (
+                    <span class={`priority-badge priority-${item.priority}`}>{item.priority}</span>
+                  )}
+                </li>
+              ))
+            }
           </ul>
         </div>
       </div>
@@ -282,20 +343,23 @@ const plannedFeatures = [
       <h2 class="section-title">Planned Features</h2>
       <p class="section-description">
         Beyond factions and biomes, we're committed to delivering a rich and evolving experience
-        with competitive features, customization options, and engaging content throughout 2025 and beyond.
+        with competitive features, customization options, and engaging content throughout 2026 and
+        beyond.
       </p>
 
       <div class="features-grid">
-        {plannedFeatures.map((category) => (
-          <div class="feature-category">
-            <h3 class="category-title">{category.category}</h3>
-            <ul class="feature-list">
-              {category.items.map((item) => (
-                <li>{item}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        {
+          plannedFeatures.map((category) => (
+            <div class="feature-category">
+              <h3 class="category-title">{category.category}</h3>
+              <ul class="feature-list">
+                {category.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -305,16 +369,19 @@ const plannedFeatures = [
     <div class="cta-content">
       <h2>Stay Updated</h2>
       <p>
-        Wishlist Bloom on Steam to be notified of launch dates, beta access opportunities,
-        and major content updates.
+        Wishlist Bloom on Steam to be notified of launch dates, beta access opportunities, and major
+        content updates.
       </p>
       <div class="cta-buttons">
-        <a href="https://store.steampowered.com" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://store.steampowered.com"
+          class="btn btn-primary"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Wishlist on Steam
         </a>
-        <a href="/" class="btn btn-secondary">
-          Back to Home
-        </a>
+        <a href="/" class="btn btn-secondary"> Back to Home </a>
       </div>
     </div>
   </section>
@@ -356,13 +423,6 @@ const plannedFeatures = [
     font-size: 1.125rem;
     line-height: 1.8;
     color: rgba(255, 255, 255, 0.8);
-  }
-
-  /* Container */
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
   }
 
   /* Timeline Section */
@@ -425,7 +485,7 @@ const plannedFeatures = [
     transition: all 0.3s ease;
   }
 
-  .timeline-phase[data-status="planned"] .marker-dot {
+  .timeline-phase[data-status='planned'] .marker-dot {
     background: rgba(0, 255, 136, 0.5);
     box-shadow: 0 0 0 4px rgba(0, 255, 136, 0.1);
   }
@@ -546,8 +606,75 @@ const plannedFeatures = [
   /* Technical Progress Section */
   .tech-progress-section {
     padding: 4rem 0;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 31, 63, 0.2) 50%, rgba(0, 0, 0, 0) 100%);
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 31, 63, 0.2) 50%,
+      rgba(0, 0, 0, 0) 100%
+    );
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Outlook Section */
+  .outlook-section {
+    padding: 4rem 0 5rem;
+    background: rgba(0, 0, 0, 0.6);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .outlook-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .outlook-card {
+    flex: 0 0 320px;
+    max-width: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 1.75rem;
+    transition: all 0.3s ease;
+  }
+
+  .outlook-card:hover {
+    border-color: rgba(0, 255, 136, 0.3);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 255, 136, 0.15);
+  }
+
+  .outlook-title {
+    font-size: 1.25rem;
+    font-family: var(--font-heading);
+    color: #fff;
+    margin-bottom: 0.75rem;
+  }
+
+  .outlook-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .outlook-card li {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .outlook-card li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: rgba(0, 255, 136, 0.8);
   }
 
   /* Current Sprint Status Card */
@@ -620,6 +747,37 @@ const plannedFeatures = [
     color: rgba(255, 255, 255, 0.8);
     margin: 0;
     line-height: 1.6;
+  }
+
+  .sprint-goal {
+    margin: 0.75rem 0 0.5rem;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.88);
+    font-weight: 500;
+  }
+
+  .sprint-highlights {
+    list-style: none;
+    padding: 0;
+    margin: 0.25rem 0 0;
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .sprint-highlights li {
+    position: relative;
+    padding-left: 1.25rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .sprint-highlights li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--color-primary);
+    font-size: 0.9rem;
   }
 
   /* Key Technical Metrics Box */
