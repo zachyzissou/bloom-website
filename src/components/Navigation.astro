@@ -89,15 +89,18 @@ const isActive = (href: string) => {
     </button>
   </div>
 
-  <div
-    id="mobile-nav"
-    class="lg:hidden"
-    data-open="false"
-  >
-    <div class="fixed inset-0 top-16 bg-black/70 backdrop-blur-sm transition-opacity data-[open='false']:pointer-events-none data-[open='false']:opacity-0"></div>
+  <div id="mobile-nav" class="lg:hidden" data-open="false">
     <div
-      class="fixed inset-x-0 top-16 origin-top rounded-b-3xl border-b border-white/10 bg-black/95 px-4 pb-8 pt-6 shadow-2xl transition duration-300 data-[open='false']:-translate-y-4 data-[open='false']:scale-y-95 data-[open='false']:opacity-0"
+      class="fixed inset-0 top-16 bg-black/70 backdrop-blur-sm transition-opacity data-[open=false]:pointer-events-none data-[open=false]:opacity-0"
+      data-mobile-overlay
+      data-open="false"
+      aria-hidden="true"
+    ></div>
+    <div
+      class="fixed inset-x-0 top-16 origin-top rounded-b-3xl border-b border-white/10 bg-black/95 px-4 pb-8 pt-6 shadow-2xl transition duration-300 data-[open=false]:-translate-y-4 data-[open=false]:scale-y-95 data-[open=false]:opacity-0"
       data-mobile-panel
+      data-open="false"
+      aria-hidden="true"
     >
       <div class="mb-4 flex items-center justify-between px-1">
         <span class="text-xs font-semibold uppercase tracking-[0.35em] text-white/70">
@@ -144,11 +147,14 @@ const isActive = (href: string) => {
   const navClose = document.getElementById('nav-close')
   const mobileNav = document.getElementById('mobile-nav')
   const mobilePanel = mobileNav?.querySelector('[data-mobile-panel]')
+  const mobileOverlay = mobileNav?.querySelector('[data-mobile-overlay]')
   const mobileLinks = mobileNav?.querySelectorAll('[data-mobile-link]')
 
   const setMenuState = (isOpen) => {
     if (!mobileNav || !navToggle || !mobilePanel) return
     mobileNav.dataset.open = isOpen.toString()
+    mobilePanel.dataset.open = isOpen.toString()
+    mobileOverlay?.setAttribute('data-open', isOpen.toString())
     navToggle.setAttribute('aria-expanded', isOpen.toString())
     navToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu')
     document.documentElement.classList.toggle('overflow-hidden', isOpen)

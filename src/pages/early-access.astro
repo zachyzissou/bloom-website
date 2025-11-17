@@ -4,60 +4,66 @@
  * High-converting landing page for EA launch announcement
  * Optimized for conversion with urgency elements and clear CTAs
  */
-import BaseLayout from '@/layouts/BaseLayout.astro'
-import FactionCard from '@/components/FactionCard.astro'
-import factionsData from '@/data/factions.json'
-import biomesData from '@/data/biomes.json'
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import FactionCard from '@/components/FactionCard.astro';
+import factionsData from '@/data/factions.json';
+import biomesData from '@/data/biomes.json';
 
 // Canon: EA Launch factions (4 factions available at Early Access). Keep in sync with ROADMAP.md (M3) and factions.json.
 // Get EA Launch factions (4 factions available at Early Access)
-const eaLaunchFactions = factionsData.factions
-  .filter(faction => faction.launchStatus === 'ea-launch')
+const eaLaunchFactions = factionsData.factions.filter(
+  (faction) => faction.launchStatus === 'ea-launch'
+);
 
 // Canon: EA Launch biomes (3 biomes at EA scope). Keep in sync with ROADMAP.md (M3) and biomes.json.
 // Get EA Launch biomes (3 biomes)
-const eaLaunchBiomes = biomesData.biomes
-  .filter(biome => biome.launchStatus === 'ea-launch')
+const eaLaunchBiomes = biomesData.biomes.filter((biome) => biome.launchStatus === 'ea-launch');
 
 // Prepare faction data for FactionCard component
-const featuredFactions = eaLaunchFactions.map(faction => ({
+const featuredFactions = eaLaunchFactions.map((faction) => ({
   name: faction.shortName,
   tagline: faction.philosophy,
   emblem: `/images/factions/${faction.id.toLowerCase()}-emblem.svg`,
   colors: {
     primary: faction.colors.primary,
-    secondary: faction.colors.secondary
+    secondary: faction.colors.secondary,
   },
-  href: `/factions#${faction.id}`
-}))
+  href: `/factions#${faction.id}`,
+}));
 
 // FAQ data
 const faqs = [
   {
     question: 'When does Early Access launch?',
-    answer: 'Bloom Early Access launches in Q1 2026. Wishlist on Steam to be notified the moment we go live!'
+    answer:
+      'Bloom Early Access launches in Q1 2026. Wishlist on Steam to be notified the moment we go live!',
   },
   {
     question: 'How much will it cost?',
-    answer: 'Early Access pricing is $24.99 USD. The full release (1.0) will be priced at $39.99 USD. Early Access purchasers will receive the full game at no additional cost, plus exclusive cosmetic rewards for supporting development early.'
+    answer:
+      'Early Access pricing is $24.99 USD. The full release (1.0) will be priced at $39.99 USD. Early Access purchasers will receive the full game at no additional cost, plus exclusive cosmetic rewards for supporting development early.',
   },
   {
     question: 'Will my progress carry over to full release?',
-    answer: 'Yes! All progress, unlocks, and items earned during Early Access will carry over to the full release.'
+    answer:
+      'Yes! All progress, unlocks, and items earned during Early Access will carry over to the full release.',
   },
   {
     question: 'Can I play solo?',
-    answer: 'Absolutely! Bloom supports 1-10 players. Play solo, with friends, or join random squads. The extraction gameplay works for all playstyles.'
+    answer:
+      'Absolutely! Bloom supports 1-10 players. Play solo, with friends, or join random squads. The extraction gameplay works for all playstyles.',
   },
   {
     question: 'What comes after Early Access?',
-    answer: '6 additional factions and 6 new biomes will be added over two major expansions (Month 3-6 and Month 6-9), leading to full release.'
+    answer:
+      '6 additional factions and 6 new biomes will be added over two major expansions (Month 3-6 and Month 6-9), leading to full release.',
   },
   {
     question: 'Will there be exclusive Early Access rewards?',
-    answer: 'Yes! Early Access supporters will receive exclusive cosmetics, founder badges, and special in-game items not available after full release.'
-  }
-]
+    answer:
+      'Yes! Early Access supporters will receive exclusive cosmetics, founder badges, and special in-game items not available after full release.',
+  },
+];
 ---
 
 <BaseLayout
@@ -77,21 +83,45 @@ const faqs = [
       <p class="hero-tagline">Be Among the First to Enter the Wasteland</p>
 
       <p class="hero-description">
-        Bloom is a grounded extraction shooter about desperate salvage runs on a dying Earth.
-        Squad up with 8–10 players, haul warped tech out of the Inner Exclusion Zone, and
-        use Early Access to help stabilize the systems that will carry the game through 1.0.
+        Bloom is a grounded extraction shooter about desperate salvage runs on a dying Earth. Squad
+        up with 8–10 players, haul warped tech out of the Inner Exclusion Zone, and use Early Access
+        to help stabilize the systems that will carry the game through 1.0.
       </p>
 
       <div class="cta-buttons">
-        <a href="https://store.steampowered.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">
-          <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+        <a
+          href="https://store.steampowered.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-primary btn-large"
+        >
+          <svg
+            class="btn-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"
+            ></path>
           </svg>
           Wishlist on Steam
         </a>
-        <a href="https://discord.gg/bloom" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-large">
-          <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+        <a
+          href="https://discord.gg/bloom"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-secondary btn-large"
+        >
+          <svg
+            class="btn-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"
+            ></path>
           </svg>
           Join Discord
         </a>
@@ -99,20 +129,53 @@ const faqs = [
 
       <div class="early-access-perks">
         <div class="perk">
-          <svg class="perk-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <svg
+            class="perk-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
           </svg>
           <span>Discounted Price</span>
         </div>
         <div class="perk">
-          <svg class="perk-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+          <svg
+            class="perk-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+            ></path>
           </svg>
           <span>Exclusive Cosmetics</span>
         </div>
         <div class="perk">
-          <svg class="perk-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+          <svg
+            class="perk-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
+            ></path>
           </svg>
           <span>Shape Development</span>
         </div>
@@ -127,7 +190,7 @@ const faqs = [
     <div class="container">
       <h2 class="section-title">What's Included in Early Access</h2>
       <p class="section-description">
-        Early Access focuses on one thing: making the core extraction loop feel incredible.
+        Early Access focuses on one thing: making the core extraction loop feel tense and rewarding.
         You get the essential factions, biomes, and systems we need to tune balance, performance,
         and the long-term salvage economy.
       </p>
@@ -136,46 +199,81 @@ const faqs = [
         <div class="content-card highlight">
           <div class="card-header">
             <div class="card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                ></path>
               </svg>
             </div>
             <h3>4 Playable Factions</h3>
           </div>
           <ul class="feature-list">
-            {eaLaunchFactions.map(faction => (
-              <li>
-                <span class="faction-name">{faction.shortName}</span>
-                <span class="faction-role">({faction.role})</span>
-              </li>
-            ))}
+            {
+              eaLaunchFactions.map((faction) => (
+                <li>
+                  <span class="faction-name">{faction.shortName}</span>
+                  <span class="faction-role">({faction.role})</span>
+                </li>
+              ))
+            }
           </ul>
         </div>
 
         <div class="content-card highlight">
           <div class="card-header">
             <div class="card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
               </svg>
             </div>
             <h3>3 Diverse Biomes</h3>
           </div>
           <ul class="feature-list">
-            {eaLaunchBiomes.map(biome => (
-              <li>
-                <span class="biome-name">{biome.displayName}</span>
-                <span class="threat-badge" data-tier={biome.threatTier}>{biome.threatLevel}</span>
-              </li>
-            ))}
+            {
+              eaLaunchBiomes.map((biome) => (
+                <li>
+                  <span class="biome-name">{biome.displayName}</span>
+                  <span class="threat-badge" data-tier={biome.threatTier}>
+                    {biome.threatLevel}
+                  </span>
+                </li>
+              ))
+            }
           </ul>
         </div>
 
         <div class="content-card">
           <div class="card-header">
             <div class="card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"></path>
               </svg>
             </div>
             <h3>Core Gameplay</h3>
@@ -191,8 +289,18 @@ const faqs = [
         <div class="content-card">
           <div class="card-header">
             <div class="card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
               </svg>
             </div>
             <h3>Massive World</h3>
@@ -213,20 +321,22 @@ const faqs = [
     <div class="container">
       <h2 class="section-title">Launch Factions</h2>
       <p class="section-description">
-        Four distinct factions at Early Access launch.
-        Each with unique abilities, playstyles, and squad synergies.
+        Four distinct factions at Early Access launch. Each with unique abilities, playstyles, and
+        squad synergies.
       </p>
 
       <div class="faction-grid">
-        {featuredFactions.map(faction => (
-          <FactionCard
-            name={faction.name}
-            tagline={faction.tagline}
-            emblem={faction.emblem}
-            colors={faction.colors}
-            href={faction.href}
-          />
-        ))}
+        {
+          featuredFactions.map((faction) => (
+            <FactionCard
+              name={faction.name}
+              tagline={faction.tagline}
+              emblem={faction.emblem}
+              colors={faction.colors}
+              href={faction.href}
+            />
+          ))
+        }
       </div>
 
       <div class="faction-details">
@@ -255,8 +365,7 @@ const faqs = [
     <div class="container">
       <h2 class="section-title">Early Access Roadmap</h2>
       <p class="section-description">
-        Continuous content updates leading to full release.
-        10 total factions and 12 biomes planned.
+        Continuous content updates leading to full release. 10 total factions and 12 biomes planned.
       </p>
 
       <div class="roadmap-timeline">
@@ -339,8 +448,8 @@ const faqs = [
     <div class="container">
       <h2 class="section-title">Why Early Access?</h2>
       <p class="section-description">
-        Early Access lets us prove the core extraction loop, stabilize 8–10 player co-op, and build Bloom
-        with you before we lock in the full 1.0 feature set.
+        Early Access lets us prove the core extraction loop, stabilize 8–10 player co-op, and build
+        Bloom with you before we lock in the full 1.0 feature set.
       </p>
 
       <div class="why-grid">
@@ -380,19 +489,20 @@ const faqs = [
     </div>
   </section>
 
-
   <!-- FAQ Section -->
   <section class="faq">
     <div class="container">
       <h2 class="section-title">Frequently Asked Questions</h2>
 
       <div class="faq-grid">
-        {faqs.map(faq => (
-          <div class="faq-item">
-            <h3 class="faq-question">{faq.question}</h3>
-            <p class="faq-answer">{faq.answer}</p>
-          </div>
-        ))}
+        {
+          faqs.map((faq) => (
+            <div class="faq-item">
+              <h3 class="faq-question">{faq.question}</h3>
+              <p class="faq-answer">{faq.answer}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -402,28 +512,50 @@ const faqs = [
     <div class="container">
       <h2 class="cta-title">Ready to Enter the Wasteland?</h2>
       <p class="cta-description">
-        Wishlist Bloom on Steam today and be notified the moment Early Access goes live.
-        Join Discord to stay updated and connect with the community.
+        Wishlist Bloom on Steam today and be notified the moment Early Access goes live. Join
+        Discord to stay updated and connect with the community.
       </p>
 
       <div class="cta-buttons">
-        <a href="https://store.steampowered.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">
-          <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+        <a
+          href="https://store.steampowered.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-primary btn-large"
+        >
+          <svg
+            class="btn-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"
+            ></path>
           </svg>
           Wishlist on Steam
         </a>
-        <a href="https://discord.gg/bloom" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-large">
-          <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+        <a
+          href="https://discord.gg/bloom"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-secondary btn-large"
+        >
+          <svg
+            class="btn-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"
+            ></path>
           </svg>
           Join Discord
         </a>
       </div>
 
-      <p class="release-info">
-        Early Access: Q1 2026 | 4 Factions | 3 Biomes | 8-10 Player Co-op
-      </p>
+      <p class="release-info">Early Access: Q1 2026 | 4 Factions | 3 Biomes | 8-10 Player Co-op</p>
     </div>
   </section>
 
@@ -514,8 +646,13 @@ const faqs = [
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 0.6; }
-      50% { opacity: 1; }
+      0%,
+      100% {
+        opacity: 0.6;
+      }
+      50% {
+        opacity: 1;
+      }
     }
 
     @keyframes fadeInUp {
@@ -753,17 +890,17 @@ const faqs = [
       text-transform: uppercase;
     }
 
-    .threat-badge[data-tier="H1"] {
+    .threat-badge[data-tier='H1'] {
       background: rgba(0, 255, 0, 0.2);
       color: #00ff00;
     }
 
-    .threat-badge[data-tier="H2"] {
+    .threat-badge[data-tier='H2'] {
       background: rgba(255, 165, 0, 0.2);
       color: #ffa500;
     }
 
-    .threat-badge[data-tier="H3"] {
+    .threat-badge[data-tier='H3'] {
       background: rgba(255, 0, 0, 0.2);
       color: #ff0000;
     }
@@ -1079,71 +1216,72 @@ const faqs = [
       }
     }
 
-  /* Why Early Access */
-  .why-ea {
-    padding: 5rem 0 4rem;
-    background: radial-gradient(circle at 0% 0%, rgba(0, 255, 136, 0.12), transparent 55%),
-      radial-gradient(circle at 100% 100%, rgba(255, 0, 85, 0.12), transparent 55%);
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  .why-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 2rem;
-    margin-top: 2.5rem;
-  }
-
-  .why-column {
-    background: rgba(0, 0, 0, 0.6);
-    border-radius: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    padding: 1.75rem 1.75rem 1.5rem;
-    backdrop-filter: blur(10px);
-    transition: all 0.25s ease;
-  }
-
-  .why-column h3 {
-    font-size: 1.3rem;
-    margin-bottom: 0.75rem;
-    color: rgba(255, 255, 255, 0.96);
-  }
-
-  .why-list {
-    list-style: none;
-    padding-left: 0;
-    margin: 0.25rem 0 0;
-  }
-
-  .why-list li {
-    position: relative;
-    padding-left: 1.25rem;
-    margin-bottom: 0.4rem;
-    font-size: 0.96rem;
-    color: rgba(255, 255, 255, 0.82);
-  }
-
-  .why-list li::before {
-    content: '▸';
-    position: absolute;
-    left: 0;
-    top: 0.1rem;
-    color: var(--color-primary);
-    font-size: 0.85rem;
-  }
-
-  .why-column:hover {
-    border-color: rgba(0, 255, 136, 0.4);
-    box-shadow: 0 12px 30px rgba(0, 255, 136, 0.18);
-    transform: translateY(-4px);
-  }
-
-  @media (max-width: 1024px) {
-    .why-grid {
-      grid-template-columns: 1fr;
+    /* Why Early Access */
+    .why-ea {
+      padding: 5rem 0 4rem;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(0, 255, 136, 0.12), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(255, 0, 85, 0.12), transparent 55%);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
-  }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .why-column {
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 1.75rem 1.75rem 1.5rem;
+      backdrop-filter: blur(10px);
+      transition: all 0.25s ease;
+    }
+
+    .why-column h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.75rem;
+      color: rgba(255, 255, 255, 0.96);
+    }
+
+    .why-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0.25rem 0 0;
+    }
+
+    .why-list li {
+      position: relative;
+      padding-left: 1.25rem;
+      margin-bottom: 0.4rem;
+      font-size: 0.96rem;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .why-list li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      top: 0.1rem;
+      color: var(--color-primary);
+      font-size: 0.85rem;
+    }
+
+    .why-column:hover {
+      border-color: rgba(0, 255, 136, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 255, 136, 0.18);
+      transform: translateY(-4px);
+    }
+
+    @media (max-width: 1024px) {
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
+    }
 
     /* Performance optimizations */
     .hero-bg,
